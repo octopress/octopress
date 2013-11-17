@@ -1,0 +1,11 @@
+#! /bin/usr/env ruby
+
+require 'mercenary'
+
+Mercenary.program(:octopress) do |p|
+  p.command(:theme) do |c|
+    c.command(:unpack) do |u|
+      Octopress::Theme.theme_unpack_opts(u)
+    end
+  end
+end
