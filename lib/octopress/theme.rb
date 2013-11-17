@@ -1,6 +1,7 @@
 module Octopress
   class Theme
-    def theme_unpack_opts(command)
+    def self.theme_unpack_opts(command)
+      Octopress.logger.debug("Unpacking theme options...")
       self.subclasses.each do |s|
         s.theme_unpack_opts(command)
       end
