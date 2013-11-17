@@ -11,6 +11,8 @@ require "octopress/version"
 require "octopress/theme"
 require_all "octopress/commands"
 
+# Third-party
+require "jekyll"
 
 module Octopress
   def self.logger
