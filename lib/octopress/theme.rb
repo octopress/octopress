@@ -6,6 +6,13 @@ module Octopress
       end
     end
 
+    def self.install
+      Octopress.logger.debug("Beginning install process...")
+      self.subclasses.each do |s|
+        s.install
+      end
+    end
+
     # Install a hook so that subclasses are recorded. This method is only
     # ever called by Ruby itself.
     #
