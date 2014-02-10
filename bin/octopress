@@ -7,7 +7,7 @@ require 'octopress'
 
 begin
   require 'bundler'
-  Bundler.require(:octopress_plugins)
+  Bundler.require(:octopress)
 rescue
 end
 
