@@ -6,6 +6,16 @@ require 'mercenary'
 require 'octopress'
 
 Mercenary.program(:octopress) do |p|
+  p.command(:build) do |c|
+    c.syntax "octopress build [options]"
+
+    c.option 'watch', '--watch', 'Rebuild site source upon every change.'
+
+    c.action do |args, options|
+      Octopress::Commands::Build.run(args, options)
+    end
+  end
+
   p.command(:theme) do |c|
     c.command(:install) do |i|
       i.action do |_, _|
