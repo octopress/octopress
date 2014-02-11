@@ -47,6 +47,16 @@ $ octopress new page --path about/index.markdown
 | `date`       | `String` | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `path`       | `String` | The path at which the new page should be generated. |
 
+### Other Commands
+
+Octopress also has the following commands, bundled as separate gems:
+
+|----------|----------------------|-------------|
+| Command  | Gem                  | Description |
+| `deploy` | [octopress-deploy][] | Deployment for Octopress and Jekyll blogs. |
+
+[octopress-deploy]: https://github.com/octopress/deploy
+
 ## Contributing
 
 1. Fork it
