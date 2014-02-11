@@ -1,6 +1,7 @@
 # Octopress
 
-TODO: Write a gem description
+Octopress is an obsessively designed toolkit for writing and deploying Jekyll
+blogs. Pretty sweet, huh?
 
 ## Installation
 
@@ -18,7 +19,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Generating a new Post
+
+```bash
+$ octopress new post --title "My Title"
+```
+
+### Generating a new Page
+
+```bash
+$ octopress new page --path about/index.markdown
+```
 
 ## Contributing
 
