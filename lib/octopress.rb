@@ -1,7 +1,7 @@
-require "octopress/version"
-require "octopress/theme"
-
 module Octopress
+  autoload :Command, 'octopress/command'
+  autoload :VERSION, 'octopress/version'
+
   def self.logger
     @logger ||= Logger.new(STDOUT)
     @logger.level = Logger::DEBUG

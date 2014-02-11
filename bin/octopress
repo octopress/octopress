@@ -5,18 +5,14 @@ $LOAD_PATH.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 require 'mercenary'
 require 'octopress'
 
-Mercenary.program(:octopress) do |p|
-  p.command(:theme) do |c|
-    c.command(:install) do |i|
-      i.action do |_, _|
-        Octopress::Theme.install
-      end
-    end
+begin
+  require 'bundler'
+  Bundler.require(:octopress)
+rescue
+end
 
-    c.command(:unpack) do |u|
-      u.action do |_, _|
-        Octopress::Theme.theme_unpack_opts(u)
-      end
-    end
-  end
+Mercenary.program(:octopress) do |p|
+  p.version Octopress::VERSION
+
+  Octopress::Command.subclasses.each { |c| c.init_with_program(p) }
 end
