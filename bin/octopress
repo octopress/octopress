@@ -5,6 +5,8 @@ $LOAD_PATH.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 require 'mercenary'
 require 'octopress'
 
+Octopress.require_blessed_gems
+
 begin
   require 'bundler'
   Bundler.require(:octopress)
