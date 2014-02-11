@@ -15,6 +15,8 @@ end
 
 Mercenary.program(:octopress) do |p|
   p.version Octopress::VERSION
+  p.description "Octopress is an obsessively designed toolkit for Jekyll blogging."
+  p.syntax "octopress <subcommand> [options]"
 
   Octopress::Command.subclasses.each { |c| c.init_with_program(p) }
 end
