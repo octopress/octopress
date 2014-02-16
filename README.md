@@ -27,7 +27,6 @@ $ octopress new post --title "My Title"
 
 "Ok, great? What else can I do?" Great question! Check out these other options:
 
-|--------------|----------|-------------|
 | Option       | Type     | Description |
 |:-------------|:---------|:------------|
 | `title`      | `String` | The title of the new post |
@@ -42,7 +41,6 @@ $ octopress new post --title "My Title"
 $ octopress new page --path about/index.markdown
 ```
 
-|--------------|----------|-------------|
 | Option       | Type     | Description |
 |:-------------|:---------|:------------|
 | `title`      | `String` | The title of the new page |
@@ -53,7 +51,6 @@ $ octopress new page --path about/index.markdown
 
 Octopress also has the following commands, bundled as separate gems:
 
-|----------|----------------------|-------------|
 | Command  | Gem                  | Description |
 |:---------|:---------------------|:------------|
 | `deploy` | [octopress-deploy][] | Deployment for Octopress and Jekyll blogs. |
