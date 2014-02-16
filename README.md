@@ -29,6 +29,7 @@ $ octopress new post --title "My Title"
 
 |--------------|----------|-------------|
 | Option       | Type     | Description |
+|:-------------|:---------|:------------|
 | `title`      | `String` | The title of the new post |
 | `date`       | `String` | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `slug`       | `String` | The slug for the new post. |
@@ -43,6 +44,7 @@ $ octopress new page --path about/index.markdown
 
 |--------------|----------|-------------|
 | Option       | Type     | Description |
+|:-------------|:---------|:------------|
 | `title`      | `String` | The title of the new page |
 | `date`       | `String` | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `path`       | `String` | The path at which the new page should be generated. |
@@ -53,6 +55,7 @@ Octopress also has the following commands, bundled as separate gems:
 
 |----------|----------------------|-------------|
 | Command  | Gem                  | Description |
+|:---------|:---------------------|:------------|
 | `deploy` | [octopress-deploy][] | Deployment for Octopress and Jekyll blogs. |
 
 [octopress-deploy]: https://github.com/octopress/deploy
