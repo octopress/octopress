@@ -25,7 +25,15 @@ module Octopress
     end
 
     def path
-      File.join(@config['source'], "#{@options['path']}.#{extension}")
+      file = @options['path']
+
+      # If path ends with a slash, make it an index
+      file << "index" if file =~ /\/$/
+
+      # if path has no extension, add the default extension
+      file << ".#{extension}" unless file =~ /\.\w+$/
+
+      File.join(@config['source'], file)
     end
 
     def extension
