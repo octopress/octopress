@@ -17,7 +17,6 @@ module Octopress
     'new_page_layout' => 'page',
     'titlecase' => true
   }}
-  
 
   def self.logger
     @logger ||= Logger.new(STDOUT)
@@ -30,13 +29,11 @@ module Octopress
   end
 
   def self.config(options={})
+    log_level = Jekyll.logger.log_level
+    Jekyll.logger.log_level = Jekyll::Stevenson::WARN
     @config ||= DEFAULTS.deep_merge Jekyll.configuration(options)
-  end
-
-  def self.layouts
-    if Octopress.respond_to? :plugins
-      Octopress.plugins
-    end
+    Jekyll.logger.log_level = log_level
+    @config
   end
 
   def self.require_blessed_gems
