@@ -1,12 +1,10 @@
-require 'pry-debugger'
 module Octopress
   class Page
 
     def initialize(options)
       @config = Octopress.config(options)
       @options = options
-      default_options
-      write
+      set_default_options
     end
 
     def write
@@ -23,9 +21,9 @@ module Octopress
       @options['extension'].sub(/^\./, '')
     end
 
-    def default_options
-      @options['date'] = convert_date @options['date']
-      @options['layout'] = 'page'
+    def set_default_options
+      @options['layout']      =  @config['octopress']['new_page_layout']
+      @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['octopress']['new_page_extension']
     end
 

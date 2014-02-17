@@ -1,8 +1,8 @@
 module Octopress
   class Post < Page
 
-    def default_options
-      @options['layout'] = 'post'
+    def set_default_options
+      @options['layout'] =  @config['octopress']['new_post_layout']
       @options['title'] ||= 'New Post'
       @options['date'] = convert_date @options['date'] || Time.now
       @options['extension'] ||= @config['octopress']['new_post_extension']

@@ -13,6 +13,8 @@ module Octopress
   DEFAULTS = { 'octopress' => {
     'new_post_extension' => 'markdown',
     'new_page_extension' => 'html',
+    'new_post_layout' => 'post',
+    'new_page_layout' => 'page',
     'titlecase' => true
   }}
   
@@ -28,17 +30,13 @@ module Octopress
   end
 
   def self.config(options={})
-    @config ||= Jekyll.configuration(options).deep_merge(DEFAULTS)
+    @config ||= DEFAULTS.deep_merge Jekyll.configuration(options)
   end
 
   def self.layouts
     if Octopress.respond_to? :plugins
       Octopress.plugins
     end
-  end
-
-  def self.default_config
-
   end
 
   def self.require_blessed_gems
