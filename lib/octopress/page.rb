@@ -5,12 +5,13 @@ module Octopress
       @config = Octopress.config(options)
       @options = options
       set_default_options
+      @content = options['content'] || content
     end
 
     def write
-      abort "File #{path} already exists" if File.exist?(path)
+      abort "File #{relative_path} already exists" if File.exist?(path)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') { |f| f.write(template) }
+      File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
         puts "New #{@options['type']}: #{relative_path}"
       else
@@ -32,7 +33,7 @@ module Octopress
     end
 
     def set_default_options
-      @options['type'] = 'page'
+      @options['type'] ||= 'page'
       @options['layout']      =  @config['octopress']['new_page_layout']
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['octopress']['new_page_extension']
@@ -50,20 +51,20 @@ module Octopress
 
     # Load the user provide or default template for a new post.
     #
-    def template
+    def content
       file = @options['template']
       file = File.join(Octopress.site.source, file) if file
       if file 
         raise "No template found at #{file}" unless File.exist? file
         parse_template Pathname.new(file).read
       else
-        parse_template default_template
+        parse_template default_content
       end
     end
 
-    def parse_template(content)
-      template = Liquid::Template.parse(content)
-      content = template.render(@options)
+    def parse_template(input)
+      template = Liquid::Template.parse(input)
+      template.render(@options)
     end
 
     def date_slug
@@ -85,7 +86,7 @@ module Octopress
 
     # Page template defaults
     #
-    def default_template
+    def default_content
       <<-TEMPLATE
 ---
 layout: {{ layout }}
