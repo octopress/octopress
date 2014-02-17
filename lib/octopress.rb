@@ -2,6 +2,8 @@ module Octopress
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
+  require 'octopress/commands/publish'
+
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
   autoload :Draft, 'octopress/draft'

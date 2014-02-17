@@ -17,7 +17,7 @@ module Octopress
 
     # Post template defaults
     #
-    def default_template
+    def default_content
       <<-TEMPLATE
 ---
 layout: {{ layout }}
