@@ -1,45 +1,45 @@
+require 'pry-debugger'
 
 module Octopress
   class Draft < Post
 
-    def write
-      super
-      if @options['publish']
-        FileUtils.rm @options['path']
-      end
+    def publish
+      @options['publish'] = true
+      @options['title'] = read_title
+      @options['type'] = 'post from draft' 
+      @content = read_content
+      @path = publish_path
+
+      abort "Publish Failed: File #{relative_path} already exists." if File.exist?(@path)
+      write
+
+      FileUtils.rm @options['path']
     end
 
     def set_default_options
       super
-      if @options['publish']
-        @options['title'] = read_title
-        @options['type'] = 'post from draft' 
-      else
-        @options['type'] = 'draft' 
-      end
+      @options['type'] = 'draft' 
     end
 
     def path
-      if @options['publish']
-        super
-      else
-        draft_path
-      end
-    end
-
-    def draft_path
       source = @config['source']
       name = "#{title_slug}.#{extension}"
       File.join(source, '_drafts', name)
     end
 
+    def publish_path
+      source = @config['source']
+      name = "#{date_slug}-#{title_slug}.#{extension}"
+      File.join(source, '_posts', name)
+    end
+
     def read
-      if @content
-        @content
+      if @read_content
+        @read_content
       else
         file = @options['path']
         abort "File #{file} not found." if !File.exist? file
-        @content = Pathname.new(file).read
+        @read_content = Pathname.new(file).read
       end
     end
 
@@ -47,12 +47,9 @@ module Octopress
       read.match(/title:\s+(.+)?$/)[1]
     end
     
-    def content
-      if @options['publish']
-        read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
-      else
-        super
-      end
+    def read_content
+      read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
     end
+
   end
 end

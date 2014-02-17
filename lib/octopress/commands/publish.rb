@@ -9,8 +9,7 @@ module Octopress
         c.action do |args, options|
           abort "You must specify a path." if args.empty?
           options['path'] = args.first
-          options['publish'] = true
-          Draft.new(options).write
+          Draft.new(options).publish
         end
       end
     end
