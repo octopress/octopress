@@ -30,7 +30,7 @@ $ octopress new post --title "My Title"
 | Option       | Type     | Description |
 |:-------------|:---------|:------------|
 | `title`      | `String` | The title of the new post |
-| `date`       | `String` | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
+| `date`       | `String` | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
 | `slug`       | `String` | The slug for the new post. |
 | `categories` | `Array`  | A comma-separated list of categories to which this post belongs |
 | `tags`       | `Array`  | A comma-separated list of tags for this post |
