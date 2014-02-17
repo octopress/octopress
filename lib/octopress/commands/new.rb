@@ -1,5 +1,4 @@
 require 'jekyll'
-require 'pry-debugger'
 
 module Octopress
   class New < Command
