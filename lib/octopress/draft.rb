@@ -1,5 +1,3 @@
-require 'pry-debugger'
-
 module Octopress
   class Draft < Post
 
