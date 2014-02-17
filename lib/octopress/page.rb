@@ -5,24 +5,23 @@ module Octopress
       @config = Octopress.config(options)
       @options = options
       set_default_options
-      @content = content
-      @path = path
+      @content = options['content'] || content
     end
 
     def write
-      abort "File #{relative_path} already exists" if File.exist?(@path)
-      FileUtils.mkdir_p(File.dirname(@path))
-      File.open(@path, 'w') { |f| f.write(@content) }
+      abort "File #{relative_path} already exists" if File.exist?(path)
+      FileUtils.mkdir_p(File.dirname(path))
+      File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
         puts "New #{@options['type']}: #{relative_path}"
       else
-        puts @path
+        puts path
       end
     end
 
     def relative_path
       local = Dir.pwd + '/'
-      @path.sub(local, '')
+      path.sub(local, '')
     end
 
     def path
@@ -34,7 +33,7 @@ module Octopress
     end
 
     def set_default_options
-      @options['type'] = 'page'
+      @options['type'] ||= 'page'
       @options['layout']      =  @config['octopress']['new_page_layout']
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['octopress']['new_page_extension']

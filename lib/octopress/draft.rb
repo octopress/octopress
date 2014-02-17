@@ -2,14 +2,13 @@ module Octopress
   class Draft < Post
 
     def publish
-      @options['publish'] = true
       @options['title'] = read_title
-      @options['type'] = 'post from draft' 
-      @content = read_content
-      @path = publish_path
-
-      abort "Publish Failed: File #{relative_path} already exists." if File.exist?(@path)
-      write
+      post_options = {
+        'title'   => read_title,
+        'content' => read_content,
+        'type'    => 'post from draft'
+      }
+      Post.new(post_options).write
 
       FileUtils.rm @options['path']
     end
@@ -25,19 +24,13 @@ module Octopress
       File.join(source, '_drafts', name)
     end
 
-    def publish_path
-      source = @config['source']
-      name = "#{date_slug}-#{title_slug}.#{extension}"
-      File.join(source, '_posts', name)
-    end
-
     def read
-      if @read_content
-        @read_content
+      if @content
+        @content
       else
         file = @options['path']
         abort "File #{file} not found." if !File.exist? file
-        @read_content = Pathname.new(file).read
+        @content = Pathname.new(file).read
       end
     end
 
