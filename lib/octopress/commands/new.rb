@@ -5,6 +5,7 @@ module Octopress
   class New < Command
     def self.init_with_program(p)
       p.command(:new) do |c|
+
         c.action do |args, options|
           abort "You must specify a path." if args.empty?
           ::Jekyll::Commands::New.process(args, options)
@@ -25,7 +26,7 @@ module Octopress
 
         c.command(:post) do |post_command|
           post_command.syntax 'octopress new post TITLE [options]'
-          post_command.description 'Add a new page to your Jekyll site.'
+          post_command.description 'Add a new post to your Jekyll site.'
           add_common_options post_command
 
           post_command.action do |args, options|
@@ -35,8 +36,8 @@ module Octopress
         end
 
         c.command(:draft) do |draft_command|
-          draft_command.syntax 'octopress new post TITLE [options]'
-          draft_command.description 'Add a new page to your Jekyll site.'
+          draft_command.syntax 'octopress new draft TITLE [options]'
+          draft_command.description 'Add a new draft post to your Jekyll site.'
           add_common_options draft_command
 
           draft_command.action do |args, options|
