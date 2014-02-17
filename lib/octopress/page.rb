@@ -24,7 +24,7 @@ module Octopress
     end
 
     def path
-      File.join(@config['source'], "#{@options['path']}.#{@options['extension']}")
+      File.join(@config['source'], "#{@options['path']}.#{extension}")
     end
 
     def extension
@@ -64,6 +64,23 @@ module Octopress
     def parse_template(content)
       template = Liquid::Template.parse(content)
       content = template.render(@options)
+    end
+
+    def date_slug
+      Time.parse(@options['date']).strftime('%Y-%m-%d')
+    end
+
+    # Returns a string which is url compatible.
+    #
+    def title_slug
+      value = @options['title'].gsub(/[^\x00-\x7F]/u, '')
+      value.gsub!(/(&amp;|&)+/, 'and')
+      value.gsub!(/[']+/, '')
+      value.gsub!(/\W+/, ' ')
+      value.strip!
+      value.downcase!
+      value.gsub!(' ', '-')
+      value
     end
 
     # Page template defaults

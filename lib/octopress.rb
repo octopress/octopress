@@ -4,6 +4,7 @@ module Octopress
   require 'octopress/commands/new'
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
+  autoload :Draft, 'octopress/draft'
 
   BLESSED_GEMS = %w[
     octopress-deploy
