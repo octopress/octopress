@@ -1,11 +1,13 @@
 module Octopress
   class Page
 
+    attr_accessor :content
+
     def initialize(options)
       @config = Octopress.config(options)
       @options = options
       set_default_options
-      @content = content
+      @content = options['content'] || read_content
       @path = path
     end
 
@@ -52,7 +54,7 @@ module Octopress
 
     # Load the user provide or default template for a new post.
     #
-    def content
+    def read_content
       file = @options['template']
       file = File.join(Octopress.site.source, file) if file
       if file 
