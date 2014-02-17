@@ -2,14 +2,12 @@ module Octopress
   class Draft < Post
 
     def publish
-      @options['title'] = read_title
       post_options = {
-        'title'   => read_title,
-        'content' => read_content,
+        'title'   => read_draft_title,
+        'content' => read_draft_content,
         'type'    => 'post from draft'
       }
       Post.new(post_options).write
-
       FileUtils.rm @options['path']
     end
 
@@ -19,26 +17,25 @@ module Octopress
     end
 
     def path
-      source = @config['source']
       name = "#{title_slug}.#{extension}"
-      File.join(source, '_drafts', name)
+      File.join(@config['source'], '_drafts', name)
     end
 
     def read
-      if @content
-        @content
+      if @draft_content
+        @draft_content
       else
         file = @options['path']
         abort "File #{file} not found." if !File.exist? file
-        @content = Pathname.new(file).read
+        @draft_content = Pathname.new(file).read
       end
     end
 
-    def read_title
+    def read_draft_title
       read.match(/title:\s+(.+)?$/)[1]
     end
     
-    def read_content
+    def read_draft_content
       read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
     end
 

@@ -10,9 +10,8 @@ module Octopress
     end
 
     def path
-      source = @config['source']
       name = "#{date_slug}-#{title_slug}.#{extension}"
-      File.join(source, '_posts', name)
+      File.join(@config['source'], '_posts', name)
     end
 
     # Post template defaults
