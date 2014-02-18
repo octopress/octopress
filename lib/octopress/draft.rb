@@ -18,7 +18,7 @@ module Octopress
 
     def path
       name = "#{title_slug}.#{extension}"
-      File.join(@config['source'], '_drafts', name)
+      File.join(source, '_drafts', name)
     end
 
     def read
