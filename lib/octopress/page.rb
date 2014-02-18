@@ -27,6 +27,10 @@ module Octopress
       path.sub(local, '')
     end
 
+    def source
+      Configuration.jekyll_config(@options)['source']
+    end
+
     def path
       file = @options['path']
 
@@ -36,7 +40,7 @@ module Octopress
       # if path has no extension, add the default extension
       file << ".#{extension}" unless file =~ /\.\w+$/
 
-      File.join(@config['jekyll']['source'], file)
+      File.join(source, file)
     end
 
     def extension
@@ -64,7 +68,7 @@ module Octopress
     #
     def content
       file = @options['template']
-      file = File.join(@config['jekyll']['source'], file) if file
+      file = File.join(source, file) if file
       if file 
         raise "No template found at #{file}" unless File.exist? file
         parse_template Pathname.new(file).read

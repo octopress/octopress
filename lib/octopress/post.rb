@@ -11,7 +11,7 @@ module Octopress
 
     def path
       name = "#{date_slug}-#{title_slug}.#{extension}"
-      File.join(@config['jekyll']['source'], '_posts', name)
+      File.join(source, '_posts', name)
     end
 
     # Post template defaults
