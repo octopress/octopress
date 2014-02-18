@@ -3,15 +3,15 @@ module Octopress
 
     def set_default_options
       @options['type'] ||= 'post'
-      @options['layout'] =  @config['octopress']['new_post_layout']
+      @options['layout'] =  @config['new_post_layout']
       @options['title'] ||= 'New Post'
       @options['date'] = convert_date @options['date'] || Time.now
-      @options['extension'] ||= @config['octopress']['new_post_extension']
+      @options['extension'] ||= @config['new_post_extension']
     end
 
     def path
       name = "#{date_slug}-#{title_slug}.#{extension}"
-      File.join(@config['source'], '_posts', name)
+      File.join(@config['jekyll']['source'], '_posts', name)
     end
 
     # Post template defaults

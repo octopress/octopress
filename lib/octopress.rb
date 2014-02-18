@@ -1,5 +1,6 @@
 module Octopress
   require 'octopress/core_ext'
+  require 'octopress/configuration'
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
@@ -14,30 +15,14 @@ module Octopress
     octopress-ink
   ]
 
-  DEFAULTS = { 'octopress' => {
-    'new_post_extension' => 'markdown',
-    'new_page_extension' => 'html',
-    'new_post_layout' => 'post',
-    'new_page_layout' => 'page',
-    'titlecase' => true
-  }}
-
   def self.logger
     @logger ||= Logger.new(STDOUT)
     @logger.level = Logger::DEBUG
     @logger
   end
 
-  def self.site(options={})
-    @site ||= Jekyll::Site.new(config(options))
-  end
-
   def self.config(options={})
-    log_level = Jekyll.logger.log_level
-    Jekyll.logger.log_level = Jekyll::Stevenson::WARN
-    @config ||= DEFAULTS.deep_merge Jekyll.configuration(options)
-    Jekyll.logger.log_level = log_level
-    @config
+    Configuration.config(options)
   end
 
   def self.require_blessed_gems
