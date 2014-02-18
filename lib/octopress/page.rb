@@ -9,7 +9,10 @@ module Octopress
     end
 
     def write
-      abort "File #{relative_path} already exists" if File.exist?(path)
+      if File.exist?(path) && !@options['force']
+        abort "File #{relative_path} already exists" if File.exist?(path)
+      end
+
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?

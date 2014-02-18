@@ -1,4 +1,5 @@
 module Octopress
+  require 'octopress/core_ext'
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
