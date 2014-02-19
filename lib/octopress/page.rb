@@ -10,7 +10,7 @@ module Octopress
 
     def write
       if File.exist?(path) && !@options['force']
-        abort "File #{relative_path} already exists" if File.exist?(path)
+        abort "File #{relative_path} already exists"
       end
 
       FileUtils.mkdir_p(File.dirname(path))
@@ -32,15 +32,16 @@ module Octopress
     end
 
     def path
+      return @path if @path
       file = @options['path']
 
       # If path ends with a slash, make it an index
-      file << "index" if file =~ /\/$/
+      file += "index" if file =~ /\/$/
 
       # if path has no extension, add the default extension
-      file << ".#{extension}" unless file =~ /\.\w+$/
+      file += ".#{extension}" unless file =~ /\.\w+$/
 
-      File.join(source, file)
+      @path = File.join(source, file)
     end
 
     def extension
