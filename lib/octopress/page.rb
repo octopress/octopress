@@ -86,7 +86,7 @@ module Octopress
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
       #
-      parsed = if input =~ /^-{3}\s+(.+?)\s+-{3}\s+(.+)/m
+      parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}\s+(.+)/m
         template = Liquid::Template.parse($1)
         "---\n#{template.render(@options)}\n---\n\n#{$2}"
       else
