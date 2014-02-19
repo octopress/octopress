@@ -1,5 +1,5 @@
 module Octopress
-  module Helpers
+  module CommandHelpers
     def self.add_build_options(c)
       c.option 'config',      '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
       c.option 'future',      '--future',    'Publishes posts with a future date'

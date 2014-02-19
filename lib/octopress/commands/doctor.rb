@@ -13,7 +13,7 @@ module Octopress
         c.option 'config', '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
 
         c.action do |args, options|
-          options = Helpers.normalize_options(options)
+          options = CommandHelpers.normalize_options(options)
           options = Jekyll.configuration(options.to_symbol_keys)
           ::Jekyll::Commands::Doctor.process(options)
         end

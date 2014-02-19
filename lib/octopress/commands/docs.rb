@@ -17,7 +17,7 @@ module Octopress
           spec = Gem::Specification.find_by_name("jekyll")
           gem_path = spec.gem_dir
 
-          options = Helpers.normalize_options(options)
+          options = CommandHelpers.normalize_options(options)
           options = ::Jekyll.configuration(options.to_symbol_keys.merge!({
             'source' => "#{gem_path}/site",
             'destination' => "#{gem_path}/site/_site"
