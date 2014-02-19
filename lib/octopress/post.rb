@@ -7,6 +7,7 @@ module Octopress
       @options['title'] ||= 'New Post'
       @options['date'] = convert_date @options['date'] || Time.now
       @options['extension'] ||= @config['new_post_extension']
+      @options['template'] ||= @config['new_post_template']
     end
 
     def path
