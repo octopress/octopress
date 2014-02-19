@@ -10,8 +10,12 @@ module Octopress
         c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
         
         c.action do |args, options|
-          abort "You must specify a path." if args.empty?
-          ::Jekyll::Commands::New.process(args, options.to_symbol_keys)
+          if options['wtf']
+            puts options
+          else
+            abort "You must specify a path." if args.empty?
+            ::Jekyll::Commands::New.process(args, options.to_symbol_keys)
+          end
         end
 
         c.command(:page) do |page_command|
