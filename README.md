@@ -19,6 +19,14 @@ Or install it yourself as:
 
 ## Usage
 
+### Generating a new site
+
+To create a new scaffold of directories and files in a new directory named my_blog:
+
+```bash
+$ octopress new my_blog
+```
+
 ### Generating a new Post
 
 ```bash
