@@ -16,5 +16,11 @@ module Octopress
       end
       options
     end
+
+    def self.add_common_options(c)
+      c.option 'date', '--date DATE', 'String that is parseable by Time#parse. (default: Time.now.iso8601)'
+      c.option 'template', '--template PATH', 'Path to a post or page template.'
+      c.option 'force', '--force', 'Force creation even if PATH already exists'
+    end
   end
 end
