@@ -6,10 +6,13 @@ module Octopress
     def self.init_with_program(p)
       p.command(:docs) do |c|
         c.syntax 'octopress docs'
-        c.description "Soon: Launch local server with docs for Octopress v#{Octopress::VERSION}"
+        c.description "Launch local server with docs for Octopress v#{Octopress::VERSION} and Octopress Ink plugins."
 
         c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
         c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
+        if ENV['OCTODEV']
+          c.option 'watch', '--watch', 'Watch docs site for changes and rebuild. (For docs development)'
+        end
         c.option 'jekyll', '--jekyll', "Launch local server with docs for Jekyll v#{Jekyll::VERSION}"
 
         c.action do |args, options|
@@ -24,19 +27,23 @@ module Octopress
             spec = Gem::Specification.find_by_name("jekyll")
             gem_path = spec.gem_dir
 
-            options = CommandHelpers.normalize_options(options)
-            options = ::Jekyll.configuration(options.to_symbol_keys.merge!({
-              'source' => "#{gem_path}/site",
-              'destination' => "#{gem_path}/site/_site"
-            }))
-            
-            ::Jekyll::Commands::Build.process(options)
-            ::Jekyll::Commands::Serve.process(options)
+            options['source'] = "#{gem_path}/site",
+            options['destination'] = "#{gem_path}/site/_site"
           else
-            puts "Sorry, not yet. View Octopress docs on http://octopress.org or view Jekyll docs locally by running `octopress docs --jekyll`"
+            options['source'] = site_dir
+            options['destination'] = File.join(site_dir, '_site')
           end
+
+          options["serving"] = true
+          options = CommandHelpers.normalize_options(options)
+          options = ::Jekyll.configuration(options.to_symbol_keys)
+          ::Jekyll::Commands::Build.process(options)
+          ::Jekyll::Commands::Serve.process(options)
         end
       end
+    end
+    def self.site_dir
+      File.expand_path('site', File.join(File.dirname(__FILE__), '../../../', ))
     end
   end
 end
