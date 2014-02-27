@@ -17,7 +17,6 @@ module Octopress
       if File.exist? file
         config = YAML.safe_load(File.open(file))
       end
-      #config['jekyll'] = jekyll_config(options)
       @config = DEFAULTS.deep_merge(config)
     end
 

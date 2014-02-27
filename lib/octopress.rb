@@ -1,3 +1,5 @@
+require 'mercenary'
+
 module Octopress
   require 'octopress/core_ext'
   require 'octopress/configuration'
@@ -20,7 +22,7 @@ module Octopress
   ]
 
   def self.logger
-    @logger ||= Logger.new(STDOUT)
+    @logger ||= Mercenary::Command.logger
     @logger.level = Logger::DEBUG
     @logger
   end

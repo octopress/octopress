@@ -10,7 +10,7 @@ module Octopress
 
     def write
       if File.exist?(path) && !@options['force']
-        abort "File #{relative_path} already exists"
+        raise "File #{relative_path} already exists. Use --force to overwrite."
       end
 
       FileUtils.mkdir_p(File.dirname(path))
@@ -34,6 +34,7 @@ module Octopress
     def path
       return @path if @path
       file = @options['path']
+      raise "You must specify a path." unless file
 
       # If path ends with a slash, make it an index
       file += "index" if file =~ /\/$/
