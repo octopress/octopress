@@ -1,7 +1,8 @@
 module Octopress
   module CommandHelpers
     def self.add_build_options(c)
-      c.option 'config',      '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+      c.option 'config',      '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
+      c.option 'octopress-config', '--octopress-config <CONFIG_FILE>', 'Custom Octopress configuration file'
       c.option 'future',      '--future',    'Publishes posts with a future date'
       c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
       c.option 'watch',       '--watch',     'Watch for changes and rebuild'

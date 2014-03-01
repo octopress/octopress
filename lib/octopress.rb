@@ -28,7 +28,7 @@ module Octopress
   end
 
   def self.config(options={})
-    Configuration.config(options)
+    @config ||= Configuration.config(options)
   end
 
   def self.require_blessed_gems
@@ -40,3 +40,4 @@ module Octopress
     end
   end
 end
+

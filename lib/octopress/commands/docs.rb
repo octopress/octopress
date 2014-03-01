@@ -32,6 +32,7 @@ module Octopress
           else
             options['source'] = site_dir
             options['destination'] = File.join(site_dir, '_site')
+            Octopress.config({'octopress-config'=>File.join(site_dir, '_octopress.yml')})
           end
 
           options["serving"] = true
@@ -43,7 +44,7 @@ module Octopress
       end
     end
     def self.site_dir
-      File.expand_path('site', File.join(File.dirname(__FILE__), '../../../', ))
+      File.expand_path('docs', File.join(File.dirname(__FILE__), '../../../', ))
     end
   end
 end

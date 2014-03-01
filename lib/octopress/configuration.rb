@@ -12,7 +12,7 @@ module Octopress
     def self.config(options={})
       return @config if @config
 
-      file = '_octopress.yml'
+      file = options['octopress-config'] || '_octopress.yml'
       config = {}
       if File.exist? file
         config = YAML.safe_load(File.open(file))
