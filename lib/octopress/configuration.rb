@@ -12,10 +12,10 @@ module Octopress
     def self.config(options={})
       return @config if @config
 
-      file = '_octopress.yml'
-      config = {}
+      file = options['octopress-config'] || '_octopress.yml'
+      config = options['override'] || {}
       if File.exist? file
-        config = YAML.safe_load(File.open(file))
+        config = YAML.safe_load(File.open(file)).deep_merge(config)
       end
       @config = DEFAULTS.deep_merge(config)
     end

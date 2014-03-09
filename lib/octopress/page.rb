@@ -73,7 +73,7 @@ module Octopress
       file = @options['template']
       file = File.join(source, '_templates', file) if file
       if file 
-        abort "No template found at #{file}" unless File.exist? file
+        abort "No #{@options['type']} template found at #{file}" unless File.exist? file
         parse_template Pathname.new(file).read
       else
         parse_template default_content

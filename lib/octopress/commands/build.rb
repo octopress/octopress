@@ -10,6 +10,7 @@ module Octopress
         CommandHelpers.add_build_options(c)
         
         c.action do |args, options|
+          Octopress.config(options)
           options = CommandHelpers.normalize_options(options)
           options = ::Jekyll.configuration(options.to_symbol_keys)
           ::Jekyll::Commands::Build.process(options)
