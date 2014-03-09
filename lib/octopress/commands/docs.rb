@@ -30,13 +30,16 @@ module Octopress
       end
       options["serving"] = true
       options = CommandHelpers.normalize_options(options)
-      options = ::Jekyll.configuration(options.to_symbol_keys)
-      ::Jekyll::Commands::Build.process(options)
-      ::Jekyll::Commands::Serve.process(options)
+      options = Jekyll.configuration(options.to_symbol_keys)
+      Jekyll::Commands::Build.process(options)
+      Jekyll::Commands::Serve.process(options)
     end
 
     def self.init_octopress_docs(options)
-      Octopress.config({'octopress-config'=>File.join(site_dir, '_octopress.yml')})
+      Octopress.config({
+        'octopress-config'=>File.join(site_dir, '_octopress.yml'),
+        'override'=> { 'docs_mode'=>true }
+      })
       require_gems
       options['source'] = site_dir
       options['destination'] = File.join(site_dir, '_site')
