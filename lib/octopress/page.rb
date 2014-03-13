@@ -5,6 +5,15 @@ module Octopress
       @config = Octopress.config(options)
       @options = options
       set_default_options
+
+      # Ensure title
+      #
+      @options['title'] ||= ''
+
+      # Ensure a quoted title
+      #
+      @options['title'] = "\"#{@options['title']}\""
+
       @content = options['content'] || content
     end
 
@@ -59,7 +68,7 @@ module Octopress
 
     def convert_date(date)
       if date
-        if @options['date'].downcase == 'now'
+        if @options['date'] == 'now'
           @options['date'] = Time.now.iso8601
         else
           begin
@@ -107,27 +116,28 @@ module Octopress
     # Returns a string which is url compatible.
     #
     def title_slug
-      value = @options['slug'] || @options['title']
-      value.gsub(/[^\x00-\x7F]/u, '')
+      value = (@options['slug'] || @options['title']).downcase
+      value.gsub!(/[^\x00-\x7F]/u, '')
       value.gsub!(/(&amp;|&)+/, 'and')
       value.gsub!(/[']+/, '')
       value.gsub!(/\W+/, ' ')
       value.strip!
-      value.downcase!
       value.gsub!(' ', '-')
       value
+    end
+
+    def front_matter(vars)
+      fm = []
+      vars.each do
+        |v| fm << "#{v}: {{ #{v} }}" if @options[v]
+      end
+      fm.join("\n")
     end
 
     # Page template defaults
     #
     def default_content
-      content = <<-TEMPLATE
-layout: {{ layout }}
-title: {{ title }}
-TEMPLATE
-      if @options['date']
-        content +="date: {{ date }}"
-      end
+      front_matter %w{layout title date}
     end
   end
 end

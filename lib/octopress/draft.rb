@@ -39,6 +39,5 @@ module Octopress
     def read_draft_content
       read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
     end
-
   end
 end

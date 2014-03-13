@@ -32,7 +32,7 @@ module Octopress
         c.command(:post) do |post_command|
           post_command.syntax 'post <TITLE> [options]'
           post_command.description 'Add a new post to your Jekyll site.'
-          post_command.option 'slug', '--slug', 'Use this slug in filename instead of sluggified post title'
+          post_command.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
           CommandHelpers.add_common_options post_command
 
           post_command.action do |args, options|
@@ -44,7 +44,7 @@ module Octopress
         c.command(:draft) do |draft_command|
           draft_command.syntax 'draft <TITLE> [options]'
           draft_command.description 'Add a new draft post to your Jekyll site.'
-          draft_command.option 'slug', '--slug', 'Use this slug in filename instead of sluggified post title'
+          draft_command.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
           CommandHelpers.add_common_options draft_command
 
           draft_command.action do |args, options|
