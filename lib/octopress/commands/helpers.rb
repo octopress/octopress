@@ -20,7 +20,7 @@ module Octopress
 
     def self.add_common_options(c)
       c.option 'template', '--template PATH', "New #{c.name.to_s} from a template. PATH is relative to _templates/"
-      c.option 'date', '--date DATE', 'String that is parseable by Time#parse. (default: Time.now.iso8601)'
+      c.option 'date', '--date DATE', "'now' or a String that is parseable by Time#parse. (default: Time.now.iso8601)"
       c.option 'force', '--force', 'Overwrite file if it already exists'
     end
   end
