@@ -4,6 +4,7 @@ module Octopress
     def publish
       post_options = {
         'title'   => read_draft_title,
+        'slug'    => File.basename(@options['path'], '.*'),
         'content' => read_draft_content,
         'type'    => 'post from draft'
       }

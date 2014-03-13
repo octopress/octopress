@@ -2,22 +2,27 @@ module Octopress
   module Configuration
 
     DEFAULTS = {
-      'new_post_extension' => 'markdown',
-      'new_page_extension' => 'html',
-      'new_post_layout' => 'post',
-      'new_page_layout' => 'page',
+      'post_extension' => 'markdown',
+      'page_extension' => 'html',
+      'post_layout' => 'post',
+      'page_layout' => 'page',
       'titlecase' => true
     }
 
     def self.config(options={})
       return @config if @config
 
-      file = options['octopress-config'] || '_octopress.yml'
-      config = options['override'] || {}
+      file = options['config-file'] || '_octopress.yml'
+      user_config = {}
+
       if File.exist? file
-        config = YAML.safe_load(File.open(file)).deep_merge(config)
+        user_config = YAML.safe_load(File.open(file))
       end
-      @config = DEFAULTS.deep_merge(config)
+
+      user_config = user_config.deep_merge(options['override'] || {})
+      user_config = (options['defaults'] || {}).deep_merge(user_config)
+
+      @config = DEFAULTS.deep_merge(user_config)
     end
 
     def self.jekyll_config(options={})

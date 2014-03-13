@@ -2,7 +2,7 @@ module Octopress
   module CommandHelpers
     def self.add_build_options(c)
       c.option 'config',      '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
-      c.option 'octopress-config', '--octopress-config <CONFIG_FILE>', 'Custom Octopress configuration file'
+      c.option 'config-file', '--octopress-config <CONFIG_FILE>', 'Custom Octopress configuration file'
       c.option 'future',      '--future',    'Publishes posts with a future date'
       c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
       c.option 'watch',       '--watch',     'Watch for changes and rebuild'
@@ -21,7 +21,7 @@ module Octopress
     def self.add_common_options(c)
       c.option 'template', '--template PATH', "New #{c.name.to_s} from a template. PATH is relative to _templates/"
       c.option 'date', '--date DATE', 'String that is parseable by Time#parse. (default: Time.now.iso8601)'
-      c.option 'force', '--force', 'Force creation even if PATH already exists'
+      c.option 'force', '--force', 'Overwrite file if it already exists'
     end
   end
 end

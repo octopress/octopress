@@ -7,7 +7,7 @@ module Octopress
       p.command(:doctor) do |c|
         c.alias(:hyde)
 
-        c.syntax 'octopress doctor'
+        c.syntax 'doctor'
         c.description 'Search site and print specific deprecation warnings'
 
         c.option 'config', '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'

@@ -5,8 +5,8 @@ module Octopress
       @options['type'] ||= 'post'
       @options['layout'] =  @config['new_post_layout']
       @options['date'] = convert_date @options['date'] || Time.now
-      @options['extension'] ||= @config['new_post_extension']
-      @options['template'] ||= @config['new_post_template']
+      @options['extension'] ||= @config['post_extension']
+      @options['template'] ||= @config['post_template']
       raise "You must specify a title." if @options['title'].nil?
     end
 

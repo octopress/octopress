@@ -7,7 +7,7 @@ module Octopress
       p.command(:serve) do |c|
         c.alias(:server)
 
-        c.syntax 'jekyll serve [options]'
+        c.syntax 'serve [options]'
         c.description 'Serve your site locally'
 
         CommandHelpers.add_build_options(c)

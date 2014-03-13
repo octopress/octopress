@@ -5,7 +5,7 @@ module Octopress
   class Build < Command
     def self.init_with_program(p)
       p.command(:build) do |c|
-        c.syntax 'octopress build [options]'
+        c.syntax 'build [options]'
         c.description 'Build your site'
         CommandHelpers.add_build_options(c)
         

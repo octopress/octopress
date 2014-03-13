@@ -53,8 +53,8 @@ module Octopress
       @options['type'] ||= 'page'
       @options['layout']      =  @config['new_page_layout']
       @options['date']        = convert_date @options['date']
-      @options['extension'] ||= @config['new_page_extension']
-      @options['template'] ||= @config['new_page_template']
+      @options['extension'] ||= @config['page_extension']
+      @options['template'] ||= @config['page_template']
     end
 
     def convert_date(date)
@@ -103,7 +103,8 @@ module Octopress
     # Returns a string which is url compatible.
     #
     def title_slug
-      value = @options['title'].gsub(/[^\x00-\x7F]/u, '')
+      value = @options['slug'] || @options['title']
+      value.gsub(/[^\x00-\x7F]/u, '')
       value.gsub!(/(&amp;|&)+/, 'and')
       value.gsub!(/[']+/, '')
       value.gsub!(/\W+/, ' ')
