@@ -19,12 +19,10 @@ module Octopress
     #
     def default_content
       <<-TEMPLATE
----
 layout: {{ layout }}
 title: {{ title }}
 date: {{ date }}
 categories: {{ categories }}
----
 TEMPLATE
     end
   end

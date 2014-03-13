@@ -70,7 +70,6 @@ This will create a new post in your `_drafts` directory.
 | `--slug`       | `String` | The slug for the new post. |
 | `--force`      | `Boolean`| Overwrite exsiting file.   |
 
-
 ### Publish a draft post
 
 ```bash
@@ -86,13 +85,11 @@ This will convert your draft post to a normal post in the `_posts` directory.
 | `--force`      | `Boolean`| Overwrite exsiting file.   |
 ```
 
-### Other Commands
+When publishing a draft, you probably want to update the date for your post. Pass the option `--date now` to set the current day and time from your system clock.
 
-Octopress also has the following commands, bundled as separate gems:
+### Deployment
 
-| Command  | Gem                  | Description |
-|:---------|:---------------------|:------------|
-| `deploy` | [octopress-deploy][] | Deployment for Octopress and Jekyll blogs. |
+You can deploy your Octopress or Jeklly blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
 
 [octopress-deploy]: https://github.com/octopress/deploy
 

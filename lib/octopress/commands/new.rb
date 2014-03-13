@@ -13,7 +13,7 @@ module Octopress
           if args.empty?
             c.logger.error "You must specify a path."
           else
-            ::Jekyll::Commands::New.process(args, options.to_symbol_keys)
+            Jekyll::Commands::New.process(args, options.to_symbol_keys)
           end
         end
 

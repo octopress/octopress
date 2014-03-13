@@ -29,7 +29,7 @@ module Octopress
       return @jekyll_config if @jekyll_config
 
       log_level = Jekyll.logger.log_level
-      Jekyll.logger.log_level = Jekyll::Stevenson::WARN
+      Jekyll.logger.log_level = Jekyll::Stevenson::ERROR
       jekyll_config = Jekyll.configuration(options)
       Jekyll.logger.log_level = log_level
 

@@ -51,7 +51,7 @@ module Octopress
 
     def set_default_options
       @options['type'] ||= 'page'
-      @options['layout']      =  @config['new_page_layout']
+      @options['layout']      =  @config['page_layout']
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['page_extension']
       @options['template'] ||= @config['page_template']
@@ -59,10 +59,14 @@ module Octopress
 
     def convert_date(date)
       if date
-        begin
-          Time.parse(date.to_s).iso8601
-        rescue => error
-          abort 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+        if @options['date'].downcase == 'now'
+          @options['date'] = Time.now.iso8601
+        else
+          begin
+            Time.parse(date.to_s).iso8601
+          rescue => error
+            abort 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+          end
         end
       end
     end
@@ -89,10 +93,10 @@ module Octopress
       #
       parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}\s+(.+)/m
         template = Liquid::Template.parse($1)
-        "---\n#{template.render(@options)}\n---\n\n#{$2}"
+        "---\n#{template.render(@options).strip}\n---\n\n#{$2}"
       else
         template = Liquid::Template.parse(input)
-        "---\n#{template.render(@options)}\n---\n\n"
+        "---\n#{template.render(@options).strip}\n---\n\n"
       end
     end
 
@@ -117,12 +121,13 @@ module Octopress
     # Page template defaults
     #
     def default_content
-      <<-TEMPLATE
----
+      content = <<-TEMPLATE
 layout: {{ layout }}
 title: {{ title }}
----
 TEMPLATE
+      if @options['date']
+        content +="date: {{ date }}"
+      end
     end
   end
 end
