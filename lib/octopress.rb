@@ -10,7 +10,6 @@ module Octopress
   require 'octopress/commands/build'
   require 'octopress/commands/serve'
   require 'octopress/commands/doctor'
-  require 'octopress/commands/docs'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'

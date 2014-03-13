@@ -1,6 +1,3 @@
-require 'jekyll'
-require File.expand_path('helpers', File.dirname(__FILE__))
-
 module Octopress
   class Doctor < Command
     def self.init_with_program(p)
@@ -9,13 +6,12 @@ module Octopress
 
         c.syntax 'doctor'
         c.description 'Search site and print specific deprecation warnings'
-
-        c.option 'config', '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+        CommandHelpers.add_common_options c
 
         c.action do |args, options|
           options = CommandHelpers.normalize_options(options)
           options = Jekyll.configuration(options.to_symbol_keys)
-          ::Jekyll::Commands::Doctor.process(options)
+          Jekyll::Commands::Doctor.process(options)
         end
       end
     end

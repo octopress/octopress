@@ -1,5 +1,3 @@
-require 'jekyll'
-
 module Octopress
   class New < Command
     def self.init_with_program(p)
@@ -17,37 +15,40 @@ module Octopress
           end
         end
 
-        c.command(:page) do |page_command|
-          page_command.syntax 'page <PATH> [options]'
-          page_command.description 'Add a new page to your Jekyll site.'
-          page_command.option 'title', '--title TITLE', 'String to be added as the title in the YAML front-matter.'
-          CommandHelpers.add_common_options page_command
+        c.command(:page) do |c|
+          c.syntax 'page <PATH> [options]'
+          c.description 'Add a new page to your Jekyll site.'
+          c.option 'title', '--title TITLE', 'String to be added as the title in the YAML front-matter.'
+          CommandHelpers.add_page_options c
+          CommandHelpers.add_common_options c
 
-          page_command.action do |args, options|
+          c.action do |args, options|
             options['path'] = args.first
             Page.new(options).write
           end
         end
 
-        c.command(:post) do |post_command|
-          post_command.syntax 'post <TITLE> [options]'
-          post_command.description 'Add a new post to your Jekyll site.'
-          post_command.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
-          CommandHelpers.add_common_options post_command
+        c.command(:post) do |c|
+          c.syntax 'post <TITLE> [options]'
+          c.description 'Add a new post to your Jekyll site.'
+          CommandHelpers.add_page_options c
+          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
+          CommandHelpers.add_common_options c
 
-          post_command.action do |args, options|
+          c.action do |args, options|
             options['title'] = args.first
             Post.new(options).write
           end
         end
 
-        c.command(:draft) do |draft_command|
-          draft_command.syntax 'draft <TITLE> [options]'
-          draft_command.description 'Add a new draft post to your Jekyll site.'
-          draft_command.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
-          CommandHelpers.add_common_options draft_command
+        c.command(:draft) do |c|
+          c.syntax 'draft <TITLE> [options]'
+          c.description 'Add a new draft post to your Jekyll site.'
+          CommandHelpers.add_page_options c
+          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
+          CommandHelpers.add_common_options c
 
-          draft_command.action do |args, options|
+          c.action do |args, options|
             options['title'] = args.first
             Draft.new(options).write
           end

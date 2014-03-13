@@ -2,8 +2,8 @@ module Octopress
   module Configuration
 
     DEFAULTS = {
-      'post_extension' => 'markdown',
-      'page_extension' => 'html',
+      'post_ext' => 'markdown',
+      'page_ext' => 'html',
       'post_layout' => 'post',
       'page_layout' => 'page',
       'titlecase' => true
@@ -12,7 +12,7 @@ module Octopress
     def self.config(options={})
       return @config if @config
 
-      file = options['config-file'] || '_octopress.yml'
+      file = options['octopress-config'] || '_octopress.yml'
       user_config = {}
 
       if File.exist? file
@@ -28,12 +28,15 @@ module Octopress
     def self.jekyll_config(options={})
       return @jekyll_config if @jekyll_config
 
-      log_level = Jekyll.logger.log_level
-      Jekyll.logger.log_level = Jekyll::Stevenson::ERROR
-      jekyll_config = Jekyll.configuration(options)
-      Jekyll.logger.log_level = log_level
+      configs = Jekyll::Configuration::DEFAULTS
 
-      @jekyll_config = jekyll_config
+      (options['config'] || ['_config.yml']).each do |file|
+        if File.exist? file
+          configs = configs.deep_merge YAML.safe_load(File.open(file)) 
+        end
+      end
+
+      @jekyll_config = configs
     end
   end
 end

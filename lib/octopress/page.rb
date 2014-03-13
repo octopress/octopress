@@ -62,7 +62,7 @@ module Octopress
       @options['type'] ||= 'page'
       @options['layout']      =  @config['page_layout']
       @options['date']        = convert_date @options['date']
-      @options['extension'] ||= @config['page_extension']
+      @options['extension'] ||= @config['page_ext']
       @options['template'] ||= @config['page_template']
     end
 

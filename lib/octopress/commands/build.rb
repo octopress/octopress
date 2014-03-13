@@ -1,6 +1,3 @@
-require 'jekyll'
-require File.expand_path('helpers', File.dirname(__FILE__))
-
 module Octopress
   class Build < Command
     def self.init_with_program(p)

@@ -1,6 +1,3 @@
-require 'jekyll'
-require File.expand_path('helpers', File.dirname(__FILE__))
-
 module Octopress
   class Serve < Command
     def self.init_with_program(p)
@@ -22,9 +19,9 @@ module Octopress
 
           options.default :serving => true
           options = CommandHelpers.normalize_options(options)
-          options = ::Jekyll.configuration(options.to_symbol_keys)
-          ::Jekyll::Commands::Build.process(options)
-          ::Jekyll::Commands::Serve.process(options)
+          options = Jekyll.configuration(options.to_symbol_keys)
+          Jekyll::Commands::Build.process(options)
+          Jekyll::Commands::Serve.process(options)
         end
       end
     end
