@@ -46,9 +46,11 @@ module Octopress
       raise "You must specify a path." unless file
 
       # If path ends with a slash, make it an index
+      #
       file += "index" if file =~ /\/$/
 
       # if path has no extension, add the default extension
+      #
       file += ".#{extension}" unless file =~ /\.\w+$/
 
       @path = File.join(source, file)
@@ -59,11 +61,11 @@ module Octopress
     end
 
     def set_default_options
-      @options['type'] ||= 'page'
+      @options['type']      ||= 'page'
       @options['layout']      =  @config['page_layout']
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['page_ext']
-      @options['template'] ||= @config['page_template']
+      @options['template']  ||= @config['page_template']
     end
 
     def convert_date(date)
@@ -87,7 +89,7 @@ module Octopress
       file = File.join(source, '_templates', file) if file
       if file 
         abort "No #{@options['type']} template found at #{file}" unless File.exist? file
-        parse_template Pathname.new(file).read
+        parse_template File.open(file).read
       else
         parse_template default_content
       end
@@ -113,19 +115,6 @@ module Octopress
       Time.parse(@options['date']).strftime('%Y-%m-%d')
     end
 
-    # Returns a string which is url compatible.
-    #
-    def title_slug
-      value = (@options['slug'] || @options['title']).downcase
-      value.gsub!(/[^\x00-\x7F]/u, '')
-      value.gsub!(/(&amp;|&)+/, 'and')
-      value.gsub!(/[']+/, '')
-      value.gsub!(/\W+/, ' ')
-      value.strip!
-      value.gsub!(' ', '-')
-      value
-    end
-
     def front_matter(vars)
       fm = []
       vars.each do
@@ -139,5 +128,6 @@ module Octopress
     def default_content
       front_matter %w{layout title date}
     end
+
   end
 end
