@@ -1,7 +1,7 @@
 require 'colorator'
 require 'find'
 
-# This is a makeshift test suite for doing integration tests.
+# This is a makeshift integration test-suite.
 # It is unapologetically pragmatic.
 
 # Find all files in a given directory
@@ -86,16 +86,22 @@ end
 
 # Ouptut nicely formatted failure messages
 #
-def print_failures(failures)
-  failures.each do |test|
-    puts "\nFailed: #{test[:desc]}"
-    if test[:message]
-      puts "  #{test[:message]}".red
-    else
-      puts "  #{test[:expected]}".green
-      puts "  #{test[:result]}".red
+def print_results
+  if !@failures.empty?
+    @failures.each do |test|
+      puts "\nFailed: #{test[:desc]}"
+      if test[:message]
+        puts "  #{test[:message]}".red
+      else
+        puts "  #{test[:expected]}".green
+        puts "  #{test[:result]}".red
+      end
+     # print a newline for easier reading
+      puts ""
     end
-    puts ""
+    abort
+  else
+    puts "All passed!".green
   end
 end
 

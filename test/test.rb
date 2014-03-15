@@ -82,7 +82,6 @@ FileUtils.cd('test-site') do |dir|
     expect: 'okay-page/index.html',
   })
 
-
 end
 
 # Build the site
@@ -90,10 +89,4 @@ end
 system "cd test-site; octopress build; cd -"
 compare_directories('test-site', 'expected')
 
-if @failures.empty?
-  puts "All passed!".green
-else
-  print_failures @failures
-  abort
-end
-
+print_results
