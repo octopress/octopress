@@ -25,6 +25,7 @@ module Octopress
       post_options = {
         'title'   => read_draft_title,
         'slug'    => publish_slug,
+        'date'    => @options['date'],
         'content' => read_draft_content,
         'type'    => 'post from draft'
       }

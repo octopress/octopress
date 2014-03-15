@@ -4,7 +4,8 @@ module Octopress
     def set_default_options
       @options['type']      ||= 'post'
       @options['layout']      = @config['post_layout']
-      @options['date']        = convert_date(@options['date']) || Time.now.iso8601
+      @options['date']      ||= Time.now.iso8601
+      @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['post_ext']
       @options['template']  ||= @config['post_template']
     end

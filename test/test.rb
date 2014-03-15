@@ -52,8 +52,8 @@ test({
 #
 test({
   desc: 'Publish a draft with a date',
-  cmd: 'octopress publish _drafts/idea.markdown --date "2014-03-14 20:20 -0000"',
-  expect: '/_posts/2014-03-14-idea.markdown',
+  cmd: 'octopress publish _drafts/idea.markdown --date "2014-03-11 20:20 -0000"',
+  expect: '/_posts/2014-03-11-idea.markdown',
 })
 
 # Add a page
