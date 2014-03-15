@@ -112,7 +112,7 @@ module Octopress
     end
 
     def date_slug
-      Time.parse(@options['date']).strftime('%Y-%m-%d')
+      Time.parse(@options['date']).iso8601.split('T')[0]
     end
 
     def front_matter(vars)
