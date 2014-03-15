@@ -63,7 +63,7 @@ def test(options)
   FileUtils.cd('test-site') do |dir|
     if cmd = options[:cmd]
       cmd = [cmd] unless cmd.is_a? Array
-      output = `#{cmd.join('; ')}`.strip
+      output = `#{cmd.join('; ')}`.gsub(/#{Dir.pwd}/,'').strip
       if options[:expect].strip == output
         pout '.'.green
       else
