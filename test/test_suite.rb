@@ -60,20 +60,18 @@ end
 #   } 
 #
 def test(options)
-  FileUtils.cd('test-site') do |dir|
-    if cmd = options[:cmd]
-      cmd = [cmd] unless cmd.is_a? Array
-      output = `#{cmd.join('; ')}`.gsub(/#{Dir.pwd}/,'').strip
-      if options[:expect].strip == output
-        pout '.'.green
-      else
-        pout 'F'.red
-        @failures << {
-          desc: options[:desc],
-          expected: options[:expect],
-          result: output,
-        }
-      end
+  if cmd = options[:cmd]
+    cmd = [cmd] unless cmd.is_a? Array
+    output = `#{cmd.join('; ')}`.gsub(/#{Dir.pwd}\/*/,'').strip
+    if options[:expect].strip == output
+      pout '.'.green
+    else
+      pout 'F'.red
+      @failures << {
+        desc: options[:desc],
+        expected: options[:expect],
+        result: output,
+      }
     end
   end
 end
@@ -94,7 +92,8 @@ def print_failures(failures)
     if test[:message]
       puts "  #{test[:message]}".red
     else
-      puts "  #{test[:expected]}".green + "  #{test[:result]}".red
+      puts "  #{test[:expected]}".green
+      puts "  #{test[:result]}".red
     end
     puts ""
   end
