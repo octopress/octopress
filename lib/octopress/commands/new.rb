@@ -12,6 +12,17 @@ module Octopress
             c.logger.error "You must specify a path."
           else
             Jekyll::Commands::New.process(args, options.to_symbol_keys)
+            Scaffold.new(args, options).write
+          end
+        end
+
+        c.command(:scaffold) do |c|
+          c.syntax 'scaffold <PATH> [options]'
+          c.description "Add Octopress's default scaffolding to your site"
+          c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
+
+          c.action do |args, options|
+            Scaffold.new(args, options).write
           end
         end
 

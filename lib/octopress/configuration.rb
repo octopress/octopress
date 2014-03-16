@@ -16,7 +16,7 @@ module Octopress
       user_config = {}
 
       if File.exist? file
-        user_config = YAML.safe_load(File.open(file))
+        user_config = YAML.safe_load(File.open(file).read) || {}
       end
 
       user_config = user_config.deep_merge(options['override'] || {})

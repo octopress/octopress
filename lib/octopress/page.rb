@@ -82,14 +82,22 @@ module Octopress
       end
     end
 
-    # Load the user provide or default template for a new post.
+    # Load the user provide or default template for a new post or page.
     #
     def content
+
+      # Handle case where user passes the full path
+      #
       file = @options['template']
-      file = File.join(source, '_templates', file) if file
-      if file 
-        abort "No #{@options['type']} template found at #{file}" unless File.exist? file
-        parse_template File.open(file).read
+
+      if file
+        file.sub(/^_templates\//, '')
+        file = File.join(source, '_templates', file) if file
+        if File.exist? file
+          parse_template File.open(file).read
+        else
+          abort "No #{@options['type']} template found at #{file}"
+        end
       else
         parse_template default_content
       end
@@ -98,6 +106,7 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
+      @options['title'].titlecase! if @config['titlecase']
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
@@ -117,8 +126,8 @@ module Octopress
 
     def front_matter(vars)
       fm = []
-      vars.each do
-        |v| fm << "#{v}: {{ #{v} }}" if @options[v]
+      vars.each do |v| 
+        fm << "#{v}: {{ #{v} }}" if @options[v]
       end
       fm.join("\n")
     end

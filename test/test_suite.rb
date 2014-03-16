@@ -91,10 +91,10 @@ def print_results
     @failures.each do |test|
       puts "\nFailed: #{test[:desc]}"
       if test[:message]
-        puts "  #{test[:message]}".red
+        puts test[:message].yellow
       else
-        puts "  #{test[:expected]}".green
-        puts "  #{test[:result]}".red
+        puts test[:expected].green
+        puts test[:result].red
       end
      # print a newline for easier reading
       puts ""
