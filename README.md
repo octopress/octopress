@@ -35,6 +35,12 @@ Here are the commands for Octopress.
 
 Run `octopress [command] --help` to learn more about any command and see its options.
 
+### Deployment
+
+You can deploy your Octopress or Jeklly blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
+
+[octopress-deploy]: https://github.com/octopress/deploy
+
 ## Configuration
 
 Octopress reads its configurations from `_octopress.yml`. Here's what the configuration looks like by default.
@@ -161,12 +167,6 @@ The YAML variables will be replaced with the correct content when you create a p
 ```sh
 octopress new post --template _templates/linkpost
 ```
-
-## Deployment
-
-You can deploy your Octopress or Jeklly blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
-
-[octopress-deploy]: https://github.com/octopress/deploy
 
 ## Contributing
 
