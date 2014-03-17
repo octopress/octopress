@@ -3,26 +3,15 @@ module Octopress
     def self.init_with_program(p)
       p.command(:new) do |c|
         c.syntax 'new <PATH>'
-        c.description 'Creates a new Jekyll site scaffold in path'
-        c.option 'force', '--force', 'Force creation even if path already exists'
-        c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
+        c.description 'Creates a new Jekyll site scaffold in path.'
+        c.option 'force', '--force', 'Force creation even if path already exists.'
+        c.option 'blank', '--blank', 'Creates scaffolding but with empty files.'
         
         c.action do |args, options|
           if args.empty?
             c.logger.error "You must specify a path."
           else
             Jekyll::Commands::New.process(args, options.to_symbol_keys)
-            Scaffold.new(args, options).write
-          end
-        end
-
-        c.command(:scaffold) do |c|
-          c.syntax 'scaffold <PATH> [options]'
-          c.description "Add Octopress's default scaffolding to your site"
-          c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
-
-          c.action do |args, options|
-            Scaffold.new(args, options).write
           end
         end
 
@@ -43,7 +32,7 @@ module Octopress
           c.syntax 'post <TITLE> [options]'
           c.description 'Add a new post to your Jekyll site.'
           CommandHelpers.add_page_options c
-          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
+          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title.'
           CommandHelpers.add_common_options c
 
           c.action do |args, options|
@@ -56,7 +45,7 @@ module Octopress
           c.syntax 'draft <TITLE> [options]'
           c.description 'Add a new draft post to your Jekyll site.'
           CommandHelpers.add_page_options c
-          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title'
+          c.option 'slug', '--slug SLUG', 'Use this slug in filename instead of sluggified post title.'
           CommandHelpers.add_common_options c
 
           c.action do |args, options|

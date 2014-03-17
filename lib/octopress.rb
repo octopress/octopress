@@ -7,6 +7,7 @@ module Octopress
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
+  require 'octopress/commands/init'
   require 'octopress/commands/publish'
   require 'octopress/commands/build'
   require 'octopress/commands/serve'

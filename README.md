@@ -17,106 +17,23 @@ Or install it yourself as:
 
     $ gem install octopress
 
-## Usage
+## Basic Usage
 
-### Start a new site
+Here are the commands for Octopress.
 
-To create a site scaffold in a new directory named my_blog:
+| Option                          | Description                               |
+|:--------------------------------|:------------------------------------------|
+| `octopress init <PATH>`         |  Adds Octopress scaffolding to your site  |
+| `octopress new post <TITLE>`    |  Add a new post to your site              |
+| `octopress new page <PATH>`     |  Add a new page to your site              |
+| `octopress new draft <TITLE>`   |  Add a new draft post to your site        |
+| `octopress publish <PATH>`      |  Publish a draft from _drafts to _posts   |
+| `octopress new <PATH>`          |  works just like `jekyll new`             |
+| `octopress build`               |  works just like `jekyll build`
+| `octopress serve`               |  works just like `jekyll serve`
+| `octopress doctor`              |  works just like `jekyll doctor`
 
-```bash
-$ octopress new my_blog
-```
-
-Essentially this works just like `jekyll new`, but it also adds some Octopress scaffolding as well.
-
-### Generating a new post
-
-This automates the creation of a new Jekyll blog post.
-
-```bash
-$ octopress new post "My Title"
-```
-
-This will create a new file at `_posts/YYYY-MM-DD-my-title.markdown` with the following YAML front-matter already added.
-
-```
-layout: post
-title: "My Title"
-date: YYYY-MM-DDTHH:MM:SS-00:00
-```
-
-"Ok, great? What else can I do?" Great question! Check out these other options:
-
-| Option         | Type     | Description |
-|:---------------|:---------|:------------|
-| `--template`   | `String` | Use a post template _templates/<file> |
-| `--date`       | `String` | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
-| `--slug`       | `String` | Slug for the new post. |
-| `--force`      | `Boolean`| Overwrite exsiting file.   |
-
-### Generating a new page
-
-```bash
-$ octopress new page path/to/index.markdown
-```
-
-| Option         | Type     | Description |
-|:---------------|:---------|:------------|
-| `--template`   | `String` | Use a page template _templates/<file> |
-| `--title`      | `String` | The title of the new page |
-| `--date`       | `String` | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
-| `--force`      | `Boolean`| Overwrite exsiting file.   |
-
-### Generating a new draft post
-
-```bash
-$ octopress new draft "My Title"
-```
-
-This will create a new post in your `_drafts` directory.
-
-| Option         | Type     | Description |
-|:---------------|:---------|:------------|
-| `--template`   | `String` | Use a post template _templates/<file> |
-| `--date`       | `String` | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
-| `--slug`       | `String` | The slug for the new post. |
-| `--force`      | `Boolean`| Overwrite exsiting file.   |
-
-### Publish a draft post
-
-```bash
-$ octopress publish _drafts/filename.md
-```
-
-This will convert your draft post to a normal post in the `_posts` directory.
-
-| Option         | Type     | Description |
-|:---------------|:---------|:------------|
-| `--date`       | `String` | Change the date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
-| `--slug`       | `String` | Change the slug for the new post. |
-| `--force`      | `Boolean`| Overwrite exsiting file.   |
-```
-
-When publishing a draft, you probably want to update the date for your post. Pass the option `--date now` to set the current day and time from your system clock.
-
-### Templates for Posts, Pages and Drafts
-
-To make creating new pages and posts easy, Octopress allows you to create templates for pages and posts. The default post template looks like this.
-
-```html
----
-layout: {{ layout }}
-title: {{ title }}
-date: {{ date }}
----
-
-```
-
-The YAML variables will be replaced with the correct content when you create a page or post. To modify this template create a `_templates/post` file and change it as you wish. You can add additional YAML front-matter or content, and you can even create multiple templates. Choose a custom template when creating a new post or page like this.
-
-```sh
-octopress new post --template _templates/linkpost
-```
+Run `octopress [command] --help` to learn more about any command and see its options.
 
 ## Configuration
 
@@ -136,9 +53,116 @@ page_layout: page
 titlecase: true
 ```
 
-This file is created with the site scaffolding when you run `octopress new` but if you already have a site you can add the scaffolding by running `octopress new scaffold .` from within your project.
+## Commands
 
-### Deployment
+### Init
+
+
+```sh
+octopress init <PATH> [options]
+```
+
+This will copy Octopress's scaffolding into the specified directory. Use the `--force` option to overwrite existing files. The scaffolding is pretty simple:
+
+```
+_octopress.yml
+_templates/
+  post
+  page
+```
+
+### New Page
+
+This automates the creation of a new post.
+
+```bash
+$ octopress new post "My Title"
+```
+
+This will create a new file at `_posts/YYYY-MM-DD-my-title.markdown` with the following YAML front-matter already added.
+
+```
+layout: post
+title: "My Title"
+date: YYYY-MM-DDTHH:MM:SS-00:00
+```
+
+"Ok, great? What else can I do?" Great question! Check out these other options:
+
+| Option               | Description                             |
+|:---------------------|:----------------------------------------|
+| `--template PATH`    | Use a template from <path>              |
+| `--date DATE`        | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
+| `--slug SLUG`        | Slug for the new post.                  |
+| `--force`            | Overwrite exsiting file.                |
+
+### New Page
+
+```sh
+$ octopress new page some-page           # ./some-page.html
+$ octopress new page docs/               # ./docs/index.html
+$ octopress new page about.html          # ./about.html
+```
+
+| Option               | Description                             |
+|:---------------------|:----------------------------------------|
+| `--template PATH`    | Use a template from <path>              |
+| `--title TITLE`      | The title of the new page               |
+| `--date DATE`        | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
+| `--force`            | Overwrite exsiting file.                |
+
+### New Draft
+
+```bash
+$ octopress new draft "My Title"
+```
+
+This will create a new post in your `_drafts` directory.
+
+| Option             | Description                               |
+|:-------------------|:------------------------------------------|
+| `--template PATH`    | Use a template from <path>              |
+| `--date DATE`      | The date for the draft. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
+| `--slug SLUG       | The slug for the new post.                |
+| `--force`          | Overwrite exsiting file.                  |
+
+### Publish draft
+
+```bash
+$ octopress publish _drafts/some-post.md
+```
+
+This will move your draft to the `_posts` directory and rename the file with the proper date.
+
+| Option             | Description                               |
+|:-------------------|:------------------------------------------|
+| `--date DATE`      | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
+| `--slug SLUG`      | Change the slug for the new post.         |
+| `--force`          | Overwrite exsiting file.                  |
+```
+
+When publishing a draft, you may want to update the date for your post. Pass the option `--date now` to set the current day and time from your system clock or use any other compatible date string.
+
+### Templates for Posts and pages
+
+Octopress post and page templates look like this.
+
+```html
+---
+layout: {{ layout }}
+title: {{ title }}
+date: {{ date }}
+---
+
+```
+
+The YAML variables will be replaced with the correct content when you create a page or post. To modify this template create a `_templates/post` file and change it as you wish. You can add additional YAML front-matter or content, and you can even create multiple templates. Choose a custom template when creating a new post or page like this.
+
+```sh
+octopress new post --template _templates/linkpost
+```
+
+## Deployment
 
 You can deploy your Octopress or Jeklly blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
 
