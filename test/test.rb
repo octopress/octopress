@@ -15,7 +15,15 @@ FileUtils.cd('test-site') do |dir|
       'echo "<div class=\'post\'>{{ page.title }}{{ content }}</div>" > _layouts/post.html',
       'echo "<div class=\'page\'>{{ page.title }}{{ content }}</div>" > _layouts/page.html'
     ],
-    expect: "New jekyll site installed in .\nOctopress scaffold added to ."
+    expect: "New jekyll site installed in ."
+  })
+
+  # Init Octopress scaffolding
+  #
+  test({
+    desc: 'Init Octopress scaffolding',
+    cmd: 'octopress init .',
+    expect: "Octopress scaffold added to ."
   })
 
   # Add a new post

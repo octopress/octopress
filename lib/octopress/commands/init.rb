@@ -1,5 +1,5 @@
 module Octopress
-  class New < Command
+  class Init < Command
     def self.init_with_program(p)
       p.command(:init) do |c|
         c.syntax 'init <PATH> [options]'

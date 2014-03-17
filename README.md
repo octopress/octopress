@@ -29,9 +29,9 @@ Here are the commands for Octopress.
 | `octopress new draft <TITLE>`   |  Add a new draft post to your site        |
 | `octopress publish <PATH>`      |  Publish a draft from _drafts to _posts   |
 | `octopress new <PATH>`          |  works just like `jekyll new`             |
-| `octopress build`               |  works just like `jekyll build`
-| `octopress serve`               |  works just like `jekyll serve`
-| `octopress doctor`              |  works just like `jekyll doctor`
+| `octopress build`               |  works just like `jekyll build`           |
+| `octopress serve`               |  works just like `jekyll serve`           |
+| `octopress doctor`              |  works just like `jekyll doctor`          |
 
 Run `octopress [command] --help` to learn more about any command and see its options.
 
