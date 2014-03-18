@@ -7,7 +7,7 @@ blogs. Pretty sweet, huh?
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress'
+    gem 'octopress', '~> 3.0.0.rc.1'
 
 And then execute:
 
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install octopress
+    $ gem install octopress --pre
 
 ## Basic Usage
 
