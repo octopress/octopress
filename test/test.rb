@@ -42,12 +42,28 @@ FileUtils.cd('test-site') do |dir|
     expect: '_posts/2014-03-13-awesome.markdown',
   })
 
+  # Add a new post in a subdirectory
+  #
+  test({
+    desc: 'Add a new post',
+    cmd: 'octopress new post "Some stuff" --dir stuff --date "2014-02-11 05:10 -0000"',
+    expect: '_posts/stuff/2014-02-11-some-stuff.markdown',
+  })
+
   # Add a draft
   #
   test({
     desc: 'Add a draft',
     cmd: 'octopress new draft "Stupid idea" --date "2014-03-10 15:20 -0000"',
     expect: '_drafts/stupid-idea.markdown',
+  })
+
+  # Add another draft
+  #
+  test({
+    desc: 'Add another draft',
+    cmd: 'octopress new draft "Another idea" --date "2014-02-10 15:20 -0000"',
+    expect: '_drafts/another-idea.markdown',
   })
 
   # Add a draft with a slug
@@ -58,12 +74,36 @@ FileUtils.cd('test-site') do |dir|
     expect: '_drafts/idea.markdown',
   })
 
+  # Add yet another draft
+  #
+  test({
+    desc: 'Add yet another draft',
+    cmd: 'octopress new draft "yet another idea" --date "2014-02-13 15:20 -0000"',
+    expect: '_drafts/yet-another-idea.markdown',
+  })
+
+  # Publish a draft
+  #
+  test({
+    desc: 'Publish a draft',
+    cmd: 'octopress publish _drafts/another-idea.markdown',
+    expect: '_posts/2014-02-10-another-idea.markdown',
+  })
+
   # Publish a draft with a date
   #
   test({
     desc: 'Publish a draft with a date',
     cmd: 'octopress publish _drafts/idea.markdown --date "2014-03-11 20:20 -0000"',
     expect: '_posts/2014-03-11-idea.markdown',
+  })
+
+  # Publish a draft in a dir
+  #
+  test({
+    desc: 'Publish a draft in a dir',
+    cmd: 'octopress publish _drafts/yet-another-idea.markdown --dir ideas',
+    expect: '_posts/ideas/2014-02-13-yet-another-idea.markdown',
   })
 
   # Add a page

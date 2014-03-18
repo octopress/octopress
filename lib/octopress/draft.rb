@@ -2,8 +2,15 @@ module Octopress
   class Draft < Post
 
     def set_default_options
-      super
-      @options['type'] = 'draft' 
+      @options['type']      ||= 'draft' 
+      @options['layout']      = @config['post_layout']
+      @options['dir']       ||= ''
+      @options['extension'] ||= @config['post_ext']
+      @options['template']  ||= @config['post_template']
+
+      if @options['type'] == 'draft'
+        @options['date']      = convert_date @options['date']
+      end
     end
 
     def path
@@ -21,12 +28,15 @@ module Octopress
     # and options passed to the publish command
     #
     def publish
+      @options['date'] ||= read_draft_date
+      @options['date'] = convert_date @options['date']
 
       post_options = {
         'title'   => read_draft_title,
         'slug'    => publish_slug,
         'date'    => @options['date'],
         'content' => read_draft_content,
+        'dir'     => @options['dir'],
         'type'    => 'post from draft'
       }
 
@@ -64,10 +74,20 @@ module Octopress
       read.match(/title:\s+(.+)?$/)[1]
     end
     
+    # read_draft_date
+    #
+    def read_draft_date
+      read.match(/date:\s+(.+)?$/)[1]
+    end
+    
     # Get content from draft post file
     #
     def read_draft_content
-      read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
+      if @options['date']
+        read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
+      else
+        read
+      end
     end
 
   end

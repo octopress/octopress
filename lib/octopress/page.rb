@@ -62,23 +62,22 @@ module Octopress
 
     def set_default_options
       @options['type']      ||= 'page'
-      @options['layout']      =  @config['page_layout']
+      @options['layout']      = @config['page_layout']
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['page_ext']
       @options['template']  ||= @config['page_template']
     end
 
     def convert_date(date)
-      if date
-        if @options['date'] == 'now'
-          @options['date'] = Time.now.iso8601
-        else
-          begin
-            Time.parse(date.to_s).iso8601
-          rescue => error
-            puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
-            abort error.message
-          end
+      date ||= 'now'
+      if date == 'now'
+        @options['date'] = Time.now.iso8601
+      else
+        begin
+          Time.parse(date.to_s).iso8601
+        rescue => error
+          puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+          abort error.message
         end
       end
     end
