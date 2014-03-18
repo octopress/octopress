@@ -77,7 +77,7 @@ _templates/
   page
 ```
 
-### New Page
+### New Post
 
 This automates the creation of a new post.
 
