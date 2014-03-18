@@ -33,6 +33,10 @@ module Octopress
     @config ||= Configuration.config(options)
   end
 
+  def self.expand_gem_path(dir='')
+    File.expand_path(File.join(File.dirname(__FILE__), '../', dir))
+  end
+
   def self.require_blessed_gems
     BLESSED_GEMS.each do |gem|
       begin

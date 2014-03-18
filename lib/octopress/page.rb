@@ -76,7 +76,8 @@ module Octopress
           begin
             Time.parse(date.to_s).iso8601
           rescue => error
-            abort 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+            puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+            abort error.message
           end
         end
       end

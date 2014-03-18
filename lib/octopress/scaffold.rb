@@ -8,9 +8,9 @@ module Octopress
     end
     
     def write
-      if File.exist?(path + '/_templates') ||
-        File.exist?(path + '/_octopress.yml')
-        abort "Some files already exist.  Use --force to overwrite." unless force
+      if !force && (File.exist?(path + '/_templates') ||
+        File.exist?(path + '/_octopress.yml'))
+        abort "Some files already exist.  Use --force to overwrite."
       end
 
       FileUtils.cp_r scaffold_path + '/.', path
@@ -19,7 +19,7 @@ module Octopress
     end
 
     def scaffold_path
-      File.expand_path('../../scaffold', File.dirname(__FILE__))
+      Octopress.expand_gem_path('scaffold')
     end
     
   end
