@@ -4,15 +4,17 @@ module Octopress
     def set_default_options
       @options['type']      ||= 'post'
       @options['layout']      = @config['post_layout']
-      @options['date']      ||= Time.now.iso8601
       @options['date']        = convert_date @options['date']
       @options['extension'] ||= @config['post_ext']
       @options['template']  ||= @config['post_template']
+      @options['dir']       ||= ''
     end
 
     def path
       name = "#{date_slug}-#{title_slug}.#{extension}"
-      File.join(source, '_posts', name)
+      dir = File.join(source, '_posts', @options['dir'])
+      FileUtils.mkdir_p dir
+      File.join(dir, name)
     end
 
     # Returns a string which is url compatible.

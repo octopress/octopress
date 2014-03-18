@@ -100,6 +100,7 @@ date: YYYY-MM-DDTHH:MM:SS-00:00
 | `--template PATH`    | Use a template from <path>              |
 | `--date DATE`        | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `--slug SLUG`        | Slug for the new post.                  |
+| `--dir DIR`          | Create post at _posts/DIR/.             |
 | `--force`            | Overwrite exsiting file.                |
 
 ### New Page
@@ -144,6 +145,7 @@ This will move your draft to the `_posts` directory and rename the file with the
 |:-------------------|:------------------------------------------|
 | `--date DATE`      | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `--slug SLUG`      | Change the slug for the new post.         |
+| `--dir DIR`        | Create post at _posts/DIR/.               |
 | `--force`          | Overwrite exsiting file.                  |
 ```
 
