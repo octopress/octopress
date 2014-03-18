@@ -16,8 +16,8 @@ module Octopress
 
         c.action do |args, options|
           Octopress.config(options)
+          options["serving"] ||= true
 
-          options.default :serving => true
           options = CommandHelpers.normalize_options(options)
           options = Jekyll.configuration(options.to_symbol_keys)
           Jekyll::Commands::Build.process(options)
