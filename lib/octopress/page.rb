@@ -5,6 +5,15 @@ module Octopress
       @config = Octopress.config(options)
       @options = options
       set_default_options
+
+      # Ensure title
+      #
+      @options['title'] ||= ''
+
+      # Ensure a quoted title
+      #
+      @options['title'] = "\"#{@options['title']}\""
+
       @content = options['content'] || content
     end
 
@@ -37,9 +46,11 @@ module Octopress
       raise "You must specify a path." unless file
 
       # If path ends with a slash, make it an index
+      #
       file += "index" if file =~ /\/$/
 
       # if path has no extension, add the default extension
+      #
       file += ".#{extension}" unless file =~ /\.\w+$/
 
       @path = File.join(source, file)
@@ -50,31 +61,44 @@ module Octopress
     end
 
     def set_default_options
-      @options['type'] ||= 'page'
-      @options['layout']      =  @config['new_page_layout']
+      @options['type']      ||= 'page'
+      @options['layout']      =  @config['page_layout']
       @options['date']        = convert_date @options['date']
-      @options['extension'] ||= @config['new_page_extension']
-      @options['template'] ||= @config['new_page_template']
+      @options['extension'] ||= @config['page_ext']
+      @options['template']  ||= @config['page_template']
     end
 
     def convert_date(date)
       if date
-        begin
-          Time.parse(date.to_s).iso8601
-        rescue => error
-          abort 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+        if @options['date'] == 'now'
+          @options['date'] = Time.now.iso8601
+        else
+          begin
+            Time.parse(date.to_s).iso8601
+          rescue => error
+            puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+            abort error.message
+          end
         end
       end
     end
 
-    # Load the user provide or default template for a new post.
+    # Load the user provide or default template for a new post or page.
     #
     def content
+
+      # Handle case where user passes the full path
+      #
       file = @options['template']
-      file = File.join(source, '_templates', file) if file
-      if file 
-        abort "No #{@options['type']} template found at #{file}" unless File.exist? file
-        parse_template Pathname.new(file).read
+
+      if file
+        file.sub(/^_templates\//, '')
+        file = File.join(source, '_templates', file) if file
+        if File.exist? file
+          parse_template File.open(file).read
+        else
+          abort "No #{@options['type']} template found at #{file}"
+        end
       else
         parse_template default_content
       end
@@ -83,45 +107,37 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
+      @options['title'].titlecase! if @config['titlecase']
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
       #
       parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}\s+(.+)/m
         template = Liquid::Template.parse($1)
-        "---\n#{template.render(@options)}\n---\n\n#{$2}"
+        "---\n#{template.render(@options).strip}\n---\n\n#{$2}"
       else
         template = Liquid::Template.parse(input)
-        "---\n#{template.render(@options)}\n---\n\n"
+        "---\n#{template.render(@options).strip}\n---\n\n"
       end
     end
 
     def date_slug
-      Time.parse(@options['date']).strftime('%Y-%m-%d')
+      @options['date'].split('T')[0]
     end
 
-    # Returns a string which is url compatible.
-    #
-    def title_slug
-      value = @options['title'].gsub(/[^\x00-\x7F]/u, '')
-      value.gsub!(/(&amp;|&)+/, 'and')
-      value.gsub!(/[']+/, '')
-      value.gsub!(/\W+/, ' ')
-      value.strip!
-      value.downcase!
-      value.gsub!(' ', '-')
-      value
+    def front_matter(vars)
+      fm = []
+      vars.each do |v| 
+        fm << "#{v}: {{ #{v} }}" if @options[v]
+      end
+      fm.join("\n")
     end
 
     # Page template defaults
     #
     def default_content
-      <<-TEMPLATE
----
-layout: {{ layout }}
-title: {{ title }}
----
-TEMPLATE
+      front_matter %w{layout title date}
     end
+
   end
 end

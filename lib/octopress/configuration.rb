@@ -2,10 +2,10 @@ module Octopress
   module Configuration
 
     DEFAULTS = {
-      'new_post_extension' => 'markdown',
-      'new_page_extension' => 'html',
-      'new_post_layout' => 'post',
-      'new_page_layout' => 'page',
+      'post_ext' => 'markdown',
+      'page_ext' => 'html',
+      'post_layout' => 'post',
+      'page_layout' => 'page',
       'titlecase' => true
     }
 
@@ -13,22 +13,30 @@ module Octopress
       return @config if @config
 
       file = options['octopress-config'] || '_octopress.yml'
-      config = options['override'] || {}
+      user_config = {}
+
       if File.exist? file
-        config = YAML.safe_load(File.open(file)).deep_merge(config)
+        user_config = YAML.safe_load(File.open(file).read) || {}
       end
-      @config = DEFAULTS.deep_merge(config)
+
+      user_config = user_config.deep_merge(options['override'] || {})
+      user_config = (options['defaults'] || {}).deep_merge(user_config)
+
+      @config = DEFAULTS.deep_merge(user_config)
     end
 
     def self.jekyll_config(options={})
       return @jekyll_config if @jekyll_config
 
-      log_level = Jekyll.logger.log_level
-      Jekyll.logger.log_level = Jekyll::Stevenson::WARN
-      jekyll_config = Jekyll.configuration(options)
-      Jekyll.logger.log_level = log_level
+      configs = Jekyll::Configuration::DEFAULTS
 
-      @jekyll_config = jekyll_config
+      (options['config'] || ['_config.yml']).each do |file|
+        if File.exist? file
+          configs = configs.deep_merge YAML.safe_load(File.open(file)) 
+        end
+      end
+
+      @jekyll_config = configs
     end
   end
 end

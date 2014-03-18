@@ -15,6 +15,6 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-_site
 .sass-cache
 .code-highlighter-cache
+test-site

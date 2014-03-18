@@ -1,3 +1,6 @@
+require 'jekyll'
+require File.expand_path('commands/helpers', File.dirname(__FILE__))
+
 module Octopress
   class Command
     def self.inherited(base)
