@@ -129,7 +129,7 @@ This will create a new post in your `_drafts` directory.
 |:-------------------|:------------------------------------------|
 | `--template PATH`    | Use a template from <path>              |
 | `--date DATE`      | The date for the draft. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
-| `--slug SLUG       | The slug for the new post.                |
+| `--slug SLUG`      | The slug for the new post.                |
 | `--force`          | Overwrite exsiting file.                  |
 
 ### Publish draft
@@ -147,7 +147,7 @@ This will move your draft to the `_posts` directory and rename the file with the
 | `--force`          | Overwrite exsiting file.                  |
 ```
 
-When publishing a draft, you may want to update the date for your post. Pass the option `--date now` to set the current day and time from your system clock or use any other compatible date string.
+When publishing a draft, the new post will use the draft's date. Pass the option `--date now` to the publish command to set the new post date from your system clock. As usual, you can pass any compatible date string as well.
 
 ### Templates for Posts and pages
 
