@@ -3,15 +3,14 @@
 Octopress is an obsessively designed toolkit for writing and deploying Jekyll
 blogs. Pretty sweet, huh?
 
-
-[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)
+<!--[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)-->
 [![Build Status](https://travis-ci.org/octopress/octopress.png?branch=master)](https://travis-ci.org/octopress/octopress)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress', '~> 3.0.0.rc.1'
+    gem 'octopress', '~> 3.0.0.rc.4'
 
 And then execute:
 
