@@ -4,7 +4,7 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll
 blogs. Pretty sweet, huh?
 
 
-[![Gem Version](https://badge.fury.io/rb/octopress-octopress.png)](http://badge.fury.io/rb/octopress-octopress)
+[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)
 [![Build Status](https://travis-ci.org/octopress/octopress.png?branch=master)](https://travis-ci.org/octopress/octopress)
 
 ## Installation
