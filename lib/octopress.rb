@@ -48,3 +48,7 @@ module Octopress
   end
 end
 
+if defined? Octopress::Ink
+  require 'octopress/docs'
+  Octopress::Ink.register_plugin(Octopress::CLIDocs)
+end

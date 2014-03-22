@@ -1,4 +1,6 @@
-# Octopress
+---
+title: "Octopress"
+---
 
 Octopress is an obsessively designed toolkit for writing and deploying Jekyll blogs. Pretty sweet, huh?
 
