@@ -21,6 +21,7 @@ module Octopress
   BLESSED_GEMS = %w[
     octopress-deploy
     octopress-ink
+    octopress-docs
   ]
 
   def self.logger
