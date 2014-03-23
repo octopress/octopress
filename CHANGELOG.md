@@ -1,17 +1,16 @@
 # Octopress Changelog
 
-### HEAD - 3.0.0 RC6
-
-#### Minor Enhancements
-- Added support for octopress-ink documentation system.
-- Added a `update_docs` Rake task to update index/docs/index.markdown from README.md.
-
 ## Current released version
+
+### 3.0.0 RC6 - 2014-03-22
+
+- Added support for octopress-ink documentation system.
+- Added a `update_docs` Rake task to update docs from the readme and changelog.
+
+## Past versions
 
 ### 3.0.0 RC5 - 2014-03-21
 - Added octopress-docs to blessed gem list.
-
-## Past versions
 
 ### 3.0.0 RC4 - 2014-03-18
 - Updated mercenary. Fixed issue: #34

@@ -19,7 +19,7 @@ module Octopress
     end
 
     def scaffold_path
-      Octopress.expand_gem_path('scaffold')
+      Octopress.gem_dir('scaffold')
     end
     
   end

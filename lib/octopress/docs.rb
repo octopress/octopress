@@ -13,5 +13,13 @@ module Octopress
     def docs_base_path
       'docs/cli'
     end
+
+    def info(options)
+      if options['docs']
+        super
+      else
+        ''
+      end
+    end
   end
 end

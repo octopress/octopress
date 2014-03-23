@@ -34,7 +34,7 @@ module Octopress
     @config ||= Configuration.config(options)
   end
 
-  def self.expand_gem_path(dir='')
+  def self.gem_dir(dir='')
     File.expand_path(File.join(File.dirname(__FILE__), '../', dir))
   end
 
@@ -46,9 +46,4 @@ module Octopress
       end
     end
   end
-end
-
-if defined? Octopress::Ink
-  require 'octopress/docs'
-  Octopress::Ink.register_plugin(Octopress::CLIDocs)
 end
