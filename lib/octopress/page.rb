@@ -74,7 +74,7 @@ module Octopress
         @options['date'] = Time.now.iso8601
       else
         begin
-          Time.parse(date.to_s).iso8601
+          Time.parse(date.to_s, Time.now).iso8601
         rescue => error
           puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
           abort error.message

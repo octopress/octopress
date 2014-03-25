@@ -1,5 +1,6 @@
 # Octopress
 
+
 Octopress is an obsessively designed toolkit for writing and deploying Jekyll blogs. Pretty sweet, huh?
 
 <!--[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)-->
@@ -67,7 +68,7 @@ titlecase: true
 
 
 ```sh
-octopress init <PATH> [options]
+$ octopress init <PATH> [options]
 ```
 
 This will copy Octopress's scaffolding into the specified directory. Use the `--force` option to overwrite existing files. The scaffolding is pretty simple:
@@ -83,7 +84,7 @@ _templates/
 
 This automates the creation of a new post.
 
-```bash
+```sh
 $ octopress new post "My Title"
 ```
 
@@ -107,7 +108,7 @@ date: YYYY-MM-DDTHH:MM:SS-00:00
 
 ### New Page
 
-```sh
+```
 $ octopress new page some-page           # ./some-page.html
 $ octopress new page docs/               # ./docs/index.html
 $ octopress new page about.html          # ./about.html
@@ -122,7 +123,7 @@ $ octopress new page about.html          # ./about.html
 
 ### New Draft
 
-```bash
+```sh
 $ octopress new draft "My Title"
 ```
 
@@ -137,7 +138,7 @@ This will create a new post in your `_drafts` directory.
 
 ### Publish draft
 
-```bash
+```sh
 $ octopress publish _drafts/some-post.md
 ```
 
@@ -149,7 +150,6 @@ This will move your draft to the `_posts` directory and rename the file with the
 | `--slug SLUG`      | Change the slug for the new post.         |
 | `--dir DIR`        | Create post at _posts/DIR/.               |
 | `--force`          | Overwrite exsiting file.                  |
-```
 
 When publishing a draft, the new post will use the draft's date. Pass the option `--date now` to the publish command to set the new post date from your system clock. As usual, you can pass any compatible date string as well.
 
@@ -157,7 +157,7 @@ When publishing a draft, the new post will use the draft's date. Pass the option
 
 Octopress post and page templates look like this.
 
-```html
+```
 ---
 layout: {{ layout }}
 title: {{ title }}
@@ -169,7 +169,7 @@ date: {{ date }}
 The YAML variables will be replaced with the correct content when you create a page or post. To modify this template create a `_templates/post` file and change it as you wish. You can add additional YAML front-matter or content, and you can even create multiple templates. Choose a custom template when creating a new post or page like this.
 
 ```sh
-octopress new post --template _templates/linkpost
+$ octopress new post --template _templates/linkpost
 ```
 
 ## Contributing
