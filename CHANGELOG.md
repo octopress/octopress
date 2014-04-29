@@ -1,5 +1,11 @@
 # Octopress Changelog
 
+## Master
+
+### 3.0.0 RC8
+
+- Improved draft date management [#35](https://github.com/octopress/octopress/issues/35)
+
 ## Current released version
 
 ### 3.0.0 RC7 - 2014-03-24

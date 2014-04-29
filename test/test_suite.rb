@@ -62,7 +62,11 @@ end
 def test(options)
   if cmd = options[:cmd]
     cmd = [cmd] unless cmd.is_a? Array
-    output = `#{cmd.join('; ')}`.gsub(/#{Dir.pwd}\/*/,'').strip
+    if options[:debug]
+      system cmd.join('; ')
+    else
+      output = `#{cmd.join('; ')}`.gsub(/#{Dir.pwd}\/*/,'').strip
+    end
     if options[:expect].strip == output
       pout '.'.green
     else
@@ -93,7 +97,7 @@ def print_results
       if test[:message]
         puts test[:message].yellow
       else
-        puts test[:expected].green
+        puts (test[:expected] || '').green
         puts test[:result].red
       end
      # print a newline for easier reading

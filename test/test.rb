@@ -13,7 +13,8 @@ FileUtils.cd('test-site') do |dir|
     cmd: [
       'octopress new . --blank',
       'echo "<div class=\'post\'>{{ page.title }}{{ content }}</div>" > _layouts/post.html',
-      'echo "<div class=\'page\'>{{ page.title }}{{ content }}</div>" > _layouts/page.html'
+      'echo "<div class=\'page\'>{{ page.title }}{{ content }}</div>" > _layouts/page.html',
+      'echo "timezone: GMT" > _config.yml'
     ],
     expect: "New jekyll site installed in ."
   })

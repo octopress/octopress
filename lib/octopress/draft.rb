@@ -8,8 +8,8 @@ module Octopress
       @options['extension'] ||= @config['post_ext']
       @options['template']  ||= @config['post_template']
 
-      if @options['type'] == 'draft'
-        @options['date']      = convert_date @options['date']
+      if @options['date']
+        @options['date'] = convert_date @options['date']
       end
     end
 
@@ -28,13 +28,12 @@ module Octopress
     # and options passed to the publish command
     #
     def publish
-      @options['date'] ||= read_draft_date
-      @options['date'] = convert_date @options['date']
+      @options['date'] ||= read_draft_date || Time.now.iso8601
 
       post_options = {
         'title'   => read_draft_title,
-        'slug'    => publish_slug,
         'date'    => @options['date'],
+        'slug'    => publish_slug,
         'content' => read_draft_content,
         'dir'     => @options['dir'],
         'type'    => 'post from draft'
@@ -71,24 +70,40 @@ module Octopress
     # Get title from draft post file
     #
     def read_draft_title
-      read.match(/title:\s+(.+)?$/)[1]
+      match = read.match(/title:\s+(.+)?$/)
+      match[1] if match
     end
     
     # read_draft_date
     #
     def read_draft_date
-      read.match(/date:\s+(.+)?$/)[1]
+      match = read.match(/date:\s+(.+)?$/)
+      match[1] if match
     end
     
     # Get content from draft post file
+    # also update the draft's date configuration
     #
     def read_draft_content
       if @options['date']
-        read.sub(/date:\s+.+?$/, "date: #{@options['date']}")
+        # remove date if it exists
+        content = read.sub(/date:\s+.+?\n/, "")
+        
+        # Insert date after title
+        content.sub(/(title:.+$)/i, '\1'+"\ndate: #{@options['date']}")
       else
         read
       end
     end
 
+    # Draft template defaults
+    #
+    def default_content
+      if @options['date']
+        front_matter %w{layout title date}
+      else
+        front_matter %w{layout title}
+      end
+    end
   end
 end
