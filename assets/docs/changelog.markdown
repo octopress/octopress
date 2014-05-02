@@ -5,6 +5,10 @@ permalink: /changelog/
 
 ## Current released version
 
+### 3.0.0 RC8 - 2014-05-02
+
+- Improved draft date management [#35](https://github.com/octopress/octopress/issues/35)
+
 ### 3.0.0 RC7 - 2014-03-24
 
 - Fixed Time.parse with `--date` option on new posts and pages.
