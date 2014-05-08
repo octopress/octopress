@@ -2,6 +2,10 @@
 
 ## Current released version
 
+### 3.0.0 RC10 - 2014-05-07
+
+- Now using SafeYAML.load instead of YAML.safe_load
+
 ### 3.0.0 RC9 - 2014-05-07
 
 - Support for Jekyll 2.0
