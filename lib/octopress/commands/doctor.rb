@@ -10,7 +10,7 @@ module Octopress
 
         c.action do |args, options|
           options = CommandHelpers.normalize_options(options)
-          options = Jekyll.configuration(options.to_symbol_keys)
+          options = Jekyll.configuration(options)
           Jekyll::Commands::Doctor.process(options)
         end
       end
