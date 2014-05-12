@@ -4,7 +4,7 @@
 
 ### 3.0.0 RC10 - 2014-05-07
 
-- Now using SafeYAML.load instead of YAML.safe_load
+- Now using SafeYAML.load instead of YAML.safe_load [#38](https://github.com/octopress/octopress/issues/38)
 
 ### 3.0.0 RC9 - 2014-05-07
 
