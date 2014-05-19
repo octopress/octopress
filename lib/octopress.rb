@@ -1,8 +1,7 @@
 require 'mercenary'
 
 module Octopress
-  require 'octopress/ext/hash'
-  require 'octopress/ext/titlecase'
+  require 'octopress/utils'
   require 'octopress/configuration'
   require 'octopress/command'
   require 'octopress/version'

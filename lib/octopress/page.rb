@@ -106,7 +106,7 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
-      @options['title'].titlecase! if @config['titlecase']
+      Octopress::Utils.titlecase!(@options['title']) if @config['titlecase']
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.

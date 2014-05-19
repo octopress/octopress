@@ -16,13 +16,13 @@ module Octopress
       user_config = {}
 
       if File.exist? file
-        user_config = SafeYAML.load(File.open(file).read) || {}
+        user_config = SafeYAML.load_file(file) || {}
       end
 
-      user_config = user_config.deep_merge(options['override'] || {})
-      user_config = (options['defaults'] || {}).deep_merge(user_config)
+      user_config = Jekyll::Utils.deep_merge_hashes(user_config, options['override'] || {})
+      user_config = Jekyll::Utils.deep_merge_hashes(options['defaults'] || {}, user_config)
 
-      @config = DEFAULTS.deep_merge(user_config)
+      @config = Jekyll::Utils.deep_merge_hashes(DEFAULTS, user_config)
     end
 
     def self.jekyll_config(options={})
@@ -32,7 +32,7 @@ module Octopress
 
       (options['config'] || ['_config.yml']).each do |file|
         if File.exist? file
-          configs = configs.deep_merge SafeYAML.load(File.open(file)) 
+          configs = Jekyll::Utils.deep_merge_hashes(configs, SafeYAML.load_file(file) || {})
         end
       end
 

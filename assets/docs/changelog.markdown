@@ -5,9 +5,16 @@ permalink: /changelog/
 
 ## Current released version
 
+### 3.0.0 RC11 - 2014-19-07
+
+- Replaced Hash extensions with Jekyll utility methods
+- Replaced String extension "titlecase" with Octopress utility method
+
+## Past versions
+
 ### 3.0.0 RC10 - 2014-05-07
 
-- Now using SafeYAML.load instead of YAML.safe_load
+- Now using SafeYAML.load instead of YAML.safe_load [#38](https://github.com/octopress/octopress/issues/38)
 
 ### 3.0.0 RC9 - 2014-05-07
 
@@ -21,8 +28,6 @@ permalink: /changelog/
 
 - Fixed Time.parse with `--date` option on new posts and pages.
 - Bumped Jekyll to 1.5.
-
-## Past versions
 
 ### 3.0.0 RC6 - 2014-03-22
 
