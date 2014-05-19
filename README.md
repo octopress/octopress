@@ -40,7 +40,7 @@ Run `octopress [command] --help` to learn more about any command and see its opt
 
 ### Deployment
 
-You can deploy your Octopress or Jeklly blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
+You can deploy your Octopress or Jekyll blog via git, rsync or Amazon S3. The deployment system ships with the [octopress-deploy][] gem which extends the Octopress CLI with the `deploy` command.
 
 [octopress-deploy]: https://github.com/octopress/deploy
 
