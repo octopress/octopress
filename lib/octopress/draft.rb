@@ -77,7 +77,7 @@ module Octopress
     # read_draft_date
     #
     def read_draft_date
-      match = read.match(/date:\s+(.+)?$/)
+      match = read.match(/date:\s+(\d.+)$/)
       match[1] if match
     end
     
@@ -87,7 +87,7 @@ module Octopress
     def read_draft_content
       if @options['date']
         # remove date if it exists
-        content = read.sub(/date:\s+.+?\n/, "")
+        content = read.sub(/date:.*$\n/, "")
         
         # Insert date after title
         content.sub(/(title:.+$)/i, '\1'+"\ndate: #{@options['date']}")

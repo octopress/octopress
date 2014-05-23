@@ -2,7 +2,6 @@
 title: "Octopress"
 ---
 
-
 Octopress is an obsessively designed toolkit for writing and deploying Jekyll blogs. Pretty sweet, huh?
 
 <!--[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)-->
@@ -12,7 +11,7 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll bl
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress', '~> 3.0.0.rc.11'
+    gem 'octopress', '~> 3.0.0.rc.12'
 
 And then execute:
 
@@ -98,7 +97,7 @@ title: "My Title"
 date: YYYY-MM-DDTHH:MM:SS-00:00
 ```
 
-"Ok, great? What else can I do?" Great question! Check out these other options:
+"OK, great? What else can I do?" Great question! Check out these other options:
 
 | Option               | Description                             |
 |:---------------------|:----------------------------------------|
@@ -106,7 +105,7 @@ date: YYYY-MM-DDTHH:MM:SS-00:00
 | `--date DATE`        | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `--slug SLUG`        | Slug for the new post.                  |
 | `--dir DIR`          | Create post at _posts/DIR/.             |
-| `--force`            | Overwrite exsiting file.                |
+| `--force`            | Overwrite existing file.                |
 
 ### New Page
 
@@ -121,7 +120,11 @@ $ octopress new page about.html          # ./about.html
 | `--template PATH`    | Use a template from <path>              |
 | `--title TITLE`      | The title of the new page               |
 | `--date DATE`        | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
-| `--force`            | Overwrite exsiting file.                |
+| `--force`            | Overwrite existing file.                |
+
+Note: The default page template doesn't expect a date. If you want to add dates
+to your posts, consider adding `date: {{ date }}` to the default template
+`_templates/page`, or create a new template to use for dated pages.
 
 ### New Draft
 
@@ -151,7 +154,7 @@ This will move your draft to the `_posts` directory and rename the file with the
 | `--date DATE`      | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
 | `--slug SLUG`      | Change the slug for the new post.         |
 | `--dir DIR`        | Create post at _posts/DIR/.               |
-| `--force`          | Overwrite exsiting file.                  |
+| `--force`          | Overwrite existing file.                  |
 
 When publishing a draft, the new post will use the draft's date. Pass the option `--date now` to the publish command to set the new post date from your system clock. As usual, you can pass any compatible date string as well.
 
@@ -163,7 +166,6 @@ Octopress post and page templates look like this.
 ---
 layout: {{ layout }}
 title: {{ title }}
-date: {{ date }}
 ---
 
 ```

@@ -82,13 +82,13 @@ module Octopress
       end
     end
 
-    # Load the user provide or default template for a new post or page.
+    # Load the user provided or default template for a new post or page.
     #
     def content
 
       # Handle case where user passes the full path
       #
-      file = @options['template']
+      file = @options['template'] || default_template
 
       if file
         file.sub(/^_templates\//, '')
@@ -103,6 +103,10 @@ module Octopress
       end
     end
 
+    def default_template
+      'page'
+    end
+
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
@@ -111,12 +115,13 @@ module Octopress
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
       #
-      parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}\s+(.+)/m
+
+      parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}(.+)?/m
         template = Liquid::Template.parse($1)
-        "---\n#{template.render(@options).strip}\n---\n\n#{$2}"
+        "---\n#{template.render(@options).strip}\n---\n#{$2}"
       else
         template = Liquid::Template.parse(input)
-        "---\n#{template.render(@options).strip}\n---\n\n"
+        "---\n#{template.render(@options).strip}\n---\n"
       end
     end
 
@@ -135,7 +140,11 @@ module Octopress
     # Page template defaults
     #
     def default_content
-      front_matter %w{layout title date}
+      if @options['date']
+        front_matter %w{layout title date}
+      else
+        front_matter %w{layout title}
+      end
     end
 
   end

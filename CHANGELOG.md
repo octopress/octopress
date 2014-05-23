@@ -1,13 +1,17 @@
 # Octopress Changelog
 
 ## Current released version
+### 3.0.0 RC11 - 2014-05-23
 
-### 3.0.0 RC11 - 2014-19-07
-
-- Replaced Hash extensions with Jekyll utility methods
-- Replaced String extension "titlecase" with Octopress utility method
+- Change: Default page template no longer includes a date.
+- Improved date management when publishing a draft.
 
 ## Past versions
+
+### 3.0.0 RC11 - 2014-05-07
+
+- Replaced Hash extensions with Jekyll utility methods.
+- Replaced String extension "titlecase" with Octopress utility method.
 
 ### 3.0.0 RC10 - 2014-05-07
 

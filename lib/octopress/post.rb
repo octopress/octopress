@@ -17,6 +17,16 @@ module Octopress
       File.join(dir, name)
     end
 
+    def default_template
+      'post'
+    end
+    
+    # Post template defaults
+    #
+    def default_content
+      front_matter %w{layout title date}
+    end
+
     # Returns a string which is url compatible.
     #
     def title_slug
