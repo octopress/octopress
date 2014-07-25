@@ -1,12 +1,19 @@
 # Octopress Changelog
 
 ## Current released version
-### 3.0.0 RC11 - 2014-05-23
+
+### 3.0.0 RC13 - 2014-07-24
+
+- Templates are no longer required unless passed as an option.
+- Drafts template default doesn't have a date anymore.
+- Now using octopress filters for titlecase
+
+## Past versions
+
+### 3.0.0 RC12 - 2014-05-23
 
 - Change: Default page template no longer includes a date.
 - Improved date management when publishing a draft.
-
-## Past versions
 
 ### 3.0.0 RC11 - 2014-05-07
 

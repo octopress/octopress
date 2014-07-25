@@ -63,7 +63,9 @@ module Octopress
     def set_default_options
       @options['type']      ||= 'page'
       @options['layout']      = @config['page_layout']
-      @options['date']        = convert_date @options['date']
+      if @options['date']
+        @options['date']        = convert_date @options['date']
+      end
       @options['extension'] ||= @config['page_ext']
       @options['template']  ||= @config['page_template']
     end
@@ -95,8 +97,10 @@ module Octopress
         file = File.join(source, '_templates', file) if file
         if File.exist? file
           parse_template File.open(file).read
-        else
+        elsif @options['template']
           abort "No #{@options['type']} template found at #{file}"
+        else
+          parse_template default_content
         end
       else
         parse_template default_content
@@ -110,19 +114,26 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
-      Octopress::Utils.titlecase!(@options['title']) if @config['titlecase']
+      if @config['titlecase']
+        @options['title'] = Octopress::Filters.titlecase(@options['title'])
+      end
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
       #
 
       parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}(.+)?/m
-        template = Liquid::Template.parse($1)
-        "---\n#{template.render(@options).strip}\n---\n#{$2}"
+        input = $1
+        content = $2
+        if @options['date'] && !(input =~ /date:/)
+          input += "\ndate: #{@options['date']}"
+        end
       else
-        template = Liquid::Template.parse(input)
-        "---\n#{template.render(@options).strip}\n---\n"
+        content = ''
       end
+
+      template = Liquid::Template.parse(input)
+      "---\n#{template.render(@options).strip}\n---\n#{content}"
     end
 
     def date_slug

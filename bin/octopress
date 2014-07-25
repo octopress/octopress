@@ -7,11 +7,6 @@ require 'octopress'
 
 Octopress.require_blessed_gems
 
-if defined? Octopress::Ink
-  require 'octopress/docs'
-  Octopress::Ink.register_plugin(Octopress::CLIDocs)
-end
-
 if ENV['BUNDLE_BIN_PATH'] || ENV['BUNDLE_GEMFILE']
   begin
     require 'bundler'

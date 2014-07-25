@@ -95,10 +95,15 @@ module Octopress
         read
       end
     end
+    
+    def default_template
+      'draft'
+    end
 
     # Draft template defaults
     #
     def default_content
+
       if @options['date']
         front_matter %w{layout title date}
       else

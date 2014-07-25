@@ -157,6 +157,6 @@ end
 # Build the site
 #
 system "cd test-site; octopress build; cd -"
-test_dirs('Compare directories', 'test-site', 'expected')
+test_dirs('Compare directories', 'expected', 'test-site')
 
 print_results

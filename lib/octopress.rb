@@ -1,7 +1,7 @@
 require 'mercenary'
+require 'octopress-filters'
 
 module Octopress
-  require 'octopress/utils'
   require 'octopress/configuration'
   require 'octopress/command'
   require 'octopress/version'
