@@ -95,7 +95,7 @@ title: "My Title"
 date: YYYY-MM-DDTHH:MM:SS-00:00
 ```
 
-"OK, great? What else can I do?" Great question! Check out these other options:
+"OK, great. What else can I do?" Great question! Check out these other options:
 
 | Option               | Description                             |
 |:---------------------|:----------------------------------------|
@@ -121,8 +121,9 @@ $ octopress new page about.html          # ./about.html
 | `--force`            | Overwrite existing file.                |
 
 Note: The default page template doesn't expect a date. If you want to add dates
-to your posts, consider adding `date: {{ date }}` to the default template
-`_templates/page`, or create a new template to use for dated pages.
+to your pages, consider adding `date: {{ date }}` to the default template
+`_templates/page`, or create a new template to use for dated pages. Otherwise,
+you will have the `--date` option to add a date to a page.
 
 ### New Draft
 
