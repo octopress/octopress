@@ -9,22 +9,34 @@ module Octopress
       'titlecase' => true
     }
 
+    # Read _octopress.yml and merge with defaults
+    #
     def self.config(options={})
-      return @config if @config
 
-      file = options['octopress-config'] || '_octopress.yml'
-      user_config = {}
+      # Cache loading the config file
+      unless @user_config
+        file = options['octopress-config'] || '_octopress.yml'
 
-      if File.exist? file
-        user_config = SafeYAML.load_file(file) || {}
+        if File.exist? file
+          config = SafeYAML.load_file(file) || {}
+        else
+          config = {}
+        end
+        
+        # Allow cli extensioins to override default user configuration
+        if options['override']
+          config = Jekyll::Utils.deep_merge_hashes(config, options['override'])
+        end
+
+        # Merge Octopress defaults
+        @user_config = Jekyll::Utils.deep_merge_hashes(DEFAULTS, config)
       end
 
-      user_config = Jekyll::Utils.deep_merge_hashes(user_config, options['override'] || {})
-      user_config = Jekyll::Utils.deep_merge_hashes(options['defaults'] || {}, user_config)
-
-      @config = Jekyll::Utils.deep_merge_hashes(DEFAULTS, user_config)
+      @user_config
     end
 
+    # Read Jekyll's _config.yml merged with Jekyll's defaults
+    #
     def self.jekyll_config(options={})
       return @jekyll_config if @jekyll_config
 

@@ -2,13 +2,18 @@
 
 ## Current released version
 
+### 3.0.0 RC14 - 2014-07-26
+
+- Simplified configuration management.
+- Now requiring titlecase gem directly.
+
+## Past versions
+
 ### 3.0.0 RC13 - 2014-07-24
 
 - Templates are no longer required unless passed as an option.
-- Drafts template default doesn't have a date anymore.
-- Now using octopress filters for titlecase
-
-## Past versions
+- The default drafts template doesn't have a date anymore.
+- Now using octopress filters for titlecase.
 
 ### 3.0.0 RC12 - 2014-05-23
 

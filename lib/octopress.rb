@@ -1,5 +1,5 @@
 require 'mercenary'
-require 'octopress-filters'
+require 'titlecase'
 
 module Octopress
   require 'octopress/configuration'

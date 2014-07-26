@@ -115,7 +115,7 @@ module Octopress
     def parse_template(input)
 
       if @config['titlecase']
-        @options['title'] = Octopress::Filters.titlecase(@options['title'])
+        @options['title'].titlecase!
       end
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 

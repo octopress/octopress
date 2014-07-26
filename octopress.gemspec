@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "mercenary", "~> 0.3.2"
   spec.add_runtime_dependency "jekyll", "~> 2.0"
-  spec.add_runtime_dependency "octopress-filters", "~> 1.1"
+  spec.add_runtime_dependency "titlecase"
 
   spec.add_development_dependency "octopress-ink"
   spec.add_development_dependency "bundler", "~> 1.3"
