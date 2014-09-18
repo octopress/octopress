@@ -1,5 +1,6 @@
 require 'mercenary'
 require 'titlecase'
+require 'octopress-docs'
 
 module Octopress
   require 'octopress/configuration'
@@ -46,3 +47,8 @@ module Octopress
     end
   end
 end
+
+Octopress::Docs.add({
+  name:        "Octopress",
+  dir:         File.expand_path(File.join(File.dirname(__FILE__), "../../")),
+})
