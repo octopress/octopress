@@ -1,6 +1,5 @@
 require 'mercenary'
 require 'titlecase'
-require 'octopress-docs'
 
 module Octopress
   require 'octopress/configuration'
@@ -47,6 +46,8 @@ module Octopress
     end
   end
 end
+
+require 'octopress-docs'
 
 Octopress::Docs.add({
   name:        "Octopress",
