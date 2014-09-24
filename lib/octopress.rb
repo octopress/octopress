@@ -50,5 +50,5 @@ end
 
 Octopress::Docs.add({
   name:        "Octopress",
-  dir:         File.expand_path(File.join(File.dirname(__FILE__), "../../")),
+  dir:         File.expand_path(File.join(File.dirname(__FILE__), "../")),
 })
