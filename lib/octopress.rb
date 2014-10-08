@@ -17,10 +17,10 @@ module Octopress
   autoload :Draft, 'octopress/draft'
   autoload :Scaffold, 'octopress/scaffold'
 
+  # Automatically require these gems if installed
   BLESSED_GEMS = %w[
-    octopress-deploy
     octopress-ink
-    octopress-docs
+    octopress-deploy
   ]
 
   def self.logger
@@ -50,6 +50,10 @@ end
 require 'octopress-docs'
 
 Octopress::Docs.add({
-  name:        "Octopress",
+  name:        "Octopress CLI",
+  slug:        "cli",
   dir:         File.expand_path(File.join(File.dirname(__FILE__), "../")),
 })
+
+Octopress.require_blessed_gems
+

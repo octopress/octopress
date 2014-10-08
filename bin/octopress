@@ -5,8 +5,6 @@ $LOAD_PATH.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 require 'mercenary'
 require 'octopress'
 
-Octopress.require_blessed_gems
-
 if ENV['BUNDLE_BIN_PATH'] || ENV['BUNDLE_GEMFILE']
   begin
     require 'bundler'
