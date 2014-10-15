@@ -1,5 +1,11 @@
 # Octopress
 
+<!---
+fake_yaml: "yeah!"
+testing:
+  stuff: [cool, stuff]
+--->
+
 Octopress is an obsessively designed toolkit for writing and deploying Jekyll blogs. Pretty sweet, huh?
 
 <!--[![Gem Version](https://badge.fury.io/rb/octopress.png)](http://badge.fury.io/rb/octopress)-->
