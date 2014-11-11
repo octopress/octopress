@@ -15,7 +15,7 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll bl
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress', '~> 3.0.0.rc.12'
+    gem 'octopress', '~> 3.0.0.rc.15'
 
 And then execute:
 
