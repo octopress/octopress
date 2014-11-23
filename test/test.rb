@@ -156,7 +156,7 @@ end
 
 # Build the site
 #
-system "cd test-site; octopress build; cd -"
+system "cd test-site; jekyll build; cd -"
 test_dirs('Compare directories', 'expected', 'test-site')
 
 print_results
