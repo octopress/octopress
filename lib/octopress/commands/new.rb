@@ -3,7 +3,7 @@ module Octopress
     def self.init_with_program(p)
       p.command(:new) do |c|
         c.syntax 'new <PATH>'
-        c.description 'Creates a new Jekyll site scaffold in path.'
+        c.description 'Creates a new site with Jekyll and Octopress scaffolding at the specified path.'
         c.option 'force', '--force', 'Force creation even if path already exists.'
         c.option 'blank', '--blank', 'Creates scaffolding but with empty files.'
         
@@ -12,6 +12,7 @@ module Octopress
             c.logger.error "You must specify a path."
           else
             Jekyll::Commands::New.process(args, options)
+            Octopress::Scaffold.new(args, options).write
           end
         end
 

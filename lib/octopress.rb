@@ -8,9 +8,6 @@ module Octopress
   require 'octopress/commands/new'
   require 'octopress/commands/init'
   require 'octopress/commands/publish'
-  require 'octopress/commands/build'
-  require 'octopress/commands/serve'
-  require 'octopress/commands/doctor'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
@@ -51,7 +48,8 @@ require 'octopress-docs'
 
 Octopress::Docs.add({
   name:        "Octopress CLI",
-  slug:        "cli",
+  slug:        "octopress",
+  base_url:    "/octopress",
   dir:         File.expand_path(File.join(File.dirname(__FILE__), "../")),
 })
 
