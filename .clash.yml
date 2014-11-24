@@ -82,7 +82,6 @@
     - reset_site
     - new_draft
     - 'octopress publish _drafts/some-cool-idea.markdown --dir ideas'
-  build: true
   compare: 
     - _expected/publish-draft-dir/_posts _posts
   enforce_missing: drafts/*
@@ -137,7 +136,7 @@
   before:
     - reset_site
     - new_posts
-    - 'octopress isolate -s "random post"'
+    - 'octopress isolate random-post'
   compare:
     - _expected/isolate-search/_posts _posts
 -
@@ -145,14 +144,16 @@
   before:
     - reset_site
     - new_posts
-    - 'octopress isolate _posts/2011-11-11-a-random-post.markdown'
+    - 'octopress isolate --path _posts/2011-11-11-a-random-post.markdown'
   compare:
     - _expected/isolate-path/_posts _posts
 -
   title: Integrate posts
   before:
+    - reset_site
     - new_posts
     - octopress isolate
     - 'octopress integrate'
   compare:
     - _expected/integrate/_posts _posts
+

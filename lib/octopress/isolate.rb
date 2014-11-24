@@ -11,11 +11,20 @@ module Octopress
 
     def revert
       dir = File.join(@site.source, '_posts')
-      posts = find_exiled_posts
-      FileUtils.mv(posts, dir)
-      FileUtils.rmdir(File.join(dir, '_exile'))
+      exile_dir = File.join(dir, '_exile')
+      if Dir.exist?(exile_dir)
+        posts = find_exiled_posts
+        if posts.size > 0
+          FileUtils.mv(posts, dir)
+          FileUtils.rmdir(File.join(dir, '_exile'))
 
-      puts "Reintegrated #{posts.size} post#{'s' if posts.size > 1} from _posts/_exile"
+          puts "Reintegrated #{posts.size} post#{'s' if posts.size != 1} from _posts/_exile"
+        else
+          puts "There aren't any posts in _posts/_exile."
+        end
+      else
+        puts "There aren't any posts in _posts/_exile."
+      end
     end
 
     def process
@@ -36,10 +45,7 @@ module Octopress
 
     # remove all posts that do not match string
     def isolate_search(string)
-      string.gsub!(/\s/i, '-')
-      puts string
-      posts = find_posts.select { |p| p =~ /#{string}/ }
-
+      posts = find_posts.select { |p| p =~ /#{string.gsub(/\s/, '-')}/i }
       isolate_except(posts)
     end
 
@@ -55,14 +61,19 @@ module Octopress
       posts = default_array(posts)
       dir = @site.source, '_posts/_exile'
 
-      FileUtils.mkdir_p(dir)
-      FileUtils.mv(others, dir)
 
-      puts "Isolated #{posts.size} post#{'s' if posts.size > 1}:"
-      posts.each do |p|
-        puts "  - #{p.sub(@site.source+'/_posts/', '')}" 
+      if posts.size > 0
+        FileUtils.mkdir_p(dir)
+        FileUtils.mv(others, dir)
+
+        puts "Isolated #{posts.size} post#{'s' if posts.size != 1}:"
+        posts.each do |p|
+          puts "  - #{p.sub(@site.source+'/_posts/', '')}" 
+        end
+        puts "Moved #{others.size} post#{'s' if others.size != 1} into _posts/_exile"
+      else
+        puts "No matching posts were found."
       end
-      puts "Moved #{others.size} post#{'s' if others.size > 1} into _posts/_exile"
     end
 
     def find_other_posts(paths)

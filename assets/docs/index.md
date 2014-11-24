@@ -145,6 +145,21 @@ The YAML variables will be replaced with the correct content when you create a p
 $ octopress new post --template _templates/linkpost
 ```
 
+## Isolate
+
+If your site is taking a while to generate, but you want to preview a post
+quickly, you can isolate that post temporarily with the isolate command. Here's the syntax:
+
+```
+octopress isolate [SEARCH] [options]
+```
+
+1. `octopress isolate` isolates the most recently dated post.
+2. `octopress isolate cats` isolates all posts with the word 'cats' in the filename.
+3. `octopress isolate --path _posts/2014-10-11-kittens.md` isolates the post at the given path.
+
+To reintegrate all posts, run `octopress integrate` which will restore all posts from `_posts/_exile`.
+
 ## Configuration
 
 Octopress reads its configurations from `_octopress.yml`. Here's what the configuration looks like by default.
@@ -162,8 +177,6 @@ page_layout: page
 # Format titles with titlecase?
 titlecase: true
 ```
-
-## Commands
 
 ## Contributing
 
