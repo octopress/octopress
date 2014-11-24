@@ -20,17 +20,16 @@ Or install it yourself as:
 
 Here are the commands for Octopress.
 
-| Option                          | Description                                 |
-|:--------------------------------|:--------------------------------------------|
-| `octopress init <PATH>`         |  Adds Octopress scaffolding to your site    |
-| `octopress new <PATH>`          |  Like `jekyll new` + `octopress init`       |
-| `octopress new post <TITLE>`    |  Add a new post to your site                |
-| `octopress new page <PATH>`     |  Add a new page to your site                |
-| `octopress new draft <TITLE>`   |  Add a new draft post to your site          |
-| `octopress publish <PATH>`      |  Publish a draft from _drafts to _posts     |
-| `octopress build`               |  works just like `jekyll build`             |
-| `octopress serve`               |  works just like `jekyll serve`             |
-| `octopress doctor`              |  works just like `jekyll doctor`            |
+| Option                          | Description                                   |
+|:--------------------------------|:----------------------------------------------|
+| `octopress init <PATH>`         |  Adds Octopress scaffolding to your site      |
+| `octopress new <PATH>`          |  Like `jekyll new` + `octopress init`         |
+| `octopress new post <TITLE>`    |  Add a new post to your site                  |
+| `octopress new page <PATH>`     |  Add a new page to your site                  |
+| `octopress new draft <TITLE>`   |  Add a new draft post to your site            |
+| `octopress publish <PATH>`      |  Publish a draft from _drafts to _posts       |
+| `octopress isolate [search]`    |  Isolate one or more posts for a faster build |
+| `octopress integrate`           |  Restores all posts, reverting isolation.     |
 
 Run `octopress [command] --help` to learn more about any command and see its options.
 

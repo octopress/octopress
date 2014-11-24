@@ -59,11 +59,11 @@ module Octopress
     def isolate_except(posts)
       others = find_other_posts(posts)
       posts = default_array(posts)
-      dir = @site.source, '_posts/_exile'
+      exile_dir = @site.source, '_posts/_exile'
 
 
       if posts.size > 0
-        FileUtils.mkdir_p(dir)
+        FileUtils.mkdir_p(exile_dir)
         FileUtils.mv(others, dir)
 
         puts "Isolated #{posts.size} post#{'s' if posts.size != 1}:"
