@@ -1,0 +1,97 @@
+require 'find'
+
+module Octopress
+  class Isolate
+    def initialize(options)
+      @options = options
+      Jekyll.logger.log_level = :error
+      @site = Jekyll::Site.new(Jekyll.configuration(@options))
+      Jekyll.logger.log_level = :info      
+    end
+
+    def revert
+      dir = File.join(@site.source, '_posts')
+      posts = find_exiled_posts
+      FileUtils.mv(posts, dir)
+      FileUtils.rmdir(File.join(dir, '_exile'))
+
+      puts "Reintegrated #{posts.size} post#{'s' if posts.size > 1} from _posts/_exile"
+    end
+
+    def process
+
+      if @options['path']
+        path = File.join(@site.source, @options['path'])
+        if File.exist? path
+          isolate_except(path)
+        else
+          puts "File not found: #{@options['path']}"
+        end
+      elsif @options['search']
+        isolate_search(@options['search'])
+      else
+        isolate_latest
+      end
+    end
+
+    # remove all posts that do not match string
+    def isolate_search(string)
+      string.gsub!(/\s/i, '-')
+      puts string
+      posts = find_posts.select { |p| p =~ /#{string}/ }
+
+      isolate_except(posts)
+    end
+
+    # Isolate all but the most recent post
+    def isolate_latest
+      post = @site.read_posts('').sort_by(&:date).last
+      path = File.join(@site.source, post.path)
+      isolate_except(path)
+    end
+
+    def isolate_except(posts)
+      others = find_other_posts(posts)
+      posts = default_array(posts)
+      dir = @site.source, '_posts/_exile'
+
+      FileUtils.mkdir_p(dir)
+      FileUtils.mv(others, dir)
+
+      puts "Isolated #{posts.size} post#{'s' if posts.size > 1}:"
+      posts.each do |p|
+        puts "  - #{p.sub(@site.source+'/_posts/', '')}" 
+      end
+      puts "Moved #{others.size} post#{'s' if others.size > 1} into _posts/_exile"
+    end
+
+    def find_other_posts(paths)
+      paths = default_array(paths)
+
+      find_posts.reject do |p| 
+        paths.include?(p)
+      end
+    end
+
+    def find_posts
+      dir = File.join(@site.source, '_posts')
+      Find.find(dir).to_a.reject do |f| 
+        File.directory?(f) || f =~ /_exile\//
+      end
+    end
+
+    def find_exiled_posts
+      dir = File.join(@site.source, '_posts/_exile')
+      Find.find(dir).to_a.reject do |f| 
+        File.directory?(f)
+      end
+    end
+
+    def default_array(input)
+      i = input || []
+      i = [i] unless i.is_a?(Array)
+      i
+    end
+
+  end
+end

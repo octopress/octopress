@@ -8,6 +8,10 @@
       - 'echo "<div class=page>{{ page.title }}{{ content }}</div>" > _layouts/page.html'
     new_draft:
       - 'octopress new draft "Some Cool Idea" --date "2014-03-10 15:20 -0000"'
+    new_posts:
+      - 'octopress new post "A random post" --date "2011-11-11 11:11 -0000"'
+      - 'octopress new post "Another random post" --date "2012-11-11 11:11 -0000"'
+      - 'octopress new post "This post is happy." --date "2013-11-11 11:11 -0000"'
 
 -
   title: Create a blank site
@@ -120,3 +124,35 @@
     - 'octopress new page pages/awesome-page --date "2011-11-11 11:11 -0000"'
   compare:
     - _expected/new-page-date/pages pages
+-
+  title: Isolate posts
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate'
+  compare:
+    - _expected/isolate/_posts _posts
+-
+  title: Isolate posts with search
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate -s "random post"'
+  compare:
+    - _expected/isolate-search/_posts _posts
+-
+  title: Isolate posts with path
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate _posts/2011-11-11-a-random-post.markdown'
+  compare:
+    - _expected/isolate-path/_posts _posts
+-
+  title: Integrate posts
+  before:
+    - new_posts
+    - octopress isolate
+    - 'octopress integrate'
+  compare:
+    - _expected/integrate/_posts _posts
