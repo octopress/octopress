@@ -64,7 +64,7 @@ module Octopress
 
       if posts.size > 0
         FileUtils.mkdir_p(exile_dir)
-        FileUtils.mv(others, dir)
+        FileUtils.mv(others, exile_dir)
 
         puts "Isolated #{posts.size} post#{'s' if posts.size != 1}:"
         posts.each do |p|

@@ -9,7 +9,9 @@ module Octopress
           c.option 'config', '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
 
           c.action do |args, options|
-            options['search'] = args.first
+            if !args.empty?
+              options['search'] = args.first
+            end
             Octopress::Isolate.new(options).process
           end
         end
