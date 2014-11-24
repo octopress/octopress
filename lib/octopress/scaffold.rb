@@ -9,8 +9,6 @@ module Octopress
     end
     
     def write
-      return if @options['blank']
-
       if !@force && (File.exist?(path + '/_templates') ||
         File.exist?(path + '/_octopress.yml'))
         abort "Some files already exist.  Use --force to overwrite."
