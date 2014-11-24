@@ -1,0 +1,159 @@
+-
+  tasks:
+    reset_site:
+      - 'rm -rf _layouts _drafts _templates _posts _site pages site'
+      - 'octopress new . --blank --force'
+      - 'rm index.html'
+      - 'echo "<div class=post>{{ page.title }}{{ content }}</div>" > _layouts/post.html'
+      - 'echo "<div class=page>{{ page.title }}{{ content }}</div>" > _layouts/page.html'
+    new_draft:
+      - 'octopress new draft "Some Cool Idea" --date "2014-03-10 15:20 -0000"'
+    new_posts:
+      - 'octopress new post "A random post" --date "2011-11-11 11:11 -0000"'
+      - 'octopress new post "Another random post" --date "2012-11-11 11:11 -0000"'
+      - 'octopress new post "This post is happy." --date "2013-11-11 11:11 -0000"'
+
+-
+  title: Create a blank site
+  before: 
+    - 'rm -rf site'
+    - 'octopress new site --blank'
+    - 'echo "timezone: GMT" > site/_config.yml'
+  compare: _expected/blank site
+
+-
+  title: Add a new post
+  before:
+    - reset_site
+    - 'octopress new post "Awesome stuff" --date "2014-03-12 05:10 -0000"'
+  compare: 
+    - _expected/new-post/_posts _posts
+-
+  title: Add a post with a slug
+  before:
+    - reset_site
+    - 'octopress new post "Super Awesome stuff" --slug awesome --date "2014-03-13 15:20 -0000"'
+  compare: 
+    - _expected/new-post-slug/_posts _posts
+-
+  title: Add a post in a subdirectory
+  before:
+    - reset_site
+    - 'octopress new post "Some stuff" --dir stuff --date "2014-02-11 05:10 -0000"'
+  compare: 
+    - _expected/new-post-dir/_posts _posts
+-
+  title: Add a draft
+  before:
+    - reset_site
+    - new_draft
+  compare: 
+    - _expected/new-draft/_drafts _drafts
+-
+  title: Add a draft with a slug
+  before:
+    - reset_site
+    - 'octopress new draft "Some great idea for a post" --slug idea'
+  compare: 
+    - _expected/new-draft-slug/_drafts _drafts
+-
+  title: Publish a draft
+  before:
+    - reset_site
+    - new_draft
+    - 'octopress publish _drafts/some-cool-idea.markdown'
+  compare: 
+    - _expected/publish-draft/_posts _posts
+  enforce_missing: drafts/*
+
+-
+  title: Publish a draft with a date
+  before:
+    - reset_site
+    - new_draft
+    - 'octopress publish _drafts/some-cool-idea.markdown --date "2014-03-11 20:20 -0000"'
+  compare: 
+    - _expected/publish-draft-date/_posts _posts
+  enforce_missing: drafts/*
+
+-
+  title: Publish a draft in a dir
+  before:
+    - reset_site
+    - new_draft
+    - 'octopress publish _drafts/some-cool-idea.markdown --dir ideas'
+  compare: 
+    - _expected/publish-draft-dir/_posts _posts
+  enforce_missing: drafts/*
+
+-
+  title: Add a page
+  before:
+    - reset_site
+    - 'octopress new page pages/awesome-page --title "Awesome Page"'
+  compare:
+    - _expected/new-page/pages pages
+
+-
+  title: Add a page with an extension
+  before:
+    - reset_site
+    - 'octopress new page pages/awesome-page.md --title "Awesome Page"'
+  compare:
+    - _expected/new-page-extension/pages pages
+-
+  title: Add an index page
+  before:
+    - reset_site
+    - 'octopress new page pages/ --title "Awesome Page"'
+  compare:
+    - _expected/new-page-index/pages pages
+-
+  title: Add a page with a custom template
+  before:
+    - reset_site
+    - 'echo "---\nlayout: {{ layout }}\ntitle: {{ title }}\nkittens: true\n---" > _templates/other_page'
+    - 'octopress new page pages/awesome-page --template other_page'
+  compare:
+    - _expected/new-page-template/pages pages
+-
+  title: Add a page with a date
+  before:
+    - reset_site
+    - 'octopress new page pages/awesome-page --date "2011-11-11 11:11 -0000"'
+  compare:
+    - _expected/new-page-date/pages pages
+-
+  title: Isolate posts
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate'
+  compare:
+    - _expected/isolate/_posts _posts
+-
+  title: Isolate posts with search
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate random-post'
+  compare:
+    - _expected/isolate-search/_posts _posts
+-
+  title: Isolate posts with path
+  before:
+    - reset_site
+    - new_posts
+    - 'octopress isolate --path _posts/2011-11-11-a-random-post.markdown'
+  compare:
+    - _expected/isolate-path/_posts _posts
+-
+  title: Integrate posts
+  before:
+    - reset_site
+    - new_posts
+    - octopress isolate
+    - 'octopress integrate'
+  compare:
+    - _expected/integrate/_posts _posts
+

@@ -1,6 +1,0 @@
----
-layout: post
-title: "Some Great Idea for a Post"
-date: 2014-03-11T20:20:00Z
----
-

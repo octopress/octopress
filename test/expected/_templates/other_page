@@ -1,5 +1,0 @@
----
-layout: {{ layout }}
-title: {{ title }}
-kittens: true
----

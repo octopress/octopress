@@ -5,10 +5,11 @@ module Octopress
     def initialize(args, options)
       @path  = File.expand_path(args.join(" "), Dir.pwd)
       @force = !!options['force']
+      @blank = !!options['blank']
     end
     
     def write
-      if !force && (File.exist?(path + '/_templates') ||
+      if !@force && (File.exist?(path + '/_templates') ||
         File.exist?(path + '/_octopress.yml'))
         abort "Some files already exist.  Use --force to overwrite."
       end
