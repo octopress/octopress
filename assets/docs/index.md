@@ -147,18 +147,19 @@ $ octopress new post --template _templates/linkpost
 
 ## Isolate
 
-If your site is taking a while to generate, but you want to preview a post
-quickly, you can isolate that post temporarily with the isolate command. Here's the syntax:
+If your site is taking a while to build, but you want to preview a post quickly, you can isolate that post temporarily with the isolate command. Here's the syntax:
 
 ```
 octopress isolate [SEARCH] [options]
 ```
 
-1. `octopress isolate` isolates the most recently dated post.
-2. `octopress isolate cats` isolates all posts with the word 'cats' in the filename.
-3. `octopress isolate --path _posts/2014-10-11-kittens.md` isolates the post at the given path.
+This will copy all other posts into `_posts/_exile` where they will be ignored by Jekyll during the build process. Here are some examples:
 
-To reintegrate all posts, run `octopress integrate` which will restore all posts from `_posts/_exile`.
+- `octopress isolate` isolates the most recently dated post.
+- `octopress isolate cats` isolates all posts with the word 'cats' in the filename.
+- `octopress isolate --path _posts/2014-10-11-kittens.md` isolates the post at the given path.
+
+To reintegrate all exiled posts, run `octopress integrate` which will restore all posts from `_posts/_exile` to `_posts`.
 
 ## Configuration
 
