@@ -19,25 +19,49 @@ module Octopress
 
     def write
       if File.exist?(path) && !@options['force']
-        raise "File #{relative_path} already exists. Use --force to overwrite."
+        raise "File #{relative_path(path)} already exists. Use --force to overwrite."
       end
 
-      FileUtils.mkdir_p(File.dirname(path))
+      dir = File.dirname(path)
+
+      FileUtils.mkdir_p(dir)
       File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
-        puts "New #{@options['type']}: #{relative_path}"
+        puts "New #{@options['type']}: #{relative_path(path)}"
+        
+        # If path begins with an underscore the page is probably being added to a collection
+        #
+        print_collection_tip($1) if dir =~ /#{source}\/_([^\/]+)/
       else
         puts path
       end
     end
 
-    def relative_path
+    # Print instructions for setting up a new collection
+    #
+    def print_collection_tip(collection)
+      # If Jekyll is not already configurated for this collection, print instructions
+      #
+      if !jekyll_config['collections'] || !jekyll_config['collections'][collection]
+        msg = "\nTIP: To create a new '#{collection}' collection, add this to your Jekyll configuration\n"
+        msg += "----------------\n"
+        msg += "collections:\n  #{collection}:\n    output: true"
+        msg += "\n----------------"
+        puts msg
+      end
+    end
+
+    def relative_path(path)
       local = Dir.pwd + '/'
       path.sub(local, '')
     end
 
+    def jekyll_config
+      Configuration.jekyll_config(@options)
+    end
+
     def source
-      Configuration.jekyll_config(@options)['source']
+      jekyll_config['source']
     end
 
     def path

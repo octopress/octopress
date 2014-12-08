@@ -64,7 +64,7 @@ title: "My Title"
 date: YYYY-MM-DDTHH:MM:SS-00:00
 ```
 
-"OK, great. What else can I do?" Great question! Check out these other options:
+#### Command options
 
 | Option               | Description                             |
 |:---------------------|:----------------------------------------|
@@ -76,11 +76,25 @@ date: YYYY-MM-DDTHH:MM:SS-00:00
 
 ### New Page
 
+Creating a new page is easy, you can use the default file name extension (.html), pass a specific extension, or end with a `/` to create
+an index.html document.
+
 ```
 $ octopress new page some-page           # ./some-page.html
+$ octopress new page about.md            # ./about.md
 $ octopress new page docs/               # ./docs/index.html
-$ octopress new page about.html          # ./about.html
 ```
+
+If you are working with collections, you might add a page like this:
+
+```
+$ octopress new page _legal/terms        # ./_legal/terms.html
+```
+
+After the page is created, Octopress will tell you how to configure this new collection.
+
+
+#### Command options
 
 | Option               | Description                             |
 |:---------------------|:----------------------------------------|
