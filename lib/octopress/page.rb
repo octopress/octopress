@@ -22,12 +22,31 @@ module Octopress
         raise "File #{relative_path} already exists. Use --force to overwrite."
       end
 
-      FileUtils.mkdir_p(File.dirname(path))
+      dir = File.dirname(path)
+      FileUtils.mkdir_p(dir)
       File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
         puts "New #{@options['type']}: #{relative_path}"
+        collection_info(dir)
       else
         puts path
+      end
+    end
+
+    def collection_info(dir)
+      dir = dir.sub("#{source}/", '')
+      if dir =~ /^_([^\/]+)/
+        collection = $1 
+        has_collections = jekyll_config['collections']
+        if !has_collections || !jekyll_config['collections'][collection]
+          msg = "\nTIP: To create a new '#{collection}' collection, add this to your Jekyll configuration\n"
+          msg += "----------------\n"
+          msg += "collections:\n  #{collection}:\n    output: true"
+          msg += "\n----------------"
+          puts msg
+        end
+      else
+        puts "not matched: #{dir}"
       end
     end
 
@@ -36,8 +55,12 @@ module Octopress
       path.sub(local, '')
     end
 
+    def jekyll_config
+      Configuration.jekyll_config(@options)
+    end
+
     def source
-      Configuration.jekyll_config(@options)['source']
+      jekyll_config['source']
     end
 
     def path
