@@ -1,6 +1,8 @@
 # Octopress Changelog
 
-## Current released version
+### 3.0.0 RC17 - 2014-12-08
+
+- Added a configuration tip when adding a new collection page.
 
 ### 3.0.0 RC16 - 2014-11-24
 
@@ -11,8 +13,6 @@
 
 - Simplified configuration management.
 - Now requiring titlecase gem directly.
-
-## Past versions
 
 ### 3.0.0 RC13 - 2014-07-24
 
