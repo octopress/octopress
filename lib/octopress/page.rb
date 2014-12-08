@@ -19,38 +19,39 @@ module Octopress
 
     def write
       if File.exist?(path) && !@options['force']
-        raise "File #{relative_path} already exists. Use --force to overwrite."
+        raise "File #{relative_path(path)} already exists. Use --force to overwrite."
       end
 
       dir = File.dirname(path)
+
       FileUtils.mkdir_p(dir)
       File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
-        puts "New #{@options['type']}: #{relative_path}"
-        collection_info(dir)
+        puts "New #{@options['type']}: #{relative_path(path)}"
+        
+        # If path begins with an underscore the page is probably being added to a collection
+        #
+        print_collection_tip($1) if dir =~ /#{source}\/_([^\/]+)/
       else
         puts path
       end
     end
 
-    def collection_info(dir)
-      dir = dir.sub("#{source}/", '')
-      if dir =~ /^_([^\/]+)/
-        collection = $1 
-        has_collections = jekyll_config['collections']
-        if !has_collections || !jekyll_config['collections'][collection]
-          msg = "\nTIP: To create a new '#{collection}' collection, add this to your Jekyll configuration\n"
-          msg += "----------------\n"
-          msg += "collections:\n  #{collection}:\n    output: true"
-          msg += "\n----------------"
-          puts msg
-        end
-      else
-        puts "not matched: #{dir}"
+    # Print instructions for setting up a new collection
+    #
+    def print_collection_tip(collection)
+      # If Jekyll is not already configurated for this collection, print instructions
+      #
+      if !jekyll_config['collections'] || !jekyll_config['collections'][collection]
+        msg = "\nTIP: To create a new '#{collection}' collection, add this to your Jekyll configuration\n"
+        msg += "----------------\n"
+        msg += "collections:\n  #{collection}:\n    output: true"
+        msg += "\n----------------"
+        puts msg
       end
     end
 
-    def relative_path
+    def relative_path(path)
       local = Dir.pwd + '/'
       path.sub(local, '')
     end
