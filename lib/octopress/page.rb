@@ -107,15 +107,24 @@ module Octopress
     def convert_date(date)
       date ||= 'now'
       if date == 'now'
-        @options['date'] = Time.now.iso8601
+        date = Time.now.iso8601
       else
         begin
-          Time.parse(date.to_s, Time.now).iso8601
+          date = Time.parse(date.to_s, Time.now).iso8601
         rescue => error
           puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
           abort error.message
         end
       end
+      date
+    end
+
+    def set_date_vars(date)
+      date = Time.parse(date || Time.now.iso8601)
+      @options['year'] = date.year
+      @options['month'] = date.strftime('%m')
+      @options['day'] = date.strftime('%d')
+      @options['ymd'] = date.strftime('%D')
     end
 
     # Load the user provided or default template for a new post or page.
@@ -151,6 +160,10 @@ module Octopress
       if @config['titlecase']
         @options['title'].titlecase!
       end
+
+      @options['slug'] = title_slug
+      set_date_vars(@options['date'])
+
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
       # template and add dashes.
@@ -172,6 +185,19 @@ module Octopress
 
     def date_slug
       @options['date'].split('T')[0]
+    end
+    
+    # Returns a string which is url compatible.
+    #
+    def title_slug
+      value = (@options['slug'] || @options['title']).downcase
+      value.gsub!(/[^\x00-\x7F]/u, '')
+      value.gsub!(/(&amp;|&)+/, 'and')
+      value.gsub!(/[']+/, '')
+      value.gsub!(/\W+/, ' ')
+      value.strip!
+      value.gsub!(' ', '-')
+      value
     end
 
     def front_matter(vars)
