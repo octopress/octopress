@@ -119,14 +119,6 @@ module Octopress
       date
     end
 
-    def set_date_vars(date)
-      date = Time.parse(date || Time.now.iso8601)
-      @options['year'] = date.year
-      @options['month'] = date.strftime('%m')
-      @options['day'] = date.strftime('%d')
-      @options['ymd'] = date.strftime('%D')
-    end
-
     # Load the user provided or default template for a new post or page.
     #
     def content
@@ -157,12 +149,18 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
+      vars = @options.dup
+
       if @config['titlecase']
-        @options['title'].titlecase!
+        vars['title'].titlecase!
       end
 
-      @options['slug'] = title_slug
-      set_date_vars(@options['date'])
+      vars['slug'] = title_slug
+      date = Time.parse(vars['date'] || Time.now.iso8601)
+      vars['year'] = date.year
+      vars['month'] = date.strftime('%m')
+      vars['day'] = date.strftime('%d')
+      vars['ymd'] = date.strftime('%D')
 
       # If possible only parse the YAML front matter.
       # If YAML front-matter dashes aren't present parse the whole 
@@ -172,15 +170,15 @@ module Octopress
       parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}(.+)?/m
         input = $1
         content = $2
-        if @options['date'] && !(input =~ /date:/)
-          input += "\ndate: #{@options['date']}"
+        if vars['date'] && !(input =~ /date:/)
+          input += "\ndate: #{vars['date']}"
         end
       else
         content = ''
       end
 
       template = Liquid::Template.parse(input)
-      "---\n#{template.render(@options).strip}\n---\n#{content}"
+      "---\n#{template.render(vars).strip}\n---\n#{content}"
     end
 
     def date_slug
