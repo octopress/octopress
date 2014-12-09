@@ -1,10 +1,20 @@
 module Octopress
   class Page
 
-    def initialize(options)
-      @site = init_site({'config' => options['config']})
+    DEFAULT_OPTIONS = {
+      'post_ext' => 'markdown',
+      'page_ext' => 'html',
+      'post_layout' => 'post',
+      'page_layout' => 'page',
+      'titlecase' => true
+    }
+
+    attr_accessor :site
+
+    def initialize(site, options)
+      @site = site
       @site.plugin_manager.conscientious_require
-      @config = Octopress.config(options)
+      @config = DEFAULT_OPTIONS.merge(site.config)
       @options = options
       set_default_options
 
@@ -17,13 +27,6 @@ module Octopress
       @options['title'] = "\"#{@options['title']}\""
 
       @content = options['content'] || content
-    end
-
-    def init_site(options)
-      Jekyll.logger.log_level = :error
-      site = Jekyll::Site.new(Jekyll.configuration(options))
-      Jekyll.logger.log_level = :info
-      site
     end
 
     def write
@@ -40,7 +43,9 @@ module Octopress
         
         # If path begins with an underscore the page is probably being added to a collection
         #
-        print_collection_tip($1) if dir =~ /#{source}\/_([^\/]+)/
+        if @options['type'] == 'page'
+          print_collection_tip($1) if dir =~ /#{site.source}\/_([^\/]+)/
+        end
       else
         puts path
       end
@@ -51,7 +56,7 @@ module Octopress
     def print_collection_tip(collection)
       # If Jekyll is not already configurated for this collection, print instructions
       #
-      if !jekyll_config['collections'] || !jekyll_config['collections'][collection]
+      if !@config['collections'] || !@config['collections'][collection]
         msg = "\nTIP: To create a new '#{collection}' collection, add this to your Jekyll configuration\n"
         msg += "----------------\n"
         msg += "collections:\n  #{collection}:\n    output: true"
@@ -65,12 +70,8 @@ module Octopress
       path.sub(local, '')
     end
 
-    def jekyll_config
-      @site.config
-    end
-
-    def source
-      jekyll_config['source']
+    def site
+      @site
     end
 
     def path
@@ -86,7 +87,7 @@ module Octopress
       #
       file += ".#{extension}" unless file =~ /\.\w+$/
 
-      @path = File.join(source, file)
+      @path = File.join(site.source, file)
     end
 
     def extension
@@ -127,7 +128,7 @@ module Octopress
 
       if file
         file.sub(/^_templates\//, '')
-        file = File.join(source, '_templates', file) if file
+        file = File.join(site.source, '_templates', file) if file
         if File.exist? file
           parse_template File.open(file).read
         elsif @options['template']

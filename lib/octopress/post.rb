@@ -12,7 +12,7 @@ module Octopress
 
     def path
       name = "#{date_slug}-#{title_slug}.#{extension}"
-      dir = File.join(source, '_posts', @options['dir'])
+      dir = File.join(site.source, '_posts', @options['dir'])
       FileUtils.mkdir_p dir
       File.join(dir, name)
     end

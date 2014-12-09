@@ -13,7 +13,7 @@ module Octopress
           abort "You must specify a path." if args.empty?
           options['path'] = args.first
           options['type'] = 'post from draft'
-          Draft.new(options).publish
+          Draft.new(CommandHelpers.site(options), options).publish
         end
       end
     end

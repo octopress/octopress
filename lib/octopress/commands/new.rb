@@ -25,7 +25,7 @@ module Octopress
 
           c.action do |args, options|
             options['path'] = args.first
-            Page.new(options).write
+            Page.new(CommandHelpers.site(options), options).write
           end
         end
 
@@ -39,7 +39,7 @@ module Octopress
 
           c.action do |args, options|
             options['title'] = args.first
-            Post.new(options).write
+            Post.new(CommandHelpers.site(options), options).write
           end
         end
 
@@ -52,7 +52,7 @@ module Octopress
 
           c.action do |args, options|
             options['title'] = args.first
-            Draft.new(options).write
+            Draft.new(CommandHelpers.site(options), options).write
           end
         end
       end

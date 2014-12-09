@@ -15,7 +15,7 @@ module Octopress
 
     def path
       name = "#{title_slug}.#{extension}"
-      File.join(source, '_drafts', name)
+      File.join(site.source, '_drafts', name)
     end
 
     # -----
@@ -41,7 +41,7 @@ module Octopress
 
       # Create a new post file
       #
-      Post.new(post_options).write
+      Post.new(site, post_options).write
       
       # Remove the old draft file
       #
