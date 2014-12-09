@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC18 - 2014-12-08
+
+- Loads site plugins before creating new pages, posts and drafts, allowing liquid tag processing in _template files.
+
 ### 3.0.0 RC17 - 2014-12-08
 
 - Added a configuration tip when adding a new collection page.
