@@ -149,14 +149,29 @@ Octopress post and page templates look like this.
 layout: {{ layout }}
 title: {{ title }}
 ---
-
 ```
 
-The YAML variables will be replaced with the correct content when you create a page or post. To modify this template create a `_templates/post` file and change it as you wish. You can add additional YAML front-matter or content, and you can even create multiple templates. Choose a custom template when creating a new post or page like this.
+You can add to the YAML front matter, add content below and even even use liquid tags and filters from your site's plugins. There are
+a handful of local variables you can use when working with templates.
+
+| Variable           | Description                               |
+|:-------------------|:------------------------------------------|
+| `date`             | The date (if set) or Time.now.iso8601     |
+| `title`            | The title of the page (if set)            |
+| `slug`             | The title in slug form                    |
+| `ymd`              | The date string, YYYY/MM/DD format        |
+| `year`             | The date's year                           |
+| `month`            | The date's month, MM                      |
+| `day`              | The date's day, DD                        |
+
+By default Octopress has templates for pages, posts and drafts. You can change them or create new ones for different types of content.
+To create linkposts template, add a file at `_templates/linkpost` and use it with a new post like this:
 
 ```sh
 $ octopress new post --template _templates/linkpost
 ```
+
+File name extensions are unnecessary since they're just plain text anyway.
 
 ## Isolate
 
