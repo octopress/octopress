@@ -2,6 +2,8 @@ module Octopress
   class Page
 
     def initialize(options)
+      @site = init_site({'config' => options['config']})
+      @site.plugin_manager.conscientious_require
       @config = Octopress.config(options)
       @options = options
       set_default_options
@@ -15,6 +17,13 @@ module Octopress
       @options['title'] = "\"#{@options['title']}\""
 
       @content = options['content'] || content
+    end
+
+    def init_site(options)
+      Jekyll.logger.log_level = :error
+      site = Jekyll::Site.new(Jekyll.configuration(options))
+      Jekyll.logger.log_level = :info
+      site
     end
 
     def write
@@ -57,7 +66,7 @@ module Octopress
     end
 
     def jekyll_config
-      Configuration.jekyll_config(@options)
+      @site.config
     end
 
     def source
@@ -181,6 +190,5 @@ module Octopress
         front_matter %w{layout title}
       end
     end
-
   end
 end
