@@ -10,13 +10,5 @@ module Octopress
       c.option 'config',           '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
       c.option 'octopress-config', '--octopress-config <CONFIG_FILE>', 'Custom Octopress configuration file'
     end
-
-    def self.site(options)
-      options = {'config' => options['config']}
-      Jekyll.logger.log_level = :error
-      site = Jekyll::Site.new(Jekyll.configuration(options))
-      Jekyll.logger.log_level = :info
-      site
-    end
   end
 end

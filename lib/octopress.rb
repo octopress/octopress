@@ -10,6 +10,7 @@ module Octopress
   require 'octopress/commands/publish'
   require 'octopress/commands/isolate'
   require 'octopress/isolate'
+  require 'octopress/titlecase'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
@@ -30,6 +31,14 @@ module Octopress
 
   def self.config(options={})
     @config ||= Configuration.config(options)
+  end
+
+  def self.site(options)
+    options = {'config' => options['config']}
+    Jekyll.logger.log_level = :error
+    site = Jekyll::Site.new(Jekyll.configuration(options))
+    Jekyll.logger.log_level = :info
+    site
   end
 
   def self.gem_dir(dir='')
