@@ -2,7 +2,6 @@ require 'mercenary'
 require 'titlecase'
 
 module Octopress
-  require 'octopress/configuration'
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
@@ -10,7 +9,6 @@ module Octopress
   require 'octopress/commands/publish'
   require 'octopress/commands/isolate'
   require 'octopress/isolate'
-  require 'octopress/titlecase'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
@@ -19,7 +17,6 @@ module Octopress
 
   # Automatically require these gems if installed
   BLESSED_GEMS = %w[
-    octopress-ink
     octopress-deploy
   ]
 
@@ -29,16 +26,22 @@ module Octopress
     @logger
   end
 
-  def self.config(options={})
-    @config ||= Configuration.config(options)
+  # Cache Jekyll's site configuration
+  #
+  def self.configuration(options={})
+    # Ignore options other than path to config file
+    @config ||= Jekyll.configuration({'config' => options['config']})
   end
 
+  # Cache Jekyll's site
+  #
   def self.site(options)
-    options = {'config' => options['config']}
-    Jekyll.logger.log_level = :error
-    site = Jekyll::Site.new(Jekyll.configuration(options))
-    Jekyll.logger.log_level = :info
-    site
+    if !@site
+      Jekyll.logger.log_level = :error
+      @site = Jekyll::Site.new(configuration(options))
+      Jekyll.logger.log_level = :info
+    end
+    @site
   end
 
   def self.gem_dir(dir='')

@@ -42,8 +42,8 @@ $ octopress init <PATH> [options]
 This will copy Octopress's scaffolding into the specified directory. Use the `--force` option to overwrite existing files. The scaffolding is pretty simple:
 
 ```
-_octopress.yml
 _templates/
+  draft
   post
   page
 ```
@@ -191,7 +191,7 @@ To reintegrate all exiled posts, run `octopress integrate` which will restore al
 
 ## Configuration
 
-Octopress reads its configurations from `_octopress.yml`. Here's what the configuration looks like by default.
+Octopress reads its configurations from `_config.yml`. Here's what the configuration looks like by default.
 
 ```yaml
 # Default extension for new posts and pages

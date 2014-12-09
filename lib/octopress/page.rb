@@ -13,7 +13,7 @@ module Octopress
 
     def initialize(site, options)
       @site = site
-      @site.plugin_manager.conscientious_require
+      site.plugin_manager.conscientious_require
       @config = DEFAULT_OPTIONS.merge(site.config)
       @options = options
       set_default_options
@@ -27,6 +27,10 @@ module Octopress
       @options['title'] = "\"#{@options['title']}\""
 
       @content = options['content'] || content
+    end
+
+    def site
+      @site
     end
 
     def write
@@ -68,10 +72,6 @@ module Octopress
     def relative_path(path)
       local = Dir.pwd + '/'
       path.sub(local, '')
-    end
-
-    def site
-      @site
     end
 
     def path
