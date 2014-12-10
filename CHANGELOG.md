@@ -1,5 +1,10 @@
 # Octopress Changelog
 
+### 3.0.0 RC19 - 2014-12-09
+
+- Improvements to configuration management.
+- Now using _config.yml for configuration instead of _octopress.yml
+
 ### 3.0.0 RC18 - 2014-12-08
 
 - Loads site plugins before creating new pages, posts and drafts, allowing liquid tag processing in _template files.
