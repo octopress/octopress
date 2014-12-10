@@ -17,6 +17,7 @@ module Octopress
 
   # Automatically require these gems if installed
   BLESSED_GEMS = %w[
+    octopress-ink
     octopress-deploy
   ]
 
@@ -29,13 +30,16 @@ module Octopress
   # Cache Jekyll's site configuration
   #
   def self.configuration(options={})
-    # Ignore options other than path to config file
-    @config ||= Jekyll.configuration({'config' => options['config']})
+    if @site
+      @site.config
+    else
+      @config ||= Jekyll.configuration({'config' => options['config']})
+    end
   end
 
   # Cache Jekyll's site
   #
-  def self.site(options)
+  def self.site(options={})
     if !@site
       Jekyll.logger.log_level = :error
       @site = Jekyll::Site.new(configuration(options))

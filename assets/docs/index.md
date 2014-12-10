@@ -151,6 +151,8 @@ title: {{ title }}
 ---
 ```
 
+Dates get automatically added to a template for posts, and for pages if a --date option is set.
+
 You can add to the YAML front matter, add content below and even even use liquid tags and filters from your site's plugins. There are
 a handful of local variables you can use when working with templates.
 
