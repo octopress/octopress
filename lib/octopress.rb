@@ -33,7 +33,7 @@ module Octopress
     if @site
       @site.config
     else
-      @config ||= Jekyll.configuration({'config' => options['config']})
+      @config ||= Jekyll.configuration(options)
     end
   end
 
@@ -65,8 +65,7 @@ end
 require 'octopress-docs'
 
 Octopress::Docs.add({
-  name:        "Octopress CLI",
-  slug:        "octopress",
+  name:        "Octopress",
   base_url:    "/octopress",
   dir:         File.expand_path(File.join(File.dirname(__FILE__), "../")),
 })

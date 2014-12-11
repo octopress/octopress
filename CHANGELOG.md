@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC20 - 2014-12-11
+
+- Minor improvements to config management system
+
 ### 3.0.0 RC19 - 2014-12-09
 
 - Improvements to configuration management.
