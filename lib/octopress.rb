@@ -48,6 +48,17 @@ module Octopress
     @site
   end
 
+  # Allow site to set
+  #
+  def self.site=(site)
+    # Octopress historically used site.title
+    # This allows theme developers to expect site.name
+    # in consistancy with Jekyll's scaffold config 
+    site.config['name'] ||= site.config['title']
+
+    @site = site
+  end
+
   def self.gem_dir(dir='')
     File.expand_path(File.join(File.dirname(__FILE__), '../', dir))
   end
@@ -67,7 +78,7 @@ require 'octopress-docs'
 Octopress::Docs.add({
   name:        "Octopress",
   base_url:    "/octopress",
-  dir:         File.expand_path(File.join(File.dirname(__FILE__), "../")),
+  path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
 })
 
 Octopress.require_blessed_gems

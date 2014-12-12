@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.1 RC20 - 2014-12-12
+
+- Improved access to Jekyll site instance
+
 ### 3.0.0 RC20 - 2014-12-11
 
 - Minor improvements to config management system
