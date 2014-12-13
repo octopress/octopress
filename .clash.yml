@@ -1,19 +1,20 @@
 -
   tasks:
     reset_site:
-      - 'cleanup'
-      - 'octopress new . --blank --force'
-      - 'rm index.html'
-      - 'echo "<div class=post>{{ page.title }}{{ content }}</div>" > _layouts/post.html'
-      - 'echo "<div class=page>{{ page.title }}{{ content }}</div>" > _layouts/page.html'
+      - cleanup
+      - octopress new . --blank --force
+      - rm index.html
+      - echo "<div class=post>{{ page.title }}{{ content }}</div>" > _layouts/post.html
+      - echo "<div class=page>{{ page.title }}{{ content }}</div>" > _layouts/page.html
     new_draft:
-      - 'octopress new draft "Some Cool Idea" --date "2014-03-10 15:20 -0000"'
+      - octopress new draft "Some Cool Idea" --date "2014-03-10 15:20 -0000"
     new_posts:
-      - 'octopress new post "A random post" --date "2011-11-11 11:11 -0000"'
-      - 'octopress new post "Another random post" --date "2012-11-11 11:11 -0000"'
-      - 'octopress new post "This post is happy." --date "2013-11-11 11:11 -0000"'
+      - octopress new post "A random post" --date "2011-11-11 11:11 -0000"
+      - octopress new post "Another random post" --date "2012-11-11 11:11 -0000"
+      - octopress new post "This post is happy." --date "2013-11-11 11:11 -0000"
     cleanup:
-      - 'rm -rf _layouts _drafts _templates _posts _site pages site'
+      - echo "Cleaning up..."
+      - rm -rf _layouts _drafts _templates _posts _site pages site
 
 -
   title: Create a blank site
@@ -160,4 +161,4 @@
     - _expected/integrate/_posts _posts
 -
   title: Cleanup
-  after: cleanuo
+  before: cleanup
