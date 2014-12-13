@@ -9,6 +9,7 @@ module Octopress
   require 'octopress/commands/publish'
   require 'octopress/commands/isolate'
   require 'octopress/isolate'
+  require 'octopress-docs'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'
@@ -40,23 +41,31 @@ module Octopress
   # Cache Jekyll's site
   #
   def self.site(options={})
-    if !@site
-      Jekyll.logger.log_level = :error
-      @site = Jekyll::Site.new(configuration(options))
-      Jekyll.logger.log_level = :info
-    end
-    @site
+    @site ||= read_site(options)
   end
 
-  # Allow site to set
+  # Quietly read from Jekyll's site
+  #
+  def self.read_site(options={})
+    Jekyll.logger.log_level = :error
+    s = Jekyll::Site.new(configuration(options))
+    Jekyll.logger.log_level = :info
+    alias_site_title(s)
+  end
+
+  # Allow site to be set
   #
   def self.site=(site)
-    # Octopress historically used site.title
-    # This allows theme developers to expect site.name
-    # in consistancy with Jekyll's scaffold config 
-    site.config['name'] ||= site.config['title']
+    @site = alias_site_title(site)
+  end
 
-    @site = site
+  # Octopress historically used site.title
+  # This ensures we can all use site.name to be
+  # compatible with Jekyll's scaffold convention
+  #
+  def self.alias_site_title(site)
+    site.config['name'] ||= site.config['title']
+    site
   end
 
   def self.gem_dir(dir='')
@@ -73,12 +82,13 @@ module Octopress
   end
 end
 
-require 'octopress-docs'
-
 Octopress::Docs.add({
   name:        "Octopress",
-  base_url:    "/octopress",
+  description: "A framework for writing Jekyll sites ",
+  base_url:    "octopress",
   path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
+  source_url:  "https://github.com/octopress/octopress",
+  website:     "http://octopress.org"
 })
 
 Octopress.require_blessed_gems
