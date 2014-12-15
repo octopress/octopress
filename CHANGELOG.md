@@ -29,7 +29,7 @@
 ### 3.0.0 RC16 - 2014-11-24
 
 - Added `integrate` and `isolate` commands.
-- Removed unnecessary Jekyll pass-through commands.
+- Removed unnecessary Jekyll pass-through commands (`serve`, `build` and `doctor`).
 
 ### 3.0.0 RC14 - 2014-07-26
 
