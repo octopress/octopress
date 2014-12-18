@@ -31,11 +31,15 @@ module Octopress
   # Cache Jekyll's site configuration
   #
   def self.configuration(options={})
-    if @site
+    if site?
       @site.config
     else
       @config ||= Jekyll.configuration(options)
     end
+  end
+
+  def self.site?
+    !@site.nil?
   end
 
   # Cache Jekyll's site
@@ -48,7 +52,7 @@ module Octopress
   #
   def self.read_site(options={})
     Jekyll.logger.log_level = :error
-    s = Jekyll::Site.new(configuration(options))
+    s = Jekyll::Site.new(Jekyll.configuration(options))
     Jekyll.logger.log_level = :info
     alias_site_title(s)
   end
