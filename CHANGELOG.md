@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC23 - 2014-12-19
+
+- Fixed issue with site configuration caching
+
 ### 3.0.0 RC22 - 2014-12-13
 
 - Docs integration improvements.
