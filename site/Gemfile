@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem "jekyll"
+gem "pry-byebug"
+
+group :jekyll_plugins do
+  gem "octopress", path: "../"
+  gem "octopress-ink", path: "../../ink"
+  gem "octopress-solarized", path: "../../solarized"
+  gem "octopress-asset-pipeline", path: "../../asset-pipeline"
+end
+

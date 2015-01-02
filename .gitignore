@@ -17,5 +17,5 @@ test/version_tmp
 tmp
 .sass-cache
 .code-highlighter-cache
-test-site
 .DS_Store
+_site

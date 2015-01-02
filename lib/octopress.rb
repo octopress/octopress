@@ -5,11 +5,12 @@ module Octopress
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/commands/new'
+  require 'octopress/commands/docs'
   require 'octopress/commands/init'
   require 'octopress/commands/publish'
   require 'octopress/commands/isolate'
   require 'octopress/isolate'
-  require 'octopress-docs'
+  require 'octopress/docs'
 
   autoload :Page, 'octopress/page'
   autoload :Post, 'octopress/post'

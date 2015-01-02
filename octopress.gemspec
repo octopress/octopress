@@ -15,14 +15,16 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files         = `git ls-files -z`.split("\x0").grep(/^(bin\/|lib\/|assets\/|changelog|readme|license|site|local)/i)
+  
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "mercenary", "~> 0.3.2"
   spec.add_runtime_dependency "jekyll", "~> 2.0"
   spec.add_runtime_dependency "titlecase"
-  spec.add_runtime_dependency "octopress-docs"
   spec.add_runtime_dependency "octopress-deploy"
+  spec.add_runtime_dependency "octopress-hooks", "~> 2.0"
+  spec.add_runtime_dependency "octopress-escape-code", "~> 2.0"
 
   spec.add_development_dependency "octopress-ink", "~> 1.0.0.rc"
   spec.add_development_dependency "bundler", "~> 1.3"

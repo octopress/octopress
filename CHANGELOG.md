@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC24 - 2015-01-02
+
+- Absorbed Octopress Docs features
+
 ### 3.0.0 RC23 - 2014-12-19
 
 - Fixed issue with site configuration caching
