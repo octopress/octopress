@@ -5,8 +5,11 @@ gem "pry-byebug"
 
 group :jekyll_plugins do
   gem "octopress", path: "../"
-  gem "octopress-ink", path: "../../ink"
-  gem "octopress-solarized", path: "../../solarized"
-  gem "octopress-asset-pipeline", path: "../../asset-pipeline"
+  gem "octopress-ink"#, path: "../../ink"
+  gem "octopress-solarized"#, path: "../../solarized"
+  gem "octopress-asset-pipeline"#, path: "../../asset-pipeline"
+  gem "octopress-abort-tag"#, path: "../../abort-tag"
+  gem "octopress-include-tag"#, path: "../../include-tag"
+  gem "octopress-codefence"#, path: "../../codefence"
 end
 

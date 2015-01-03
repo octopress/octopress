@@ -93,6 +93,7 @@ module Octopress
         name: plugin.name,
         slug: plugin.slug,
         type: plugin.type,
+        description: plugin.description,
         path: plugin.path,
         source_url: plugin.source_url,
         website: plugin.website,
