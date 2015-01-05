@@ -5,9 +5,8 @@ site_tools:
   - octopress-asset-pipeline
   - octopress-blockquote-tag
   - octopress-date-format
-  - octopress-deploy
   - octopress-feed
-  - jekyll-minify-html
+  - octopress-minify-html
 
 themes:
   - octopress-genesis-theme
