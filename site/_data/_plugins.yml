@@ -1,6 +1,3 @@
-themes:
-  - octopress-genesis-theme
-
 site_tools:
   - octopress
   - octopress-deploy
@@ -12,6 +9,9 @@ site_tools:
   - octopress-feed
   - jekyll-minify-html
 
+themes:
+  - octopress-genesis-theme
+
 developer_tools:
   - octopress-ink
   - octopress-codefence
@@ -19,6 +19,7 @@ developer_tools:
   - octopress-render-code
   - octopress-codeblock
   - octopress-solarized
+  - clash
 
 liquid_plugins:
   - octopress-include-tag
