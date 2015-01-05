@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   # using ruby grep here in order to not have a depedency on grep cli tool. (mostly for windows machines)
-  spec.files         = `git ls-files`.split("\n").grep(%r{^(bin\/|lib\/|assets\/|changelog|readme|license|site|local|scaffold\/)}i)
+  spec.files         = `git ls-files`.split("\n").grep(%r{^(bin\/|lib\/|assets\/|scaffold\/|site\/|local\/|changelog|readme|license)}i)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   
   spec.require_paths = ["lib"]
