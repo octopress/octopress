@@ -1,0 +1,35 @@
+themes:
+  - octopress-genesis-theme
+
+site_tools:
+  - octopress
+  - octopress-deploy
+  - octopress-linkblog
+  - octopress-asset-pipeline
+  - octopress-blockquote-tag
+  - octopress-date-format
+  - octopress-deploy
+  - octopress-feed
+  - jekyll-minify-html
+
+developer_tools:
+  - octopress-ink
+  - octopress-codefence
+  - octopress-gist-tag
+  - octopress-render-code
+  - octopress-codeblock
+  - octopress-solarized
+
+liquid_plugins:
+  - octopress-include-tag
+  - octopress-render-tag
+  - octopress-wrap-tag
+  - octopress-abort-tag
+  - octopress-abort-tag
+  - octopress-assign-tag
+  - octopress-capture-tag
+  - octopress-filter-tag
+  - octopress-return-tag
+  - octopress-comment-tag
+  - octopress-content-for
+  - octopress-markdown-block

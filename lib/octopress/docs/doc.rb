@@ -1,19 +1,21 @@
 module Octopress
   module Docs
     class Doc
-      attr_reader :filename, :plugin_name, :plugin_slug, :base_url, :plugin_type, :description, :source_url
+      attr_reader :filename, :name, :slug, :base_url, :type, :description, :source_url, :version, :gem
 
       def initialize(options={})
         @file            = options[:file]
         @path            = options[:path] ||= '.'
         @file_dir        = File.dirname(@file)
-        @plugin_name     = options[:name]
-        @plugin_slug     = options[:slug]
-        @plugin_type     = options[:type]
+        @name            = options[:name]
+        @slug            = options[:slug]
+        @type            = options[:type]
         @base_url        = options[:base_url]
         @source_url      = options[:source_url]
         @description     = options[:description]
         @data            = options[:data] || {}
+        @gem             = options[:gem]
+        @version         = options[:version]
       end
 
       # Add doc page to Jekyll pages
@@ -41,12 +43,14 @@ module Octopress
           p.data['escape_code'] = true
 
           p.data['plugin'] = { 
-            'name'        => @plugin_name, 
-            'slug'        => @plugin_slug,
-            'type'        => @plugin_type,
+            'name'        => @name, 
+            'slug'        => @slug,
+            'type'        => @type,
             'source_url'  => @source_url,
             'description' => @description,
-            'url'         => @base_url
+            'url'         => @base_url,
+            'version'     => @version,
+            'gem'         => @gem,
           }
 
           p.data['dir'] = doc_dir
@@ -67,7 +71,7 @@ module Octopress
       end
 
       def plugin_slug
-        Jekyll::Utils.slugify(@plugin_type == 'theme' ? 'theme' : @plugin_slug)
+        Jekyll::Utils.slugify(@type == 'theme' ? 'theme' : @slug)
       end
 
       def page_dir

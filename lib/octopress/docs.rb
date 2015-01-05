@@ -93,6 +93,8 @@ module Octopress
         name: plugin.name,
         slug: plugin.slug,
         type: plugin.type,
+        version: plugin.version,
+        gem: plugin.gem,
         description: plugin.description,
         path: plugin.path,
         source_url: plugin.source_url,
@@ -222,6 +224,7 @@ module Octopress
       require "octopress/docs/liquid_filters"
       require "octopress/docs/jekyll/convertible"
       require "octopress/docs/jekyll/page"
+      require "octopress-escape-code"
 
       if !options.nil?
         # Look at the local site and require all of its plugins
@@ -234,8 +237,6 @@ module Octopress
         #
         options = Docs.site.config.merge(options)
       end
-
-      require "octopress-escape-code"
       options
     end
 
