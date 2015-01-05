@@ -13,7 +13,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "http://octopress.org"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files | grep -iE "^(bin\/|lib\/|assets\/|changelog|readme|license|site|local|scaffold\/)"`.split("\n")
+  # using ruby grep here in order to not have a depedency on grep cli tool. (mostly for windows machines)
+  spec.files         = `git ls-files`.split("\n").grep(%r{^(bin\/|lib\/|assets\/|changelog|readme|license|site|local|scaffold\/)}i)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   
   spec.require_paths = ["lib"]
