@@ -15,7 +15,7 @@ themes:
 developer_tools:
   - octopress-ink
   - octopress-codefence
-  - octopress-gist-tag
+  - octopress-gist
   - octopress-render-code
   - octopress-codeblock
   - octopress-solarized
