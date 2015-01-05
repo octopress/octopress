@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC25 - 2015-01-02
+
+- Fixed missing scaffolding.
+
 ### 3.0.0 RC24 - 2015-01-02
 
 - Absorbed Octopress Docs features
