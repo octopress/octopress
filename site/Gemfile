@@ -18,6 +18,8 @@ group :jekyll_plugins do
   gem "octopress-render-tag"#, path: "../../render-tag"
   gem "octopress-return-tag"#, path: "../../return-tag"
   gem "octopress-minify-html"#, path: "../../minify-html"
+  gem "octopress-quote-tag"#, path: "../../quote-tag"
+  gem "octopress-image-tag"#, path: "../../image-tag"
   gem "clash", path: "../../clash"
 end
 

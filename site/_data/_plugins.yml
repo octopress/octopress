@@ -2,11 +2,10 @@ site_tools:
   - octopress
   - octopress-deploy
   - octopress-linkblog
-  - octopress-asset-pipeline
-  - octopress-blockquote-tag
-  - octopress-date-format
   - octopress-feed
+  - octopress-asset-pipeline
   - octopress-minify-html
+  - octopress-date-format
 
 themes:
   - octopress-genesis-theme
@@ -21,6 +20,8 @@ developer_tools:
   - clash
 
 liquid_plugins:
+  - octopress-quote-tag
+  - octopress-image-tag
   - octopress-include-tag
   - octopress-render-tag
   - octopress-wrap-tag
