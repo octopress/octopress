@@ -63,7 +63,7 @@ module Octopress
       else
         file = @options['path']
         abort "File #{file} not found." if !File.exist? file
-        @draft_content = File.open(file).read
+        @draft_content = File.read(file)
       end
     end
 
