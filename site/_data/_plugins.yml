@@ -22,6 +22,7 @@ developer_tools:
 liquid_plugins:
   - octopress-quote-tag
   - octopress-image-tag
+  - octopress-video-tag
   - octopress-include-tag
   - octopress-render-tag
   - octopress-wrap-tag

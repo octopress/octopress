@@ -19,7 +19,9 @@ group :jekyll_plugins do
   gem "octopress-return-tag"#, path: "../../return-tag"
   gem "octopress-minify-html"#, path: "../../minify-html"
   gem "octopress-quote-tag"#, path: "../../quote-tag"
+  gem "octopress-pullquote-tag"#, path: "../../pullquote-tag"
   gem "octopress-image-tag"#, path: "../../image-tag"
+  gem "octopress-video-tag"#, path: "../../video-tag"
   gem "clash", path: "../../clash"
 end
 
