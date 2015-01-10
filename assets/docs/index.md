@@ -14,6 +14,7 @@ Here are the subcommands for Octopress.
 - `new page <PATH>`      Add a new page to your site
 - `new draft <TITLE>`    Add a new draft post to your site
 - `publish <PATH>`       Publish a draft from _drafts to _posts
+- `unpublish <SEARCH>`   Search for a post and convert it into a draft.              
 - `isolate [search]`     Isolate one or more posts for a faster build
 - `integrate`            Restores all posts, reverting isolation.
 
@@ -109,7 +110,7 @@ This will create a new post in your `_drafts` directory.
 | `--slug SLUG`      | The slug for the new post.                |
 | `--force`          | Overwrite exsiting file.                  |
 
-### Publish draft
+### Publish a draft
 
 ```sh
 $ octopress publish _drafts/some-post.md
@@ -125,6 +126,30 @@ This will move your draft to the `_posts` directory and rename the file with the
 | `--force`          | Overwrite existing file.                  |
 
 When publishing a draft, the new post will use the draft's date. Pass the option `--date now` to the publish command to set the new post date from your system clock. As usual, you can pass any compatible date string as well.
+
+### Unpublish a post
+
+This will move a post to the `_drafts` directory renaming the file without the date according to the drafts convention.
+
+```sh
+$ octopress unpublish "some post"
+$ octopress unpublish --path _posts/2015-01-10-some-post.md
+```
+
+| Option             | Description                               |
+|:-------------------|:------------------------------------------|
+| `--path`           | Specify a path instead of using search    |
+| `--force`          | Overwrite existing file.                  |
+
+If you have multiple posts that match the search string, you
+will be prompted to chose a post. That will look like this:
+
+```
+Found 2 posts matching 'random'
+  1) 2011-11-11-a-random-post.markdown
+  2) 2012-11-11-another-random-post.markdown
+Which do you want to unpublish? (enter a number): 
+```
 
 ### Templates for Posts and pages
 

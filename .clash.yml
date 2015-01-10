@@ -8,6 +8,8 @@
       - echo "<div class=page>{{ page.title }}{{ content }}</div>" > _layouts/page.html
     new_draft:
       - octopress new draft "Some Cool Idea" --date "2014-03-10 15:20 -0000"
+    new_post:
+      - octopress new post "Some Cool Idea" --date "2014-03-10 15:20 -0000"
     new_posts:
       - octopress new post "A random post" --date "2011-11-11 11:11 -0000"
       - octopress new post "Another random post" --date "2012-11-11 11:11 -0000"
@@ -88,7 +90,26 @@
   compare: 
     - _expected/publish-draft-dir/_posts _posts
   enforce_missing: drafts/*
+-
+  title: Unpublish a post
+  before:
+    - reset_site
+    - new_post
+    - 'octopress unpublish --path _posts/2014-03-10-some-cool-idea.markdown'
+  compare: 
+    - _expected/new-draft/_drafts _drafts
 
+  enforce_missing: _posts/*
+-
+  title: Unpublish a post with search
+  before:
+    - reset_site
+    - new_post
+    - octopress unpublish 'cool'
+  compare: 
+    - _expected/new-draft/_drafts _drafts
+
+  enforce_missing: _posts/*
 -
   title: Add a page
   before:

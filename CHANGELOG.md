@@ -1,12 +1,16 @@
 # Octopress Changelog
 
+### 3.0.0 RC26 - 2015-01-02
+
+- Added `unpublish` command for converting posts into drafts
+
 ### 3.0.0 RC25 - 2015-01-02
 
 - Fixed missing scaffolding.
 
 ### 3.0.0 RC24 - 2015-01-02
 
-- Absorbed Octopress Docs features
+- Absorbed Octopress Docs features.
 
 ### 3.0.0 RC23 - 2014-12-19
 
