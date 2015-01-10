@@ -89,7 +89,7 @@ module Octopress
     end
 
     def find_exiled_posts
-      Utils.find_posts.reject { |f| f !=~ /_exile\// }
+      Utils.find_posts.select { |f| f =~ /_exile\// }
     end
 
     def default_array(input)
