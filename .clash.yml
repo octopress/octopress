@@ -25,7 +25,6 @@
     - 'octopress new site --blank'
     - 'echo "timezone: GMT" > site/_config.yml'
   compare: _expected/blank site
-
 -
   title: Add a new post
   before:
