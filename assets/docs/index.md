@@ -187,14 +187,12 @@ Run `octopress integrate` to restore all exiled posts. This can be helpful if yo
 for a single post or page.
 
 ```sh
-$ octopress isolate
-$ octopress isolate _posts/2014-10-11-kittens.md
-$ octopress isolate kittens
+$ octopress isolate                                # Move all posts
+$ octopress isolate _posts/2014-10-11-kittens.md   # Move post at path
+$ octopress isolate kittens                        # Move post matching search
 ```
 
-In the first example, `octopress isolate` without any arguments will send all posts to `_posts/_exile`. The second example demonstrates
-how to isoalte a post by passing a path. The third example will isolate a post which matches the search string. If multiple posts match,
-you will be prompted to chose from a menue which post to isolate.
+In the third example, if multiple posts match the search a prompt will ask you to select a post from a menu.
 
 ## Configuration
 
