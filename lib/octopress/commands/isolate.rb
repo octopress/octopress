@@ -3,16 +3,18 @@ module Octopress
     class Isolate < Command
       def self.init_with_program(p)
         p.command(:isolate) do |c|
-          c.syntax 'isolate [search] [options]'
-          c.description "Move posts to _posts/_exile if they do not match the search text or move the most recent post if search text is omitted."
-          c.option 'path',   '--path [STRING]', 'Isolate a post at the specified path.'
-          c.option 'config', '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
+          c.syntax 'isolate <POST> [options]'
+          c.description "Move all posts not matching selected psot to _posts/_exile. Command accepts path to post or search string."
+          CommandHelpers.add_common_options c
 
           c.action do |args, options|
-            if !args.empty?
-              options['search'] = args.first
+            options['path'] = args.first
+
+            if options['path'] && !File.exist?(options['path'])
+              options['path'] = CommandHelpers.select_posts(options['path'], 'isolate')
             end
-            Octopress::Isolate.new(options).process
+
+            isolate_post(options)
           end
         end
 
@@ -22,9 +24,17 @@ module Octopress
           c.option 'config', '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
 
           c.action do |args, options|
-            Octopress::Isolate.new(options).revert
+            integrate_posts(options)
           end
         end
+      end
+
+      def self.isolate_post(options)
+        Octopress::Isolate.new(options).isolate
+      end
+
+      def self.integrate_posts(options)
+        Octopress::Isolate.new(options).integrate
       end
     end
   end

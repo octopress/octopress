@@ -3,6 +3,11 @@ module Octopress
 
     def set_default_options
       @options['type']      ||= 'draft' 
+
+      if @options['title'].nil? && @options[:type] == 'post'
+        raise "Draft not created: Please choose a title.\n".red + "  For example: " + "octopress new draft 'The merits of napping'".yellow
+      end
+
       @options['layout']      = @config['post_layout']
       @options['dir']       ||= ''
       @options['extension'] ||= @config['post_ext']
@@ -18,23 +23,20 @@ module Octopress
       File.join(site.source, '_drafts', name)
     end
 
-    # -----
-    # Methods for publishing drafts
-    # -----
-
     # Create a new post from draft file
     #
     # Sets post options based on draft file contents
     # and options passed to the publish command
     #
     def publish
-      @options['date'] ||= read_draft_date || Time.now.iso8601
+      @options['date'] ||= read_post_date || Time.now.iso8601
+      @options['title'] = read_post_title
 
       post_options = {
-        'title'   => read_draft_title,
+        'title'   => @options['title'],
         'date'    => @options['date'],
-        'slug'    => publish_slug,
-        'content' => read_draft_content,
+        'slug'    => title_slug,
+        'content' => read_post_content,
         'dir'     => @options['dir'],
         'type'    => 'post from draft'
       }
@@ -49,53 +51,6 @@ module Octopress
 
     end
 
-    # Get the slug from options or filename
-    #
-    def publish_slug
-      @options['slug'] || File.basename(@options['path'], '.*')
-    end
-
-    # Reads the file from _drafts/[path]
-    #
-    def read
-      if @draft_content
-        @draft_content
-      else
-        file = @options['path']
-        abort "File #{file} not found." if !File.exist? file
-        @draft_content = File.read(file)
-      end
-    end
-
-    # Get title from draft post file
-    #
-    def read_draft_title
-      match = read.match(/title:\s+(.+)?$/)
-      match[1] if match
-    end
-    
-    # read_draft_date
-    #
-    def read_draft_date
-      match = read.match(/date:\s+(\d.+)$/)
-      match[1] if match
-    end
-    
-    # Get content from draft post file
-    # also update the draft's date configuration
-    #
-    def read_draft_content
-      if @options['date']
-        # remove date if it exists
-        content = read.sub(/date:.*$\n/, "")
-        
-        # Insert date after title
-        content.sub(/(title:.+$)/i, '\1'+"\ndate: #{@options['date']}")
-      else
-        read
-      end
-    end
-    
     def default_template
       'draft'
     end

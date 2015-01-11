@@ -19,3 +19,7 @@ tmp
 .code-highlighter-cache
 .DS_Store
 _site
+test/_drafts
+test/_templates
+test/_posts
+test/_layouts
