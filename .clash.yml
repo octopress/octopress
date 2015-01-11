@@ -17,7 +17,11 @@
     cleanup:
       - echo "Cleaning up..."
       - rm -rf _layouts _drafts _templates _posts _site pages site
-
+-
+  title: new_post
+  before:
+    - reset_site
+    - new_posts
 -
   title: Create a blank site
   before: 
@@ -94,7 +98,7 @@
   before:
     - reset_site
     - new_post
-    - 'octopress unpublish --path _posts/2014-03-10-some-cool-idea.markdown'
+    - 'octopress unpublish _posts/2014-03-10-some-cool-idea.markdown'
   compare: 
     - _expected/new-draft/_drafts _drafts
 
@@ -104,7 +108,7 @@
   before:
     - reset_site
     - new_post
-    - octopress unpublish 'cool'
+    - octopress unpublish cool
   compare: 
     - _expected/new-draft/_drafts _drafts
 
@@ -147,11 +151,11 @@
   compare:
     - _expected/new-page-date/pages pages
 -
-  title: Isolate posts
+  title: Exile all posts
   before:
     - reset_site
     - new_posts
-    - 'octopress isolate'
+    - octopress isolate
   compare:
     - _expected/isolate/_posts _posts
 -
@@ -159,7 +163,7 @@
   before:
     - reset_site
     - new_posts
-    - 'octopress isolate random-post'
+    - octopress isolate happy
   compare:
     - _expected/isolate-search/_posts _posts
 -
@@ -167,7 +171,7 @@
   before:
     - reset_site
     - new_posts
-    - 'octopress isolate --path _posts/2011-11-11-a-random-post.markdown'
+    - octopress isolate _posts/2011-11-11-a-random-post.markdown
   compare:
     - _expected/isolate-path/_posts _posts
 -
@@ -176,7 +180,7 @@
     - reset_site
     - new_posts
     - octopress isolate
-    - 'octopress integrate'
+    - octopress integrate
   compare:
     - _expected/integrate/_posts _posts
 -

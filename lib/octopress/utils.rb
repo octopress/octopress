@@ -1,15 +1,6 @@
 module Octopress
   module Utils
 
-    def self.find_posts
-      @posts ||= begin
-        dir = File.join(Octopress.site.source, '_posts')
-        Find.find(dir).to_a.reject do |f| 
-          File.directory?(f)
-        end
-      end
-    end
-
     # Smart capitalization for titles
     #
     def self.titlecase(input)

@@ -51,10 +51,6 @@ module Octopress
       FileUtils.rm @options['path']
     end
 
-    def find_posts(search)
-      find_posts.select { |p| p =~ /#{string.gsub(/\s/, '-')}/i }
-    end
-
     # Reads the file from options[path]
     #
     def read

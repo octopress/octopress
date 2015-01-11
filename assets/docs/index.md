@@ -8,15 +8,17 @@ title: Using Octopress
 
 Here are the subcommands for Octopress.
 
-- `init <PATH>`          Adds Octopress scaffolding to your site.
-- `new <PATH>`           Like `jekyll new` + `octopress init`
-- `new post <TITLE>`     Add a new post to your site
-- `new page <PATH>`      Add a new page to your site
-- `new draft <TITLE>`    Add a new draft post to your site
-- `publish <PATH>`       Publish a draft from _drafts to _posts
-- `unpublish <SEARCH>`   Search for a post and convert it into a draft.              
-- `isolate [search]`     Isolate one or more posts for a faster build
-- `integrate`            Restores all posts, reverting isolation.
+```
+init <PATH>         # Adds Octopress scaffolding to your site
+new <PATH>          # Like `jekyll new` + `octopress init`
+new post <TITLE>    # Add a new post to your site
+new page <PATH>     # Add a new page to your site
+new draft <TITLE>   # Add a new draft post to your site
+publish <POST>      # Publish a draft from _drafts to _posts
+unpublish <POST>    # Search for a post and convert it into a draft
+isolate [POST]      # Stash all posts but the one you're workign on for a faster build
+integrate           # Restores all posts, doing the opposite of the isolate command
+```
 
 Run `octopress --help` to list sub commands and `octopress <subcommand> --help` to learn more about any subcommand and see its options.
 
@@ -97,11 +99,11 @@ you will have the `--date` option to add a date to a page.
 
 ### New Draft
 
+This will create a new post in your `_drafts` directory.
+
 ```sh
 $ octopress new draft "My Title"
 ```
-
-This will create a new post in your `_drafts` directory.
 
 | Option             | Description                               |
 |:-------------------|:------------------------------------------|
@@ -112,11 +114,15 @@ This will create a new post in your `_drafts` directory.
 
 ### Publish a draft
 
-```sh
-$ octopress publish _drafts/some-post.md
-```
+Use the `publish` command to publish a draft to the `_posts` folder. This will also rename the file with the proper date format.
 
-This will move your draft to the `_posts` directory and rename the file with the proper date.
+```sh
+$ octopress publish _drafts/some-cool-post.md
+$ octopress publish cool
+```
+In the first example, a draft is published using the path. The publish command can also search for a post by filename. The second command
+would work the same as the first. If other drafts match your search, you will be prompted to select them from a menu. This is often much
+faster than typing out the full path.
 
 | Option             | Description                               |
 |:-------------------|:------------------------------------------|
@@ -129,27 +135,15 @@ When publishing a draft, the new post will use the draft's date. Pass the option
 
 ### Unpublish a post
 
-This will move a post to the `_drafts` directory renaming the file without the date according to the drafts convention.
+Use the `unpublish` command to move a post to the `_drafts` directory, renaming the file according to the drafts convention.
 
 ```sh
-$ octopress unpublish "some post"
-$ octopress unpublish --path _posts/2015-01-10-some-post.md
+$ octopress unpublish _posts/2015-01-10-some-post.md
+$ octopress unpublish some post
 ```
 
-| Option             | Description                               |
-|:-------------------|:------------------------------------------|
-| `--path`           | Specify a path instead of using search    |
-| `--force`          | Overwrite existing file.                  |
-
-If you have multiple posts that match the search string, you
-will be prompted to chose a post. That will look like this:
-
-```
-Found 2 posts matching 'random'
-  1) 2011-11-11-a-random-post.markdown
-  2) 2012-11-11-another-random-post.markdown
-Which do you want to unpublish? (enter a number): 
-```
+Just like the publish command, you can either pass a path or a search string to match the file name. If more than one match is found, you
+will be prompted to select from a menu of posts.
 
 ### Templates for Posts and pages
 
@@ -188,19 +182,19 @@ File name extensions are unnecessary since they're just plain text anyway.
 
 ## Isolate
 
-If your site is taking a while to build, but you want to preview a post quickly, you can isolate that post temporarily with the isolate command. Here's the syntax:
+The `isolate` command will allow you to stash posts in `_posts/_exile` where they will be ignored by Jekyll during the build process.
+Run `octopress integrate` to restore all exiled posts. This can be helpful if you have a very large site and you want to quickly preview a build
+for a single post or page.
 
+```sh
+$ octopress isolate
+$ octopress isolate _posts/2014-10-11-kittens.md
+$ octopress isolate kittens
 ```
-octopress isolate [SEARCH] [options]
-```
 
-This will copy all other posts into `_posts/_exile` where they will be ignored by Jekyll during the build process. Here are some examples:
-
-- `octopress isolate` isolates the most recently dated post.
-- `octopress isolate cats` isolates all posts with the word 'cats' in the filename.
-- `octopress isolate --path _posts/2014-10-11-kittens.md` isolates the post at the given path.
-
-To reintegrate all exiled posts, run `octopress integrate` which will restore all posts from `_posts/_exile` to `_posts`.
+In the first example, `octopress isolate` without any arguments will send all posts to `_posts/_exile`. The second example demonstrates
+how to isoalte a post by passing a path. The third example will isolate a post which matches the search string. If multiple posts match,
+you will be prompted to chose from a menue which post to isolate.
 
 ## Configuration
 
@@ -222,7 +216,7 @@ titlecase: true
 
 ## Contributing
 
-1. Fork it
+1. Fork it ( https://github.com/octopress/octopress/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
