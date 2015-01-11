@@ -28,7 +28,7 @@ module Octopress
     end
 
     def isolate
-      post = File.expand_path(@options['path']) if @options['post']
+      post = File.expand_path(@options['path']) if @options['path']
       others = (post ? find_other_posts(post) : CommandHelpers.find_posts)
       exile_dir = File.join(site.source, '_posts/_exile')
 
