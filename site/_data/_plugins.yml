@@ -21,17 +21,17 @@ developer_tools:
 
 liquid_plugins:
   - octopress-quote-tag
+  - octopress-pullquote-tag
   - octopress-image-tag
   - octopress-video-tag
   - octopress-include-tag
   - octopress-render-tag
   - octopress-wrap-tag
-  - octopress-abort-tag
-  - octopress-abort-tag
   - octopress-assign-tag
   - octopress-capture-tag
   - octopress-filter-tag
   - octopress-return-tag
   - octopress-comment-tag
   - octopress-content-for
-  - octopress-markdown-block
+  - octopress-markdown-tag
+  - octopress-abort-tag
