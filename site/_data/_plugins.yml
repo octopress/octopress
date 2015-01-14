@@ -17,10 +17,13 @@ developer_tools:
   - octopress-render-code
   - octopress-codeblock
   - octopress-solarized
+  - octopress-filters
+  - octopress-debugger
   - clash
 
 liquid_plugins:
   - octopress-quote-tag
+  - octopress-filter-tag
   - octopress-pullquote-tag
   - octopress-image-tag
   - octopress-video-tag

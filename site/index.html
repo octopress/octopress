@@ -1,13 +1,13 @@
 ---
-layout: default
+layout: theme:page
 ---
 
-{% for plugin in plugin_docs %}
 <ul class='plugin'>
+{% for plugin in plugin_docs %}
   <li>
     <a href="/{{ plugin[1].url }}">{{ plugin[1].name }}</a>{% if plugin[1].description %} - {{ plugin[1].description }}{% endif %}
     {% assign source = plugin[1].source_url %}
     {% if source %} - {{ source | docs_source_url }}{% endif %}
   </li>
-</ul>
 {% endfor %}
+</ul>

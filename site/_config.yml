@@ -1,3 +1,4 @@
+url: http://octopress.org
 markdown: redcarpet
 exclude:
   - Gemfile
