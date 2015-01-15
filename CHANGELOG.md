@@ -1,17 +1,22 @@
 # Octopress Changelog
 
-### 3.0.0 RC27 (2015-01-02)
+### 3.0.0 RC27 (2015-01-15)
+
+- Fix: `--template` option accepts a path, allowing shell auto-completion.
+- Added short option flags for most commands.
+
+### 3.0.0 RC27 (2015-01-15)
 
 - Minor fix to paths.
 - Improved scaffold command output.
 - Fixed drafts template config.
 - Added config documentation for template file configs.
 
-### 3.0.0 RC26 (2015-01-02)
+### 3.0.0 RC26 (2015-01-11)
 
 - Added `unpublish` command for converting posts into drafts.
 
-### 3.0.0 RC25 (2015-01-02)
+### 3.0.0 RC25 (2015-01-05)
 
 - Fixed missing scaffolding.
 
