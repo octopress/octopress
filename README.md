@@ -31,7 +31,7 @@ new page <PATH>     # Add a new page to your site
 new draft <TITLE>   # Add a new draft post to your site
 publish <POST>      # Publish a draft from _drafts to _posts
 unpublish <POST>    # Search for a post and convert it into a draft
-isolate [POST]      # Stash all posts but the one you're workign on for a faster build
+isolate [POST]      # Stash all posts but the one you're working on for a faster build
 integrate           # Restores all posts, doing the opposite of the isolate command
 ```
 
@@ -125,7 +125,7 @@ $ octopress new draft "My Title"
 | `--template PATH`  | Use a template from <path>                |
 | `--date DATE`      | The date for the draft. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
 | `--slug SLUG`      | The slug for the new post.                |
-| `--force`          | Overwrite exsiting file.                  |
+| `--force`          | Overwrite existing file.                  |
 
 ### Publish a draft
 
