@@ -128,7 +128,7 @@ module Octopress
       file = @options['template'] || default_template
 
       if file
-        file.sub(/^_templates\//, '')
+        file.sub!(/^_templates\//, '')
         file = File.join(site.source, '_templates', file) if file
         if File.exist? file
           parse_template File.open(file).read
