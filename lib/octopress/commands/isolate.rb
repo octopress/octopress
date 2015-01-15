@@ -4,7 +4,7 @@ module Octopress
       def self.init_with_program(p)
         p.command(:isolate) do |c|
           c.syntax 'isolate <POST> [options]'
-          c.description "Move all posts not matching selected psot to _posts/_exile. Command accepts path to post or search string."
+          c.description "Move all posts not matching selected post to _posts/_exile. Command accepts path to post or search string."
           CommandHelpers.add_common_options c
 
           c.action do |args, options|
