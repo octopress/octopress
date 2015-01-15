@@ -190,7 +190,7 @@ By default Octopress has templates for pages, posts and drafts. You can change t
 To create linkposts template, add a file at `_templates/linkpost` and use it with a new post like this:
 
 ```sh
-$ octopress new post --template _templates/linkpost
+$ octopress new post --template linkpost
 ```
 
 File name extensions are unnecessary since they're just plain text anyway.
