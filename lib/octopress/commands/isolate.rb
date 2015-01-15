@@ -21,7 +21,7 @@ module Octopress
         p.command(:integrate) do |c|
           c.syntax 'integrate'
           c.description "Reintegrate posts from _posts/_exile."
-          c.option 'config', '--config <CONFIG_FILE>[,CONFIG_FILE2,...]', Array, 'Custom Jekyll configuration file'
+          CommandHelpers.add_common_options c
 
           c.action do |args, options|
             integrate_posts(options)
