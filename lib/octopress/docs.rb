@@ -248,8 +248,8 @@ module Octopress
       source = Octopress.gem_dir('local')
       {
         'source'      => source,
-        'destination' => File.join(source, '/_site'),
-        'layouts'     => File.join(source, '/_layouts'),
+        'destination' => File.join(source, '_site'),
+        'layouts'     => File.join(source, '_layouts'),
         'port'        => '4444',
         'serving'     =>  true,
       }

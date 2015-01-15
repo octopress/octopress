@@ -1,3 +1,5 @@
+require 'find'
+
 module Octopress
   class Scaffold
     attr_reader :path, :force
@@ -9,19 +11,42 @@ module Octopress
     end
     
     def write
-      if !@force && (File.exist?(path + '/_templates') ||
-        File.exist?(path + '/_octopress.yml'))
+      if !@force && File.exist?(File.join(path, '_templates'))
         abort "Some files already exist.  Use --force to overwrite."
       end
 
-      FileUtils.cp_r scaffold_path + '/.', path
+      FileUtils.cp_r(File.join(scaffold_path, '.'), path)
+      puts "Added Octopress scaffold:"
+      puts scaffold_file_list.green
+    end
 
-      puts "Octopress scaffold added to #{path}."
+    def local_path
+      pwd = File.join(Dir.pwd, '')
+      path.sub(pwd, '')
     end
 
     def scaffold_path
       Octopress.gem_dir('scaffold')
     end
-    
+
+    # Returns a list of 
+    def scaffold_files
+      Find.find(scaffold_path).to_a.reject do |file| 
+        file == scaffold_path
+      end
+    end
+
+    def scaffold_file_list
+      scaffold_files.map do |file| 
+        name = file.sub(File.join(scaffold_path, ''), '')
+        name = name.gsub(/[^\/]+\//, '  ')
+
+        if File.directory?(file)
+          name = File.join(name, '')
+        end
+
+        " + " + name
+      end.join("\n")
+    end
   end
 end

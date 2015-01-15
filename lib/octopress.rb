@@ -76,7 +76,7 @@ module Octopress
   end
 
   def self.gem_dir(dir='')
-    File.expand_path(File.join(File.dirname(__FILE__), '../', dir))
+    File.expand_path(File.join(File.dirname(__FILE__), '..', dir))
   end
 
   def self.require_blessed_gems

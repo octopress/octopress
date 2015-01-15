@@ -11,7 +11,7 @@ module Octopress
       @options['layout']      = @config['post_layout']
       @options['dir']       ||= ''
       @options['extension'] ||= @config['post_ext']
-      @options['template']  ||= @config['post_template']
+      @options['template']  ||= @config['draft_template']
 
       if @options['date']
         @options['date'] = convert_date @options['date']
