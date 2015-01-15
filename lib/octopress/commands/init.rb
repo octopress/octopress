@@ -4,7 +4,7 @@ module Octopress
       p.command(:init) do |c|
         c.syntax 'init <PATH> [options]'
         c.description "Add Octopress's default scaffolding to your site."
-        c.option 'force', '--force', 'Overwrite files if they already exist.'
+        c.option 'force', '-f', '--force', 'Overwrite files if they already exist.'
 
         c.action do |args, options|
           Scaffold.new(args, options).write

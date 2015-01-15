@@ -187,13 +187,25 @@ a handful of local variables you can use when working with templates.
 | `day`              | The date's day, DD                        |
 
 By default Octopress has templates for pages, posts and drafts. You can change them or create new ones for different types of content.
-To create linkposts template, add a file at `_templates/linkpost` and use it with a new post like this:
+To create linkposts template, add a file at `_templates/linkpost`, such as:
 
-```sh
-$ octopress new post --template _templates/linkpost
+```
+---
+title: {{ title }}
+external-url: {{ url }}
+---
 ```
 
-File name extensions are unnecessary since they're just plain text anyway.
+Then you can use it with a new post like this:
+
+```sh
+$ octopress new post "Some title" --template linkpost
+$ octopress new post "Some title" -tm _templates/linkpost
+```
+
+In the second example, I'm passing the full template file path. This way I can use my shell's tab to auto-complete feature.
+
+When creating templates, file name extensions are unnecessary since the files are just plain text anyway.
 
 ## Isolate
 
