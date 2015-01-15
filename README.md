@@ -196,13 +196,16 @@ external-url: {{ url }}
 ---
 ```
 
-and use it with a new post like this:
+Then you can use it with a new post like this:
 
 ```sh
-$ octopress new post --template linkpost
+$ octopress new post "Some title" --template linkpost
+$ octopress new post "Some title" -tm _templates/linkpost
 ```
 
-File name extensions are unnecessary since they're just plain text anyway.
+In the second example, I'm passing the full template file path. This way I can use my shell's tab to auto-complete feature.
+
+When creating templates, file name extensions are unnecessary since the files are just plain text anyway.
 
 ## Isolate
 
