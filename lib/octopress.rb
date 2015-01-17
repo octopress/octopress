@@ -95,7 +95,7 @@ Octopress::Docs.add({
   version:     Octopress::VERSION,
   description: "A framework for writing Jekyll sites ",
   base_url:    "octopress",
-  path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
+  path:        File.expand_path(File.join(File.dirname(__FILE__), "..")),
   source_url:  "https://github.com/octopress/octopress",
   website:     "http://octopress.org",
 })

@@ -13,6 +13,12 @@ module Octopress
       @options['extension'] ||= @config['post_ext']
       @options['template']  ||= @config['post_template']
       @options['dir']       ||= ''
+
+      # Language dir should always be added if language is set
+      #
+      if @options['lang']
+        @options['dir']       = File.join(@options['lang'], @options['dir'])
+      end
     end
 
     def path
@@ -26,15 +32,9 @@ module Octopress
       'post'
     end
     
-    # Post template defaults
-    #
-    def default_content
-      front_matter %w{layout title date}
-    end
-
     def unpublish
-      @options['date'] = read_post_date
-      @options['title'] = read_post_title
+      @options['date'] = read_post_yaml('date')
+      @options['title'] = read_post_yaml('title')
 
       post_options = {
         'title'   => @options['title'],
@@ -63,15 +63,8 @@ module Octopress
 
     # Get title from post file
     #
-    def read_post_title
-      match = read.match(/title:\s+(.+)?$/)
-      match[1] if match
-    end
-    
-    # Read date from post file
-    #
-    def read_post_date
-      match = read.match(/date:\s+(\d.+)$/)
+    def read_post_yaml(key)
+      match = read.match(/#{key}:\s*(.+)?$/)
       match[1] if match
     end
     

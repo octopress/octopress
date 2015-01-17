@@ -1,6 +1,10 @@
 # Octopress Changelog
 
-### 3.0.0 RC27 (2015-01-15)
+### 3.0.0 RC29 (2015-01-17)
+
+- Added `--lang` option for multi-language support.
+
+### 3.0.0 RC28 (2015-01-15)
 
 - Fix: `--template` option accepts a path, allowing shell auto-completion.
 - Added short option flags for most commands.

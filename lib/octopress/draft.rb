@@ -29,12 +29,13 @@ module Octopress
     # and options passed to the publish command
     #
     def publish
-      @options['date'] ||= read_post_date || Time.now.iso8601
-      @options['title'] = read_post_title
+      @options['date'] ||= read_post_yaml('date') || Time.now.iso8601
+      @options['title'] = read_post_yaml('title')
 
       post_options = {
         'title'   => @options['title'],
         'date'    => @options['date'],
+        'lang'    => read_post_yaml('lang'),
         'slug'    => title_slug,
         'content' => read_post_content,
         'dir'     => @options['dir'],
@@ -53,17 +54,6 @@ module Octopress
 
     def default_template
       'draft'
-    end
-
-    # Draft template defaults
-    #
-    def default_content
-
-      if @options['date']
-        front_matter %w{layout title date}
-      else
-        front_matter %w{layout title}
-      end
     end
   end
 end

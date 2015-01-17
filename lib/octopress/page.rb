@@ -16,13 +16,16 @@ module Octopress
       site.plugin_manager.conscientious_require
       @config = DEFAULT_OPTIONS.merge(site.config)
       @options = options
+      @options['lang'].downcase! if @options['lang']
       set_default_options
+
+      @front_matter = %w{layout title date lang}
 
       # Ensure title
       #
       @options['title'] ||= ''
 
-      # Ensure a quoted title
+      # Ensure a quoted title to avoid YAML parsing issues.
       #
       @options['title'] = "\"#{@options['title']}\""
 
@@ -135,10 +138,10 @@ module Octopress
         elsif @options['template']
           abort "No #{@options['type']} template found at #{file}"
         else
-          parse_template default_content
+          parse_template default_front_matter
         end
       else
-        parse_template default_content
+        parse_template default_front_matter
       end
     end
 
@@ -149,13 +152,18 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
-      vars = @options.dup
-
       if @config['titlecase']
-        vars['title'].titlecase!
+        @options['title'].titlecase!
       end
 
+      vars = @options.dup
+
+      # Allow templates to use slug
+      #
       vars['slug'] = title_slug
+
+      # Allow templates to use date fragments
+      #
       date = Time.parse(vars['date'] || Time.now.iso8601)
       vars['year'] = date.year
       vars['month'] = date.strftime('%m')
@@ -170,15 +178,23 @@ module Octopress
       parsed = if input =~ /\A-{3}\s+(.+?)\s+-{3}(.+)?/m
         input = $1
         content = $2
-        if vars['date'] && !(input =~ /date:/)
-          input += "\ndate: #{vars['date']}"
-        end
+        input << default_front_matter(input)
       else
         content = ''
       end
 
       template = Liquid::Template.parse(input)
       "---\n#{template.render(vars).strip}\n---\n#{content}"
+    end
+
+    # Ensures front-matter is set with optional arguments
+    #
+    def default_front_matter(template='')
+      @front_matter.dup.map do |k|
+        if @options[k] && !(template =~ /#{k}:/)
+          "\n#{k}: #{@options[k]}"
+        end
+      end.join('')
     end
 
     def date_slug
@@ -196,24 +212,6 @@ module Octopress
       value.strip!
       value.gsub!(' ', '-')
       value
-    end
-
-    def front_matter(vars)
-      fm = []
-      vars.each do |v| 
-        fm << "#{v}: {{ #{v} }}" if @options[v]
-      end
-      fm.join("\n")
-    end
-
-    # Page template defaults
-    #
-    def default_content
-      if @options['date']
-        front_matter %w{layout title date}
-      else
-        front_matter %w{layout title}
-      end
     end
   end
 end
