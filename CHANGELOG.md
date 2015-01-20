@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC30 (2015-01-19)
+
+- Fixed issue where `docs` command referenced Octopress Ink.
+
 ### 3.0.0 RC29 (2015-01-17)
 
 - Added `--lang` option for multi-language support.

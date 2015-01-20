@@ -23,7 +23,10 @@ module Octopress
         # Activate dependencies for serving docs.
         #
         options = Docs.load_docs(options)
-        Octopress::Ink.load_plugin_assets = false
+
+        if defined? Octopress::Ink
+          Octopress::Ink.load_plugin_assets = false
+        end
 
         
         Jekyll.logger.log_level = :error

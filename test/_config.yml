@@ -1,3 +1,2 @@
-timezone: GMT
 exclude:
   - Gemfile*

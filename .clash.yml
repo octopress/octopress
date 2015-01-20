@@ -20,11 +20,6 @@
       - echo "Cleaning up..."
       - rm -rf _layouts _drafts _templates _posts _site pages site
 -
-  title: new_post
-  before:
-    - reset_site
-    - new_posts
--
   title: Create a blank site
   before: 
     - 'rm -rf site'
