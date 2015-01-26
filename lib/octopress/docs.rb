@@ -231,7 +231,6 @@ module Octopress
         # Ensuring their documentation is loaded into the docs site
         #
         site = Octopress.read_site({'config'=>options['config']})
-        site.plugin_manager.conscientious_require
 
         # Require escape code last to set Octopress hook priority.
         #

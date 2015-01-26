@@ -56,6 +56,8 @@ module Octopress
   def self.read_site(options={})
     Jekyll.logger.log_level = :error
     s = Jekyll::Site.new(Jekyll.configuration(options))
+    Jekyll::PluginManager.require_from_bundler
+    s.plugin_manager.conscientious_require
     Jekyll.logger.log_level = :info
     alias_site_title(s)
   end

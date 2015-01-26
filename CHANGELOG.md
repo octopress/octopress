@@ -1,5 +1,9 @@
 # Octopress Changelog
 
+### 3.0.0 RC31 (2015-01-26)
+
+- Fixed issue where Gemfile plugins weren't being required.
+
 ### 3.0.0 RC30 (2015-01-19)
 
 - Fixed issue where `docs` command referenced Octopress Ink.
