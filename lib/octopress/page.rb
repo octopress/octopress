@@ -13,7 +13,6 @@ module Octopress
 
     def initialize(site, options)
       @site = site
-      site.plugin_manager.conscientious_require
       @config = DEFAULT_OPTIONS.merge(site.config)
       @options = options
       @options['lang'].downcase! if @options['lang']

@@ -1,4 +1,4 @@
-# Octopress Changelog
+# Changelog
 
 ### 3.0.0 RC31 (2015-01-26)
 
