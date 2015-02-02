@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 RC32 (2015-02-02)
+
+- Added octopress-multilingual to list of plugins which can extend the CLI.
+
 ### 3.0.0 RC31 (2015-01-26)
 
 - Fixed issue where Gemfile plugins weren't being required.

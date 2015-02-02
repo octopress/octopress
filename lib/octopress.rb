@@ -23,6 +23,7 @@ module Octopress
   BLESSED_GEMS = %w[
     octopress-ink
     octopress-deploy
+    octopress-multilingual
   ]
 
   def self.logger
