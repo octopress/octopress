@@ -35,7 +35,6 @@ module Octopress
       post_options = {
         'title'   => @options['title'],
         'date'    => @options['date'],
-        'lang'    => read_post_yaml('lang'),
         'slug'    => title_slug,
         'content' => read_post_content,
         'dir'     => @options['dir'],

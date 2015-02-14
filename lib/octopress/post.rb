@@ -13,12 +13,6 @@ module Octopress
       @options['extension'] ||= @config['post_ext']
       @options['template']  ||= @config['post_template']
       @options['dir']       ||= ''
-
-      # Language dir should always be added if language is set
-      #
-      if @options['lang']
-        @options['dir']       = File.join(@options['lang'], @options['dir'])
-      end
     end
 
     def path

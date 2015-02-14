@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 RC33 (2015-02-14)
+
+- Removed `--lang` option from CLI. This adds unnecessary complexity which can be addressed with templates.
+
 ### 3.0.0 RC32 (2015-02-02)
 
 - Added octopress-multilingual to list of plugins which can extend the CLI.

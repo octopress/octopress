@@ -74,7 +74,6 @@ date: YYYY-MM-DDTHH:MM:SS-00:00
 |:---------------------|:----------------------------------------|
 | `--template PATH`    | Use a template from <path>              |
 | `--date DATE`        | The date for the post. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
-| `--lang LANGUAGE`    | Set post language (e.g. en, it) for multi-language sites. |
 | `--slug SLUG`        | Slug for the new post.                  |
 | `--dir DIR`          | Create post at _posts/DIR/.             |
 | `--force`            | Overwrite existing file.                |
@@ -106,7 +105,6 @@ After the page is created, Octopress will tell you how to configure this new col
 | `--template PATH`    | Use a template from <path>              |
 | `--title TITLE`      | The title of the new page               |
 | `--date DATE`        | The date for the page. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) |
-| `--lang LANGUAGE`    | Set page language (e.g. en, it) for multi-language sites. |
 | `--force`            | Overwrite existing file.                |
 
 Note: The default page template doesn't expect a date. If you want to add dates
@@ -126,7 +124,6 @@ $ octopress new draft "My Title"
 |:-------------------|:------------------------------------------|
 | `--template PATH`  | Use a template from <path>                |
 | `--date DATE`      | The date for the draft. Should be parseable by [Time#parse](http://ruby-doc.org/stdlib-2.1.0/libdoc/time/rdoc/Time.html#method-i-parse) (defaults to Time.now) |
-| `--lang LANGUAGE`  | Set draft language (e.g. en, it) for multi-language sites. |
 | `--slug SLUG`      | The slug for the new post.                |
 | `--force`          | Overwrite existing file.                  |
 

@@ -15,10 +15,9 @@ module Octopress
       @site = site
       @config = DEFAULT_OPTIONS.merge(site.config)
       @options = options
-      @options['lang'].downcase! if @options['lang']
       set_default_options
 
-      @front_matter = %w{layout title date lang}
+      @front_matter = %w{layout title date}
 
       # Ensure title
       #
