@@ -8,6 +8,8 @@ group :jekyll_plugins do
   gem "octopress-deploy"#, path: "../../deploy"
   gem "octopress-linkblog"#, path: "../../linkblog"
   gem "octopress-feeds"#, path: "../../feeds"
+  gem "octopress-paginate"#, path: "../../paginate"
+  gem "octopress-multilingual"#, path: "../../multilingual"
   gem "octopress-asset-pipeline"#, path: "../../asset-pipeline"
   gem "octopress-minify-html"#, path: "../../minify-html"
   gem "octopress-date-format"#, path: "../../date-format"
