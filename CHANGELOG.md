@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 RC34 (2015-02-21)
+
+- Added `multilingual?` method so plugins can easily check if a site is configured with Octopress Multilingual.
+
 ### 3.0.0 RC33 (2015-02-14)
 
 - Removed `--lang` option from CLI. This adds unnecessary complexity which can be addressed with templates.
