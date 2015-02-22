@@ -2,6 +2,8 @@ require 'mercenary'
 require 'titlecase'
 
 module Octopress
+  extend self
+
   require 'octopress/command'
   require 'octopress/version'
   require 'octopress/utils'
@@ -26,7 +28,7 @@ module Octopress
     octopress-multilingual
   ]
 
-  def self.logger
+  def logger
     @logger ||= Mercenary::Command.logger
     @logger.level = Logger::DEBUG
     @logger
@@ -34,7 +36,7 @@ module Octopress
 
   # Cache Jekyll's site configuration
   #
-  def self.configuration(options={})
+  def configuration(options={})
     if site?
       @site.config
     else
@@ -42,19 +44,25 @@ module Octopress
     end
   end
 
-  def self.site?
+  def site?
     !@site.nil?
+  end
+
+  # Is this site set up with the multilingual plugin?
+  #
+  def multilingual?
+    defined?(Octopress::Multilingual) && !Octopress.site.config['lang'].nil?
   end
 
   # Cache Jekyll's site
   #
-  def self.site(options={})
+  def site(options={})
     @site ||= read_site(options)
   end
 
   # Quietly read from Jekyll's site
   #
-  def self.read_site(options={})
+  def read_site(options={})
     Jekyll.logger.log_level = :error
     s = Jekyll::Site.new(Jekyll.configuration(options))
     Jekyll::PluginManager.require_from_bundler
@@ -65,7 +73,7 @@ module Octopress
 
   # Allow site to be set
   #
-  def self.site=(site)
+  def site=(site)
     @site = alias_site_title(site)
   end
 
@@ -73,16 +81,16 @@ module Octopress
   # This ensures we can all use site.name to be
   # compatible with Jekyll's scaffold convention
   #
-  def self.alias_site_title(site)
+  def alias_site_title(site)
     site.config['name'] ||= site.config['title']
     site
   end
 
-  def self.gem_dir(dir='')
+  def gem_dir(dir='')
     File.expand_path(File.join(File.dirname(__FILE__), '..', dir))
   end
 
-  def self.require_blessed_gems
+  def require_blessed_gems
     BLESSED_GEMS.each do |gem|
       begin
         require gem
