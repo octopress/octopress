@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 RC35 (2015-03-21)
+
+- Raised minimum Jekyll version to 2.5.
+
 ### 3.0.0 RC34 (2015-02-21)
 
 - Added `multilingual?` method so plugins can easily check if a site is configured with Octopress Multilingual.
