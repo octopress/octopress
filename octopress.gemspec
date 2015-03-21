@@ -16,11 +16,11 @@ Gem::Specification.new do |spec|
   # using ruby grep here in order to not have a depedency on grep cli tool. (mostly for windows machines)
   spec.files         = `git ls-files`.split("\n").grep(%r{^(bin\/|lib\/|assets\/|scaffold\/|site\/|local\/|changelog|readme|license)}i)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  
+
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "mercenary", "~> 0.3.2"
-  spec.add_runtime_dependency "jekyll", "~> 2.0"
+  spec.add_runtime_dependency "jekyll", "~> 2.5"
   spec.add_runtime_dependency "titlecase"
   spec.add_runtime_dependency "octopress-deploy"
   spec.add_runtime_dependency "octopress-hooks", "~> 2.0"
