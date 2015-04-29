@@ -17,7 +17,7 @@ module Octopress
       @options = options
       set_default_options
 
-      @front_matter = %w{layout title date}
+      @front_matter = %w{title date}
 
       # Ensure title
       #
@@ -25,7 +25,7 @@ module Octopress
 
       # Ensure a quoted title to avoid YAML parsing issues.
       #
-      @options['title'] = "\"#{@options['title']}\""
+      @options['title'] = "#{@options['title']}"
 
       @content = options['content'] || content
     end

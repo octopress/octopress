@@ -133,7 +133,7 @@
   title: Add a page with a custom template
   before:
     - reset_site
-    - 'echo "---\nlayout: {{ layout }}\ntitle: {{ title }}\nkittens: true\n---" > _templates/other_page'
+    - 'echo "---\nlayout: {{ layout }}\ntitle: \"{{ title }}\"\nkittens: true\n---" > _templates/other_page'
     - 'octopress new page pages/awesome-page --template other_page'
   compare:
     - _expected/new-page-template/pages pages
