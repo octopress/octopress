@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Octopress
   class Post < Page
 
