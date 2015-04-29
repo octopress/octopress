@@ -3,6 +3,7 @@ module Octopress
 
     def set_default_options
       @options['type']      ||= 'post'
+      @options['write_message'] ||= 'New post:'
 
       if @options['title'].nil? && @options[:type] == 'post'
         raise "Post not created: Please choose a title.\n".red + "  For example: " + "octopress new post \"Friendship with a tomato?\"".yellow
@@ -36,8 +37,10 @@ module Octopress
         'slug'    => title_slug,
         'content' => read_post_content,
         'dir'     => @options['dir'],
-        'type'    => 'draft from post'
+        'type'    => "draft from post",
+        'write_message' => "Unpublished: #{relative_path(path)} →"
       }
+
       Draft.new(site, post_options).write     
       
       # Remove the old post file

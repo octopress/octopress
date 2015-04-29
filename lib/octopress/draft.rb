@@ -3,6 +3,7 @@ module Octopress
 
     def set_default_options
       @options['type']      ||= 'draft' 
+      @options['write_message'] ||= 'New draft:'
 
       if @options['title'].nil? && @options[:type] == 'post'
         raise "Draft not created: Please choose a title.\n".red + "  For example: " + "octopress new draft 'The merits of napping'".yellow
@@ -38,7 +39,8 @@ module Octopress
         'slug'    => title_slug,
         'content' => read_post_content,
         'dir'     => @options['dir'],
-        'type'    => 'post from draft'
+        'type'    => "post from draft",
+        'write_message' => "Published: #{relative_path(path)} →"
       }
 
       # Create a new post file

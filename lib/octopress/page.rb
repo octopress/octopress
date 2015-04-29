@@ -36,7 +36,7 @@ module Octopress
 
     def write
       if File.exist?(path) && !@options['force']
-        raise "File #{relative_path(path)} already exists. Use --force to overwrite."
+        abort "File #{relative_path(path)} already exists. Use --force to overwrite."
       end
 
       dir = File.dirname(path)
@@ -44,7 +44,7 @@ module Octopress
       FileUtils.mkdir_p(dir)
       File.open(path, 'w') { |f| f.write(@content) }
       if STDOUT.tty?
-        puts "New #{@options['type']}: #{relative_path(path)}"
+        puts "#{@options['write_message']} #{relative_path(path)}"
         
         # If path begins with an underscore the page is probably being added to a collection
         #
@@ -97,6 +97,7 @@ module Octopress
 
     def set_default_options
       @options['type']      ||= 'page'
+      @options['write_message'] ||= 'New page:'
       @options['layout']      = @config['page_layout']
       if @options['date']
         @options['date']        = convert_date @options['date']
