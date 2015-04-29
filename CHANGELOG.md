@@ -1,5 +1,10 @@
 # Changelog
 
+### 3.0.0 RC36 (2015-04-29)
+
+- Fix: Layout is not automatically added to post/page templates
+- Minor: Improved output for publishing drafts. 
+
 ### 3.0.0 RC35 (2015-03-21)
 
 - Raised minimum Jekyll version to 2.5.
