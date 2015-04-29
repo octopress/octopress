@@ -26,7 +26,7 @@ module Octopress
 
           c.action do |args, options|
             if args.empty?
-              c.logger.error "Plese choose a path"
+              c.logger.error "Plese pass a path for your new page."
               puts c
             else
               options['path'] = args.first
@@ -45,7 +45,7 @@ module Octopress
 
           c.action do |args, options|
             if args.empty?
-              c.logger.error "Please choose a title."
+              c.logger.error "Please pass a title for your new post."
               puts c
             else
               options['title'] = args.join(" ")
@@ -63,7 +63,7 @@ module Octopress
 
           c.action do |args, options|
             if args.empty?
-              c.logger.error "Plese choose a title"
+              c.logger.error "Plese pass a title for your new draft."
               puts c
             else
               options['title'] = args.join(" ")

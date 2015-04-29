@@ -4,7 +4,7 @@ module Octopress
 
     def add_page_options(c)
       c.option 'date',     '-d', '--date DATE', "Use 'now' or a String that is parseable by Time#parse."
-      c.option 'template', '-tm', '--template PATH', "New #{c.name.to_s} from a template."
+      c.option 'template', '-T','--template PATH', "New #{c.name.to_s} from a template."
       c.option 'force',    '-f', '--force', 'Overwrite file if it already exists'
     end
 
