@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 RC37 (2015-04-29)
+
+- Fix: Added UTF-8 encoding to fix an issue with Ruby 1.9 support.
+
 ### 3.0.0 RC36 (2015-04-29)
 
 - Fix: Layout is not automatically added to post/page templates
