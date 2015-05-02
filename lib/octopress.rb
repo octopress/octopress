@@ -99,6 +99,19 @@ module Octopress
       end
     end
   end
+
+  def self.require_gems
+    if !ENV["CLASH_NO_BUNDLER_REQUIRE"] && (File.file?("Gemfile") || File.file?("../Gemfile"))
+      require "bundler"
+      Bundler.setup # puts all groups on the load path
+      Bundler.require(:octopress)
+      true
+    else
+      false
+    end
+    rescue LoadError, Bundler::GemfileNotFound
+    false
+  end
 end
 
 Octopress::Docs.add({

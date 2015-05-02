@@ -5,13 +5,7 @@ $LOAD_PATH.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 require 'mercenary'
 require 'octopress'
 
-if ENV['BUNDLE_BIN_PATH'] || ENV['BUNDLE_GEMFILE']
-  begin
-    require 'bundler'
-    Bundler.require(:octopress)
-  rescue
-  end
-end
+Octopress.require_gems
 
 Mercenary.program(:octopress) do |p|
   p.version Octopress::VERSION
