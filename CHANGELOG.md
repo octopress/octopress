@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 (2015-05-02)
+- Minor: No more need to run bundle exec. Yay.
+- Minor: Improved octopress docs functionality.
+
 ### 3.0.0 RC37 (2015-04-29)
 
 - Fix: Added UTF-8 encoding to fix an issue with Ruby 1.9 support.
