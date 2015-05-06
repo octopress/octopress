@@ -18,7 +18,9 @@ module Octopress
       # Add template to source directory
       if File.exist?(config_file)
         config = SafeYAML.load_file(config_file)
-        path = File.join(path, config['source'])
+        if config['source']
+          path = File.join(path, config['source'])
+        end
       end
       path
     end

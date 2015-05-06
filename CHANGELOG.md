@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.2 (2015-05-06)
+- Fix: Scaffolding path was broken when a configuration didn't have a source setting.
+
 ### 3.0.1 (2015-05-05)
 - Fix: Now template scaffolding is installed at the configured Jekyll site source.
 
