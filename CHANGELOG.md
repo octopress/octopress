@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.1 (2015-05-05)
+- Fix: Now template scaffolding is installed at the configured Jekyll site source.
+
 ### 3.0.0 (2015-05-02)
 - Minor: No more need to run bundle exec. Yay.
 - Minor: Improved octopress docs functionality.
