@@ -5,9 +5,22 @@ module Octopress
     attr_reader :path, :force
 
     def initialize(args, options)
-      @path  = File.expand_path(args.join(" "), Dir.pwd)
+      @path  = init_path(args)
       @force = !!options['force']
       @blank = !!options['blank']
+    end
+
+    def init_path(args)
+      path = File.expand_path(args.join(" "), Dir.pwd)
+      config_file = File.join(path, '_config.yml') 
+
+      # If there is a Jekyll configuration file present
+      # Add template to source directory
+      if File.exist?(config_file)
+        config = SafeYAML.load_file(config_file)
+        path = File.join(path, config['source'])
+      end
+      path
     end
     
     def write
