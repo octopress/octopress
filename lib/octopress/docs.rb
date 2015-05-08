@@ -225,6 +225,7 @@ module Octopress
       require "octopress/docs/jekyll/convertible"
       require "octopress/docs/jekyll/page"
       require "octopress-escape-code"
+      Octopress.require_gems
 
       if !options.nil?
         # Look at the local site and require all of its plugins

@@ -5,8 +5,6 @@ $LOAD_PATH.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 require 'mercenary'
 require 'octopress'
 
-Octopress.require_gems
-
 Mercenary.program(:octopress) do |p|
   p.version Octopress::VERSION
   p.description "Octopress is an obsessively designed toolkit for Jekyll blogging."
