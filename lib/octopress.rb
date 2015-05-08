@@ -101,6 +101,8 @@ module Octopress
   end
 
   def self.require_gems
+    require_blessed_gems
+
     if !ENV["OCTOPRESS_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
       begin
         require "bundler"
@@ -127,5 +129,5 @@ Octopress::Docs.add({
   website:     "http://octopress.org",
 })
 
-Octopress.require_blessed_gems
+Octopress.require_gems
 
