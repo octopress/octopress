@@ -106,7 +106,7 @@ module Octopress
     if !ENV["OCTOPRESS_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
       begin
         require "bundler"
-        Bundler.setup # puts all groups on the load path
+        Bundler.require(:default)
         Bundler.require(:octopress)
         true
       rescue LoadError, Bundler::GemfileNotFound

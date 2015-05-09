@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.3 (2015-05-09)
+- Fix: Require gems from Gemfile if possible to reduce need to prefix with bundle exec.
+
 ### 3.0.2 (2015-05-06)
 - Fix: Scaffolding path was broken when a configuration didn't have a source setting.
 
