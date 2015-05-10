@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "mercenary", "~> 0.3.2"
-  spec.add_runtime_dependency "jekyll", "~> 2.5"
+  spec.add_runtime_dependency "jekyll", ">= 2.5"
   spec.add_runtime_dependency "titlecase"
   spec.add_runtime_dependency "octopress-deploy"
   spec.add_runtime_dependency "octopress-hooks", "~> 2.0"

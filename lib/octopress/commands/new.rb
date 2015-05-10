@@ -40,7 +40,7 @@ module Octopress
           c.description 'Add a new post to your Jekyll site.'
           CommandHelpers.add_page_options c
           c.option 'slug', '-s', '--slug SLUG', 'Use this slug in filename instead of sluggified post title.'
-          c.option 'dir', '-d', '--dir DIR', 'Create post at _posts/DIR/.'
+          c.option 'dir', '-D', '--dir DIR', 'Create post at _posts/DIR/.'
           CommandHelpers.add_common_options c
 
           c.action do |args, options|

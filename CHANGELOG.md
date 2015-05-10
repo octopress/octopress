@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.4 (2015-05-10)
+- Fix: Changed shortcode for `--dir` to `-D` so it doesn't interfere with `-d` for `--date`.
+
 ### 3.0.3 (2015-05-09)
 - Fix: Require gems from Gemfile if possible to reduce need to prefix with bundle exec.
 
