@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "octopress-hooks", "~> 2.0"
   spec.add_runtime_dependency "octopress-escape-code", "~> 2.0"
 
-  spec.add_development_dependency "octopress-ink", "~> 1.0.0.rc"
+  spec.add_development_dependency "octopress-ink", "~> 1.0"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "clash"
