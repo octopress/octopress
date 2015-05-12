@@ -1,7 +1,12 @@
 # Changelog
 
 ### 3.0.5 (2015-05-12)
-- Minor: Now works with Jekyll 2.4.0
+- Support for Jekyll 2 & 3
+- Relaxed version requirements for Jekyll
+- Added support for Jekyll Hooks when available
+- Support for < Jekyll 2.5 by loading Jekyll plugins manually if necessary
+- Updated documentation for adding doc pages to plugins
+- Requiring Redcarpet because it gives us proper codefences for documentation pages (Ugh. I don't like Kramdown)
 
 ### 3.0.4 (2015-05-10)
 - Fix: Changed shortcode for `--dir` to `-D` so it doesn't interfere with `-d` for `--date`.
