@@ -9,7 +9,7 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll bl
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress', '~> 3.0.0.rc'
+    gem 'octopress', '~> 3.0'
 
 And then execute:
 
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install octopress --pre
+    $ gem install octopress
 
 ## Octopress Commands
 

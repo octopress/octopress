@@ -66,8 +66,10 @@ module Octopress
   def read_site(options={})
     Jekyll.logger.log_level = :error
     s = Jekyll::Site.new(Jekyll.configuration(options))
-    Jekyll::PluginManager.require_from_bundler
-    s.plugin_manager.conscientious_require
+    if defined?(Jekyll::PluginManager) && Jekyll::PluginManager.respond_to?(:require_from_bundler)
+      Jekyll::PluginManager.require_from_bundler
+      s.plugin_manager.conscientious_require
+    end
     Jekyll.logger.log_level = :info
     alias_site_title(s)
   end
@@ -100,7 +102,7 @@ module Octopress
     end
   end
 
-  def self.require_gems
+  def require_gems
     require_blessed_gems
 
     if !ENV["OCTOPRESS_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
@@ -108,6 +110,7 @@ module Octopress
         require "bundler"
         Bundler.require(:default)
         Bundler.require(:octopress)
+        Bundler.require(:jekyll_plugins)
         true
       rescue LoadError, Bundler::GemfileNotFound
         false

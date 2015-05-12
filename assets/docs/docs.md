@@ -16,6 +16,7 @@ the code below to automatically add your plugin's Readme, Changelog and any page
 if defined? Octopress::Docs
   Octopress::Docs.add({
     name:        "Your Plugin",
+    gem_name:    "your-gem",
     description: "This plugin causes awesomeness",
     path:        File.expand_path(File.join(File.dirname(__FILE__), "../")), # gem root
     slug:        "your-plugin",                      # optional

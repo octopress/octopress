@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.5 (2015-05-12)
+- Minor: Now works with Jekyll 2.4.0
+
 ### 3.0.4 (2015-05-10)
 - Fix: Changed shortcode for `--dir` to `-D` so it doesn't interfere with `-d` for `--date`.
 
