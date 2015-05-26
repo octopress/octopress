@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.6 (2015-05-26)
+- Fixed issue with Bundler gem loading.
+
 ### 3.0.5 (2015-05-12)
 - Support for Jekyll 2 & 3
 - Relaxed version requirements for Jekyll
