@@ -33,6 +33,7 @@ publish <POST>      # Publish a draft from _drafts to _posts
 unpublish <POST>    # Search for a post and convert it into a draft
 isolate [POST]      # Stash all posts but the one you're working on for a faster build
 integrate           # Restores all posts, doing the opposite of the isolate command
+deploy              # deploy your site via S3, Cloudfront, Rsync, or to GitHub pages.
 ```
 
 Run `octopress --help` to list sub commands and `octopress <subcommand> --help` to learn more about any subcommand and see its options.
@@ -243,6 +244,26 @@ post_template: post
 page_template: page
 draft_template: draft
 ```
+
+## Deployment
+
+The Octopress gem comes with [octopress-deploy](https://github.com/octopress/deploy) which allows you to easily deploy your site with Rsync, on S3 or Cloudfront, to GitHub pages, or other Git based deployment hosting platforms.
+
+### Basic usage
+
+```
+octopress deploy init METHOD [options]  # git, s3, or rsync - Create a _deploy.yml configuration
+octopress deploy                        # Deploys _site based on deployment configuration
+octopress pull DIR                      # Download your deployed site to the specified DIR
+```
+
+You can find more detailed documentation by running:
+
+```
+$ octopress deploy --help
+```
+
+Or by visiting the [Octopress deploy project page](https://github.com/octopress/deploy).
 
 ## Contributing
 
