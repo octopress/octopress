@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.7 (2015-06-01)
+- Fixed a bug where pages templates would only show dates if the `new page` command included a `--date` option. Now if a template has a date, the new page will have a date.
+
 ### 3.0.6 (2015-05-26)
 - Fixed issue with Bundler gem loading.
 
