@@ -182,7 +182,7 @@ a handful of local variables you can use when working with templates.
 | `date`             | The date (if set) or Time.now.iso8601     |
 | `title`            | The title of the page (if set)            |
 | `slug`             | The title in slug form                    |
-| `ymd`              | The date string, YYYY/MM/DD format        |
+| `ymd`              | The date string, YYYY-MM-DD format        |
 | `year`             | The date's year                           |
 | `month`            | The date's month, MM                      |
 | `day`              | The date's day, DD                        |
