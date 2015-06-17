@@ -208,7 +208,7 @@ In the second example, I'm passing the full template file path. This way I can u
 
 When creating templates, file name extensions are unnecessary since the files are just plain text anyway.
 
-## Isolate
+### Isolate
 
 The `isolate` command will allow you to stash posts in `_posts/_exile` where they will be ignored by Jekyll during the build process.
 Run `octopress integrate` to restore all exiled posts. This can be helpful if you have a very large site and you want to quickly preview a build
