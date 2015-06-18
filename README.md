@@ -184,7 +184,7 @@ $ octopress unpublish some post
 Just like the publish command, you can either pass a path or a search string to match the file name. If more than one match is found, you
 will be prompted to select from a menu of posts.
 
-### Templates for Posts and pages
+#### Templates for Posts and pages
 
 Octopress post and page templates look like this.
 
@@ -245,9 +245,19 @@ $ octopress isolate kittens                        # Move post matching search
 
 In the third example, if multiple posts match the search a prompt will ask you to select a post from a menu.
 
-### Deploy
+### Deploying your site
 
 The Octopress gem comes with [octopress-deploy](https://github.com/octopress/deploy) which allows you to easily deploy your site with Rsync, on S3 or Cloudfront, to GitHub pages, or other Git based deployment hosting platforms.
+
+Once you've built your site (with `jekyll build`) you can deploy it like this:
+
+```
+$ octopress deploy
+```
+
+This will read your `_deploy.yml` configuration and deploy your site.
+
+Deploy has a few commands you should know.
 
 | Commands                                   | Description                                                        |
 |:-------------------------------------------|:-------------------------------------------------------------------|
@@ -256,20 +266,20 @@ The Octopress gem comes with [octopress-deploy](https://github.com/octopress/dep
 | `octopress deploy pull [DIR]`              | Pull down your site into a local directory.                        |
 | `octopress deploy add-bucket <NAME>`       | (S3 only) Add a bucket using your configured S3 credentials.       |
 
-#### Deploy configuration
 
-First set up a configuration file for your deployment method. For Git based deployment, pass the repository url. For S3 and Rsync, no arguments are necessary.
+#### Generate Deployment configuration
+
+Octopress can generate a `_deploy.yml` file for your deployment method. **Remember to add your configuration to `.gitignore` to be sure
+you never commit sensitive information to your repository.**
 
 ```
-$ octopress deploy init git git@github.com:user/project
 $ octopress deploy init s3
 $ octopress deploy init rsync
+$ octopress deploy init git git@github.com:user/project
 ```
 
-This will generate a `_deploy.yml` file in your current
-directory which you can edit to add any necessary configuration.
-**Remember to add your configuration to `.gitignore` to be sure
-you never commit sensitive information to your repository.**
+This will generate a `_deploy.yml` file in your current directory which you can edit to add any necessary configuration.
+For S3 and Rsync, no arguments are necessary, but for Git deployment (to GitHub Pages, Heroku, etc), pass the repository url. 
 
 If you like, you can pass configurations as command line options. To see specific options for any method, add the `--help` flag.
 For example to see the options for configuring S3:
@@ -278,33 +288,19 @@ For example to see the options for configuring S3:
 $ octopress deploy init s3 --help
 ```
 
-#### Deploy your site
-
-Change the deployment configuration however you like, then build and deploy your site.
+If you want to publish your site to a staging server, you can create a second configuration. For example, to setup rsync for a staging site, you'd do this.
 
 ```
-$ jekyll build      # if you haven't yet
-$ octopress deploy
+$ octopress deploy init rsync --config _staging.yml
 ```
 
-This will read your `_deploy.yml` configuration and deploy your
-site. If you like, you can specify a configuration file.
+After modifying the configuration file, you can deploy your site to it like this:
 
 ```
 $ octopress deploy --config _staging.yml
 ```
 
-#### Pull down your site
-
-With the `pull` command, you can pull your site down into a local directory.
-
-```
-$ octopress deploy pull [DIR]
-```
-
-Mainly you'd do this if you're troubleshooting deployment and you want to see if it's working how you expected.
-
-##### Git Deployment Configuration
+#### Git Deployment Configuration
 
 Only `git_url` is required. Other options will default as shown below.
 
@@ -317,7 +313,7 @@ Only `git_url` is required. Other options will default as shown below.
 | `deploy_dir`  | Directory where deployment files are staged      | .deploy        |
 | `remote`      | Name of git remote                               | deploy         |
 
-##### Rsync Deployment Configuration
+#### Rsync Deployment Configuration
 
 | Config         | Description                                       | Default
 |:---------------|:--------------------------------------------------|:---------------|
@@ -398,24 +394,15 @@ If you prefer, you can store AWS access credentials in environment variables ins
 
 Note: configurations in `_deploy.yml` will override environment variables so be sure to remove those if you decide to use environment variables.
 
-#### Add a new bucket
+### Pull down your site
 
-If your AWS credentials are properly configured, you can add a new bucket with this command.
+With the `pull` command, you can pull your site down into a local directory.
 
 ```
-$ octopress deploy add-bucket <NAME>
+$ octopress deploy pull [DIR]
 ```
 
-This will connect to AWS, create a new S3 bucket, and configure it for static website hosting. This command can use the settings in your deployment configuration or you can pass options to override those settings.
-
-| Option        | Description                                      | Default
-|:--------------|:-------------------------------------------------|:---------------|
-| `--region`    | Override the `region` configuration              |                |
-| `--index`     | Specify an index page for your site              | index.html     |
-| `--error`     | Specify an error page for your site              | error.html     |
-| `--config`    | Use a custom configuration file                  | _deploy.yml    |
-
-You'll only need to pass options if you want to override settings in your deploy config file.
+Mainly you'd do this if you're troubleshooting deployment and you want to see if it's working how you expected.
 
 ## Contributing
 
