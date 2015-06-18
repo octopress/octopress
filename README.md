@@ -255,7 +255,7 @@ Once you've built your site (with `jekyll build`) you can deploy it like this:
 $ octopress deploy
 ```
 
-This will read your `_deploy.yml` configuration and deploy your site.
+This reads a `_deploy.yml` configuration and deploys your site. Read below to learn how Octopress can generate a deployment configuration file for you.
 
 Deploy has a few commands you should know.
 
@@ -269,8 +269,11 @@ Deploy has a few commands you should know.
 
 #### Generate Deployment configuration
 
-Octopress can generate a `_deploy.yml` file for your deployment method. **Remember to add your configuration to `.gitignore` to be sure
+**Remember to add your configuration to `.gitignore` to be sure
 you never commit sensitive information to your repository.**
+
+
+Octopress can generate a deployment configuration file for you using the `octopress deploy init` command.
 
 ```
 $ octopress deploy init s3
@@ -279,7 +282,6 @@ $ octopress deploy init git git@github.com:user/project
 ```
 
 This will generate a `_deploy.yml` file in your current directory which you can edit to add any necessary configuration.
-For S3 and Rsync, no arguments are necessary, but for Git deployment (to GitHub Pages, Heroku, etc), pass the repository url. 
 
 If you like, you can pass configurations as command line options. To see specific options for any method, add the `--help` flag.
 For example to see the options for configuring S3:
