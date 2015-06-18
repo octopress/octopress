@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.8 (2015-06-18)
+- Added documentation for Octopress's deploy project.
+
 ### 3.0.7 (2015-06-01)
 - Fixed a bug where pages templates would only show dates if the `new page` command included a `--date` option. Now if a template has a date, the new page will have a date.
 
