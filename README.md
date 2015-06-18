@@ -251,7 +251,7 @@ The Octopress gem comes with [octopress-deploy](https://github.com/octopress/dep
 
 | Commands                                   | Description                                                        |
 |:-------------------------------------------|:-------------------------------------------------------------------|
-| `octopress deploy`                         | Deploy your site (based on the `_deploy.yml` configuration         |
+| `octopress deploy`                         | Deploy your site (based on the `_deploy.yml` configuration)        |
 | `octopress deploy init <METHOD> [options]` | Generate a config file for the deployment method. (git, s3, rsync) |
 | `octopress deploy pull [DIR]`              | Pull down your site into a local directory.                        |
 | `octopress deploy add-bucket <NAME>`       | (S3 only) Add a bucket using your configured S3 credentials.       |
