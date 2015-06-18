@@ -1,6 +1,9 @@
 # Changelog
 
-### 3.0.8 (2015-06-18)
+### 3.0.9 (2015-06-18)
+- Documentation improvements
+
+### 3.0.8 (2015-06-17)
 - Added documentation for Octopress's deploy project.
 
 ### 3.0.7 (2015-06-01)
