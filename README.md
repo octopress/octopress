@@ -19,7 +19,30 @@ Or install it yourself as:
 
     $ gem install octopress
 
-## Octopress Commands
+## Configuration
+
+Octopress reads its configurations from `_config.yml`. Here's what the configuration looks like by default.
+
+```yaml
+# Default extension for new posts and pages
+post_ext: markdown
+page_ext: html
+
+# Default templates for posts and pages
+# Found in _templates/
+post_layout: post
+page_layout: page
+
+# Format titles with titlecase?
+titlecase: true
+
+# Change default template file (in _templates/)
+post_template: post
+page_template: page
+draft_template: draft
+```
+
+## Octopress CLI Commands
 
 Here are the subcommands for Octopress.
 
@@ -33,7 +56,7 @@ publish <POST>      # Publish a draft from _drafts to _posts
 unpublish <POST>    # Search for a post and convert it into a draft
 isolate [POST]      # Stash all posts but the one you're working on for a faster build
 integrate           # Restores all posts, doing the opposite of the isolate command
-deploy              # deploy your site via S3, Cloudfront, Rsync, or to GitHub pages.
+deploy              # deploy your site via S3, Rsync, or to GitHub pages.
 ```
 
 Run `octopress --help` to list sub commands and `octopress <subcommand> --help` to learn more about any subcommand and see its options.
@@ -222,48 +245,177 @@ $ octopress isolate kittens                        # Move post matching search
 
 In the third example, if multiple posts match the search a prompt will ask you to select a post from a menu.
 
-## Configuration
-
-Octopress reads its configurations from `_config.yml`. Here's what the configuration looks like by default.
-
-```yaml
-# Default extension for new posts and pages
-post_ext: markdown
-page_ext: html
-
-# Default templates for posts and pages
-# Found in _templates/
-post_layout: post
-page_layout: page
-
-# Format titles with titlecase?
-titlecase: true
-
-# Change default template file (in _templates/)
-post_template: post
-page_template: page
-draft_template: draft
-```
-
-## Deployment
+### Deploy
 
 The Octopress gem comes with [octopress-deploy](https://github.com/octopress/deploy) which allows you to easily deploy your site with Rsync, on S3 or Cloudfront, to GitHub pages, or other Git based deployment hosting platforms.
 
-### Basic usage
+| Commands                                   | Description                                                        |
+|:-------------------------------------------|:-------------------------------------------------------------------|
+| `octopress deploy`                         | Deploy your site (based on the `_deploy.yml` configuration         |
+| `octopress deploy init <METHOD> [options]` | Generate a config file for the deployment method. (git, s3, rsync) |
+| `octopress deploy pull [DIR]`              | Pull down your site into a local directory.                        |
+| `octopress deploy add-bucket <NAME>`       | (S3 only) Add a bucket using your configured S3 credentials.       |
+
+#### Deploy configuration
+
+First set up a configuration file for your deployment method. For Git based deployment, pass the repository url. For S3 and Rsync, no arguments are necessary.
 
 ```
-octopress deploy init METHOD [options]  # git, s3, or rsync - Create a _deploy.yml configuration
-octopress deploy                        # Deploys _site based on deployment configuration
-octopress pull DIR                      # Download your deployed site to the specified DIR
+$ octopress deploy init git git@github.com:user/project
+$ octopress deploy init s3
+$ octopress deploy init rsync
 ```
 
-You can find more detailed documentation by running:
+This will generate a `_deploy.yml` file in your current
+directory which you can edit to add any necessary configuration.
+**Remember to add your configuration to `.gitignore` to be sure
+you never commit sensitive information to your repository.**
+
+If you like, you can pass configurations as command line options. To see specific options for any method, add the `--help` flag.
+For example to see the options for configuring S3:
 
 ```
-$ octopress deploy --help
+$ octopress deploy init s3 --help
 ```
 
-Or by visiting the [Octopress deploy project page](https://github.com/octopress/deploy).
+#### Deploy your site
+
+Change the deployment configuration however you like, then build and deploy your site.
+
+```
+$ jekyll build      # if you haven't yet
+$ octopress deploy
+```
+
+This will read your `_deploy.yml` configuration and deploy your
+site. If you like, you can specify a configuration file.
+
+```
+$ octopress deploy --config _staging.yml
+```
+
+#### Pull down your site
+
+With the `pull` command, you can pull your site down into a local directory.
+
+```
+$ octopress deploy pull [DIR]
+```
+
+Mainly you'd do this if you're troubleshooting deployment and you want to see if it's working how you expected.
+
+##### Git Deployment Configuration
+
+Only `git_url` is required. Other options will default as shown below.
+
+| Config        | Description                                      | Default
+|:--------------|:-------------------------------------------------|:---------------|
+| `method`      | Deployment method, in this case use 'git'        |                |
+| `site_dir`    | Path to static site files                        | _site          |
+| `git_url`     | Url for remote git repository                    |                |
+| `git_branch`  | Deployment branch for git repository             | master         |
+| `deploy_dir`  | Directory where deployment files are staged      | .deploy        |
+| `remote`      | Name of git remote                               | deploy         |
+
+##### Rsync Deployment Configuration
+
+| Config         | Description                                       | Default
+|:---------------|:--------------------------------------------------|:---------------|
+| `method`       | Deployment method, in this case use 'rsync'       |                |
+| `site_dir`     | Path to static site files                         | _site          |
+| `user`         | ssh user, e.g user@host.com                       |                |
+| `port`         | ssh port                                          | 22             |
+| `remote_path`  | Remote destination's document root                |                |
+| `exclude_from` | Path to a file containing rsync exclusions        |                |
+| `exclude`      | Inline list of rsync exclusions                   |                |
+| `include_from` | Path to a file containing rsync inclusions        |                |
+| `include`      | Inline list of inclusions to override exclusions  |                |
+| `delete`       | Delete files in destination not found in source   | false          |
+
+You can rsync to a local directory by configuring `remote_path` and leaving off `user` and `port`.
+
+#### Amazon S3 Deployment Configuration
+
+To deploy with Amazon S3 you will need to install the [aws-sdk-v1 gem](https://rubygems.org/gems/aws-sdk-v1).
+
+Important: when using S3, you must add your `_deploy.yml` to your .gitignore to prevent accidentally sharing
+account access information.
+
+| Config              | Description                                           | Default
+|:--------------------|:------------------------------------------------------|:-------------|
+| `method`            | Deployment method, in this case use 's3'              |              |
+| `site_dir`          | Path to static site files                             | _site        |
+| `bucket_name`       | S3 bucket name                                        |              |
+| `access_key_id`     | AWS access key                                        |              |
+| `secret_access_key` | AWS secret key                                        |              |
+| `distribution_id`   | [optional] AWS CloudFront distribution id             |              |
+| `remote_path`       | Directory files should be synced to.                  | /            |
+| `verbose`           | [optional] Display all file actions during deploy.    | false        |
+| `incremental`       | [optional] Incremental deploy (only updated files)    | false        |
+| `region`            | [optional] Region for your AWS bucket                 | us-east-1    |
+| `delete`            | Delete files in `remote_path` not found in `site_dir` | false        |
+| `headers`           | Set headers for matched files                         | []           |
+
+If you choose a bucket which doesn't yet exist, Octopress Deploy will offer to create it for you, and offer to configure it as a static website.
+
+If you configure Octopress to delete files, all files found in the `remote_path` on S3 bucket will be removed unless they match local site files.
+If `remote_path` is a subdirectory, only files in that subdirectory will be evaluated for deletion.
+
+##### S3 Headers
+
+You can create an array of header congifs to set expiration, content and cache settings for any paths matching the `filename`.
+
+| Header Config       | Description                                           | Default
+|:--------------------|:------------------------------------------------------|:-------------|
+| `filename`          | A regex or a substring of the file to match           |              |
+| `site_dir`          | An http date or a number of years or days from now    |              |
+| `content_type`      | A string which is passed through to the headers       |              |
+| `content_encoding`  | A string which is passed through to the headers       |              |
+| `cache_control`     | A string which is passed through to the headers       |              |
+
+Here is how you might set expriation and cache controls for CSS and Javascript files.
+
+```yaml
+headers:
+  - filename: '^assets.*\.js$'
+    expires: '+3 years'
+    cache_control: 'max-age=94608000'
+    content_type: 'application/javascript'
+  - filename: '^assets.*\.css$'
+    expires: '+3 years'
+    cache_control: 'max-age=94608000'
+    content_type: 'text/css'
+```
+
+##### AWS config via ENV
+
+If you prefer, you can store AWS access credentials in environment variables instead of a configuration file. 
+
+| Config              | ENV var                        |
+|:--------------------|:-------------------------------|
+| `access_key_id`     | AWS_ACCESS_KEY_ID              |
+| `secret_access_key` | AWS_SECRET_ACCESS_KEY          |
+
+Note: configurations in `_deploy.yml` will override environment variables so be sure to remove those if you decide to use environment variables.
+
+#### Add a new bucket
+
+If your AWS credentials are properly configured, you can add a new bucket with this command.
+
+```
+$ octopress deploy add-bucket <NAME>
+```
+
+This will connect to AWS, create a new S3 bucket, and configure it for static website hosting. This command can use the settings in your deployment configuration or you can pass options to override those settings.
+
+| Option        | Description                                      | Default
+|:--------------|:-------------------------------------------------|:---------------|
+| `--region`    | Override the `region` configuration              |                |
+| `--index`     | Specify an index page for your site              | index.html     |
+| `--error`     | Specify an error page for your site              | error.html     |
+| `--config`    | Use a custom configuration file                  | _deploy.yml    |
+
+You'll only need to pass options if you want to override settings in your deploy config file.
 
 ## Contributing
 
