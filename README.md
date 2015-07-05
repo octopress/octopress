@@ -257,6 +257,8 @@ $ octopress deploy
 
 This reads a `_deploy.yml` configuration and deploys your site. Read below to learn how Octopress can generate a deployment configuration file for you.
 
+Note: The `_deploy.yml` is processed through ERB, which makes it easy to load configurations from environment variables.
+
 Deploy has a few commands you should know.
 
 | Commands                                   | Description                                                        |
