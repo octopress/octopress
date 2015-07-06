@@ -361,6 +361,13 @@ If you choose a bucket which doesn't yet exist, Octopress Deploy will offer to c
 If you configure Octopress to delete files, all files found in the `remote_path` on S3 bucket will be removed unless they match local site files.
 If `remote_path` is a subdirectory, only files in that subdirectory will be evaluated for deletion.
 
+You can also set up your configuration to read your AWS credentials from your environment variables using ERB like this:
+
+```
+access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
+```
+
 ##### S3 Headers
 
 You can create an array of header congifs to set expiration, content and cache settings for any paths matching the `filename`.
