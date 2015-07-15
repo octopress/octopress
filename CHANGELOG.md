@@ -1,7 +1,10 @@
 # Changelog
 
+### 3.0.11 (2015-07-15)
+- Fix: filenames and extensions are preserved when publishing drafts and unpublishing posts.
+
 ### 3.0.10 (2015-07-15)
-- Fixed issue where `--force` flag wouldn't work when publishing drafts
+- Fix: `--force` flag works properly when publishing drafts and unpublishing posts.
 
 ### 3.0.9 (2015-06-18)
 - Documentation improvements
