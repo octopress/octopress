@@ -21,7 +21,11 @@ module Octopress
     end
 
     def path
-      name = "#{title_slug}.#{extension}"
+      name = if @options['path']
+        "#{path_slug(@options['path'])}.#{File.extname(@options['path']).sub(/^\./, '')}"
+      else
+        "#{title_slug}.#{extension}"
+      end
       File.join(site.source, '_drafts', name)
     end
 
@@ -35,14 +39,15 @@ module Octopress
       @options['title'] = read_post_yaml('title')
 
       post_options = {
-        'title'   => @options['title'],
-        'date'    => @options['date'],
-        'slug'    => title_slug,
-        'force'   => @options['force'],
-        'content' => read_post_content,
-        'dir'     => @options['dir'],
-        'type'    => "post from draft",
-        'write_message' => "Published: #{relative_path(path)} →"
+        'title'     => @options['title'],
+        'date'      => @options['date'],
+        'slug'      => path_slug(@options['path']),
+        'extension' => File.extname(@options['path']).sub(/^\./, ''),
+        'content'   => read_post_content,
+        'dir'       => @options['dir'],
+        'type'      => "post from draft",
+        'write_message' => "Published: #{relative_path(path)} →",
+        'force'     => @options['force']
       }
 
       # Create a new post file

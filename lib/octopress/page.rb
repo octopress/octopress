@@ -200,6 +200,12 @@ module Octopress
     def date_slug
       @options['date'].split('T')[0]
     end
+
+    # Returns a slug extracted from a path
+    #
+    def path_slug(path)
+      File.basename(path, '.*').scan(/((\d+-){3})?(\S+)/).flatten[2]
+    end
     
     # Returns a string which is url compatible.
     #
