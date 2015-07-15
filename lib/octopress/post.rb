@@ -21,8 +21,10 @@ module Octopress
       name = if @options['path']
         "#{date_slug}-#{path_slug(@options['path'])}.#{File.extname(@options['path']).sub(/^\./, '')}"
       else
-        "#{title_slug}.#{extension}"
+        "#{date_slug}-#{title_slug}.#{extension}"
       end
+      File.join(site.source, '_drafts', name)
+      name = "#{date_slug}-#{title_slug}.#{extension}"
       dir = File.join(site.source, '_posts', @options['dir'])
       FileUtils.mkdir_p dir
       File.join(dir, name)
