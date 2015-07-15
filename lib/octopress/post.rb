@@ -36,6 +36,7 @@ module Octopress
         'title'   => @options['title'],
         'date'    => @options['date'],
         'slug'    => title_slug,
+        'force'   => @options['force'],
         'content' => read_post_content,
         'dir'     => @options['dir'],
         'type'    => "draft from post",

@@ -3,6 +3,7 @@ module Octopress
     def self.init_with_program(p)
       p.command(:unpublish) do |c|
         c.syntax 'unpublish <POST> [options]'
+        c.option 'force', '--force', 'Overwrite draft if it already exists'
         c.description 'Convert a post to a draft. Command accepts path to post or search string.'
         CommandHelpers.add_common_options c
 

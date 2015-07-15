@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.10 (2015-07-15)
+- Fixed issue where `--force` flag wouldn't work when publishing drafts
+
 ### 3.0.9 (2015-06-18)
 - Documentation improvements
 
