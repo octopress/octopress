@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.1.0 (2015-12-08)
+- Now supporting Jekyll 3+
+
 ### 3.0.11 (2015-07-15)
 - Fix: filenames and extensions are preserved when publishing drafts and unpublishing posts.
 

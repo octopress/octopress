@@ -219,7 +219,6 @@ module Octopress
     def self.load_docs(options=nil)
       @enabled = true
 
-      require "octopress-hooks"
       require "octopress/docs/hooks"
       require "octopress/docs/liquid_filters"
       require "octopress/docs/jekyll/convertible"
