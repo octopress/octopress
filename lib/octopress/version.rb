@@ -1,3 +1,3 @@
 module Octopress
-  VERSION = "3.0.12.pre.1"
+  VERSION = "3.1.0"
 end
