@@ -1,5 +1,8 @@
 url: http://octopress.org
-markdown: redcarpet
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
 exclude:
   - Gemfile
 redcarpet:
