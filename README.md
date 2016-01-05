@@ -370,7 +370,7 @@ secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
 
 ##### S3 Headers
 
-You can create an array of header congifs to set expiration, content and cache settings for any paths matching the `filename`.
+You can create an array of header configs to set expiration, content and cache settings for any paths matching the `filename`.
 
 | Header Config       | Description                                           | Default
 |:--------------------|:------------------------------------------------------|:-------------|
