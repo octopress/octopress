@@ -7,17 +7,27 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll bl
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install Octopress manually:
+
+    $ gem install octopress
+
+Or if you use [Bundler](http://bundler.io), add this line to your Gemfile:
 
     gem 'octopress', '~> 3.0'
 
-And then execute:
+And then run:
 
     $ bundle
 
-Or install it yourself as:
+New to bundler? Run `gem install bundler` then create a file named `Gemfile` in your site's root directory with the following content:
 
-    $ gem install octopress
+```
+source 'https://rubygems.org'
+
+gem 'octopress', '~> 3.0'
+```
+
+Run `bundle` to install the gems specified in your Gemfile.
 
 ## Configuration
 
