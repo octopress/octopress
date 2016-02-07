@@ -207,7 +207,7 @@ title: {{ title }}
 
 Dates get automatically added to a template for posts, and for pages if a --date option is set.
 
-You can add to the YAML front matter, add content below and even even use liquid tags and filters from your site's plugins. There are
+You can add to the YAML front matter, add content below and even use liquid tags and filters from your site's plugins. There are
 a handful of local variables you can use when working with templates.
 
 | Variable           | Description                               |
@@ -390,7 +390,7 @@ You can create an array of header configs to set expiration, content and cache s
 | `content_encoding`  | A string which is passed through to the headers       |              |
 | `cache_control`     | A string which is passed through to the headers       |              |
 
-Here is how you might set expriation and cache controls for CSS and Javascript files.
+Here is how you might set expiration and cache controls for CSS and Javascript files.
 
 ```yaml
 headers:
