@@ -385,7 +385,7 @@ You can create an array of header configs to set expiration, content and cache s
 | Header Config       | Description                                           | Default
 |:--------------------|:------------------------------------------------------|:-------------|
 | `filename`          | A regex or a substring of the file to match           |              |
-| `site_dir`          | An http date or a number of years or days from now    |              |
+| `expires`           | An http date or a number of years or days from now    |              |
 | `content_type`      | A string which is passed through to the headers       |              |
 | `content_encoding`  | A string which is passed through to the headers       |              |
 | `cache_control`     | A string which is passed through to the headers       |              |
