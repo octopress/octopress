@@ -77,6 +77,7 @@ module Octopress
 
       print "Which do you want to #{action}? (enter a number): "
       $stdout.flush
+      trap("SIGINT") { puts ''; abort "#{action.capitalize} canceled: Ctrl-C hit." }
       post = $stdin.gets.strip.to_i
 
       # Give a newline for further output
