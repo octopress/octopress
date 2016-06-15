@@ -77,7 +77,7 @@ Run `octopress --help` to list sub commands and `octopress <subcommand> --help` 
 $ octopress init <PATH> [options]
 ```
 
-This will copy Octopress's scaffolding into the specified directory. Use the `--force` option to overwrite existing files. The scaffolding is pretty simple:
+This will copy Octopress's scaffolding into the specified directory, which should be an already initialized Jekyll blog. Use the `--force` option to overwrite existing files. The scaffolding is pretty simple:
 
 ```
 _templates/
