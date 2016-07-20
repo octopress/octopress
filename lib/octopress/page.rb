@@ -198,7 +198,12 @@ module Octopress
     end
 
     def date_slug
-      @options['date'].split('T')[0]
+      begin
+        Time.parse(@options['date']).strftime('%Y-%m-%d')
+      rescue => error
+        puts 'Could not parse date. Try formatting it like YYYY-MM-DD HH:MM'
+        abort error.message
+      end
     end
 
     # Returns a slug extracted from a path
