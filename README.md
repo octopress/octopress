@@ -5,6 +5,28 @@ Octopress is an obsessively designed toolkit for writing and deploying Jekyll bl
 [![Gem Version](https://badge.fury.io/rb/octopress.svg)](http://badge.fury.io/rb/octopress)
 [![Build Status](https://travis-ci.org/octopress/octopress.svg?branch=master)](https://travis-ci.org/octopress/octopress)
 
+## GitHub Pages Quickstart
+
+```
+USERNAME=username # change this
+REPONAME=$USERNAME.github.io # change to just REPONAME if you're using github project pages
+
+gem install octopress jekyll
+mkdir blog
+cd blog
+octopress new ./
+
+git init
+git remote add deploy git@github.com:$USERNAME/$REPONAME.git
+octopress deploy init git git@github.com:$USERNAME/$REPONAME
+echo "_deploy.yml" >> .gitignore
+
+jekyll build
+git add .
+git commit -m 'first deploy'
+octopress deploy
+```
+
 ## Installation
 
 Install Octopress manually:
