@@ -29,6 +29,16 @@ gem 'octopress', '~> 3.0'
 
 Run `bundle` to install the gems specified in your Gemfile.
 
+## Example Workflow
+```sh
+$ octopress new website_name
+$ cd website_name
+$ octopress new post "My Title"
+$ jekyll build
+$ open _site/index.html
+$ octopress deploy
+```
+
 ## Configuration
 
 Octopress reads its configurations from `_config.yml`. Here's what the configuration looks like by default.
