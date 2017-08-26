@@ -67,13 +67,22 @@ module Octopress
       end
     end
 
+    # Extracts the YAML front matter
+    #
+    def yaml_front_matter
+      @yaml_front_matter ||= begin
+        match = read.match(/\A---\s*\n(.*?\n?)^---\s*$\n?/m)
+        match[1] || ""
+      end
+    end
+
     # Get title from post file
     #
     def read_post_yaml(key)
-      match = read.match(/#{key}:\s*(.+)?$/)
+      match = yaml_front_matter.match(/^\s*#{key}:\s*(.+)?$/)
       match[1] if match
     end
-    
+
     # Get content from draft post file
     # also update the draft's date configuration
     #
