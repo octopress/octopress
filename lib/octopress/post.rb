@@ -33,7 +33,7 @@ module Octopress
     def default_template
       'post'
     end
-    
+
     def unpublish
       @options['date'] = read_post_yaml('date')
       @options['title'] = read_post_yaml('title')
@@ -51,7 +51,7 @@ module Octopress
       }
 
       Draft.new(site, post_options).write
-      
+
       # Remove the old post file
       #
       FileUtils.rm @options['path']
@@ -70,10 +70,15 @@ module Octopress
     # Extracts the YAML front matter
     #
     def yaml_front_matter
-      @yaml_front_matter ||= begin
-        match = read.match(/\A---\s*\n(.*?\n?)^---\s*$\n?/m)
-        match[1] || ""
-      end
+      parse_content unless @yaml_front_matter
+      @yaml_front_matter
+    end
+
+    # Extracts the body of the post after the YAML front matter
+    #
+    def body
+      parse_content unless @body
+      @body
     end
 
     # Get title from post file
@@ -83,20 +88,32 @@ module Octopress
       match[1] if match
     end
 
+    FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*\n?$)/m
+
+    def parse_content
+      match = read.match(FRONT_MATTER_REGEXP)
+      if match
+        @yaml_front_matter = match[0]
+        @body = match.post_match
+      else
+        @yaml_front_matter = ""
+        @body = read
+      end
+    end
+
     # Get content from draft post file
     # also update the draft's date configuration
     #
     def read_post_content
       if @options['date']
-        # remove date if it exists
-        content = read.sub(/date:.*$\n/, "")
-        
-        # Insert date after title
-        content.sub(/(title:.+$)/i, '\1'+"\ndate: #{@options['date']}")
+        # update date if it exists
+        front_matter = yaml_front_matter
+          .sub(/date:.*$\n/, "")
+          .sub(/(title:.+$)/i, '\1'+"\ndate: #{@options['date']}")
+        "#{front_matter}#{body}"
       else
         read
       end
     end
-    
   end
 end
