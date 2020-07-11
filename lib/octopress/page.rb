@@ -151,7 +151,11 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
-      if @config['titlecase']
+      # Fix titlecase FrozenError when publish a draft to post
+      # On converting a draft to post parse_template is called before
+      # Post.read_post_yaml. That's why the title is empty.
+      #
+      if !@options['title'].empty? && @config['titlecase']
         @options['title'].titlecase!
       end
 
