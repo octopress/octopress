@@ -151,7 +151,7 @@ module Octopress
     # Render Liquid vars in YAML front-matter.
     def parse_template(input)
 
-      if @config['titlecase']
+      if @config['titlecase'] && @options['title'] != ""
         @options['title'].titlecase!
       end
 
